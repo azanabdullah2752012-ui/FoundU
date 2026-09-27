@@ -1,10 +1,12 @@
 import type { LessonData, Topic } from '../types';
 import { fractionsWhatIsAFractionLesson } from './lessons/fractions-what-is-a-fraction';
+import { fractionsEquivalentFractionsLesson } from './lessons/fractions-equivalent-fractions';
 import { decimalsPlaceValueLesson } from './lessons/decimals-place-value';
 import { percentagesIntroLesson } from './lessons/percentages-intro';
 
 export const ALL_LESSONS: Record<string, LessonData> = {
   'fractions-what-is-a-fraction': fractionsWhatIsAFractionLesson,
+  'fractions-equivalent-fractions': fractionsEquivalentFractionsLesson,
   'decimals-place-value': decimalsPlaceValueLesson,
   'percentages-what-percentages-mean': percentagesIntroLesson,
 };
@@ -29,9 +31,9 @@ export const FOUNDATION_TOPICS: Topic[] = [
         id: 'fractions-equivalent-fractions',
         title: 'Equivalent fractions',
         description: 'Why 2/4, 4/8, and 1/2 look different but measure the exact same quantity.',
-        estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        estimatedMinutes: 7,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'fractions-simplifying-fractions',

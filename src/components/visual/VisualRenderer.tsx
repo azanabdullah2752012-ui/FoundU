@@ -3,6 +3,7 @@ import type { VisualData } from '../../types';
 import { FractionBar } from './FractionBar';
 import { FractionCircle } from './FractionCircle';
 import { FractionComparison } from './FractionComparison';
+import { NumberLine } from './NumberLine';
 
 interface VisualRendererProps {
   visual?: VisualData;
@@ -44,6 +45,19 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
         <FractionComparison
           fractionA={visual.comparison.fractionA}
           fractionB={visual.comparison.fractionB}
+        />
+      )}
+
+      {visual.type === 'number-line' && (
+        <NumberLine
+          fractions={[
+            {
+              numerator: visual.shadedParts,
+              denominator: visual.totalParts,
+              label: visual.label,
+            },
+          ]}
+          showTicks={visual.totalParts}
         />
       )}
     </div>

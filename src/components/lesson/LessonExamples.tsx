@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import type { LessonData } from '../../types';
-import { ArrowLeft, ArrowRight, Eye, Sliders } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Eye, Sliders, MapPin } from 'lucide-react';
 import { FractionBar } from '../visual/FractionBar';
+import { NumberLine } from '../visual/NumberLine';
+import { EqualPartsBuster } from '../visual/EqualPartsBuster';
+import { SubdivisionSimulator } from '../visual/SubdivisionSimulator';
 
 interface LessonExamplesProps {
   lesson: LessonData;
@@ -25,6 +28,8 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
     }
   };
 
+  const isEquivalentLesson = lesson.id === 'fractions-equivalent-fractions';
+
   return (
     <article className="max-w-3xl mx-auto py-8 sm:py-12 animate-in fade-in duration-200">
       {/* Stage Badge */}
@@ -33,7 +38,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
           STAGE 02
         </span>
         <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
-          Visual Examples
+          Visual Examples & Intuition Lab
         </span>
       </div>
 
@@ -45,7 +50,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
       </p>
 
       {/* Grid of structured visual examples */}
-      <div className="space-y-6 mb-12">
+      <div className="space-y-6 mb-10">
         {lesson.examples.items.map((item, idx) => (
           <div
             key={item.id}
@@ -95,49 +100,87 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
         ))}
       </div>
 
-      {/* Interactive Intuition Playground: Touch & See */}
-      <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-2xl p-6 sm:p-7 mb-10 shadow-xs">
-        <div className="flex items-center gap-2 mb-2">
-          <Sliders className="w-4 h-4 text-[#D45B34]" />
-          <h3 className="font-semibold text-base text-[#1C1917]">
-            Intuition Playground: Click and observe
-          </h3>
+      {/* Lesson 1 Conceptual Misconception Buster: The Equal Parts Law */}
+      {!isEquivalentLesson && (
+        <div className="mb-10">
+          <EqualPartsBuster />
         </div>
-        <p className="text-xs text-[#6B6861] mb-4">
-          Click any block directly to shade it, or choose how many equal cuts to make.
-          Notice how cutting into more pieces makes each piece smaller.
-        </p>
+      )}
 
-        {/* Cuts selector */}
-        <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
-          <span className="text-xs text-[#6B6861] shrink-0">Divide into:</span>
-          {[2, 3, 4, 6, 8].map((denom) => (
-            <button
-              key={denom}
-              type="button"
-              onClick={() => handleDenominatorChange(denom)}
-              className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-all ${
-                sandboxDenominator === denom
-                  ? 'bg-[#1C1917] text-white shadow-xs'
-                  : 'bg-white border border-[#E8E5DD] text-[#6B6861] hover:text-[#1C1917]'
-              }`}
-            >
-              {denom} equal parts
-            </button>
-          ))}
+      {/* Lesson 2 Manipulative: Subdivision Simulator */}
+      {isEquivalentLesson ? (
+        <div className="mb-10">
+          <SubdivisionSimulator baseNumerator={1} baseDenominator={2} />
         </div>
+      ) : (
+        /* Lesson 1 Intuition Playground: Touch, Slice, and Sync with Number Line */
+        <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-2xl p-6 sm:p-7 mb-10 shadow-xs">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-[#D45B34]" />
+              <h3 className="font-semibold text-base text-[#1C1917]">
+                Intuition Lab: Touch, Slice & Locate
+              </h3>
+            </div>
+            <span className="text-[11px] font-mono text-[#D45B34] uppercase font-semibold">
+              Interactive
+            </span>
+          </div>
 
-        <div className="bg-white p-4 rounded-xl border border-[#E8E5DD]">
-          <FractionBar
-            totalParts={sandboxDenominator}
-            shadedParts={sandboxNumerator}
-            interactive={true}
-            onShadedChange={(newVal) => setSandboxNumerator(newVal)}
-            label={`Fraction: ${sandboxNumerator} / ${sandboxDenominator}`}
-            size="lg"
-          />
+          <p className="text-xs text-[#6B6861] mb-4">
+            Click any block directly to shade it. Watch how changing the fraction updates both the physical area and its exact location on the number line.
+          </p>
+
+          {/* Cuts selector */}
+          <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1">
+            <span className="text-xs text-[#6B6861] shrink-0 font-medium">Divide whole into:</span>
+            {[2, 3, 4, 6, 8].map((denom) => (
+              <button
+                key={denom}
+                type="button"
+                onClick={() => handleDenominatorChange(denom)}
+                className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium transition-all ${
+                  sandboxDenominator === denom
+                    ? 'bg-[#1C1917] text-white shadow-xs'
+                    : 'bg-white border border-[#E8E5DD] text-[#6B6861] hover:text-[#1C1917]'
+                }`}
+              >
+                {denom} parts
+              </button>
+            ))}
+          </div>
+
+          {/* Interactive Fraction Bar */}
+          <div className="bg-white p-4 rounded-xl border border-[#E8E5DD] mb-4">
+            <FractionBar
+              totalParts={sandboxDenominator}
+              shadedParts={sandboxNumerator}
+              interactive={true}
+              onShadedChange={(newVal) => setSandboxNumerator(newVal)}
+              label={`Shaded Portion: ${sandboxNumerator} / ${sandboxDenominator}`}
+              size="lg"
+            />
+          </div>
+
+          {/* Live Synchronized Number Line */}
+          <div className="bg-white p-4 rounded-xl border border-[#E8E5DD]">
+            <div className="flex items-center gap-1.5 text-xs font-mono text-[#6B6861] mb-1">
+              <MapPin className="w-3.5 h-3.5 text-[#D45B34]" />
+              <span>Exact Coordinate on the Continuum:</span>
+            </div>
+            <NumberLine
+              fractions={[
+                {
+                  numerator: sandboxNumerator,
+                  denominator: sandboxDenominator,
+                  label: `${sandboxNumerator}/${sandboxDenominator}`,
+                },
+              ]}
+              showTicks={sandboxDenominator}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Navigation Buttons */}
       <div className="pt-6 border-t border-[#E8E5DD] flex items-center justify-between">
