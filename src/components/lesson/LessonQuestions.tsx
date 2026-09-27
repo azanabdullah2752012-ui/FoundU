@@ -271,8 +271,8 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
                 </div>
 
                 {choice.visual && (
-                  <div className="w-24">
-                    <VisualRenderer visual={choice.visual} />
+                  <div className="w-28 sm:w-36 shrink-0 my-auto ml-2">
+                    <VisualRenderer visual={choice.visual} size="xs" className="my-0" />
                   </div>
                 )}
               </button>
@@ -316,19 +316,31 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
             }`}
           >
             {isCorrect ? (
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#1E6B4F]">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>That’s right.</span>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-sm font-bold text-[#1E6B4F]">
+                  <CheckCircle2 className="w-5 h-5" />
+                  <span>That’s right!</span>
                 </div>
+
                 <p className="text-sm text-[#1C1917] leading-relaxed">
                   {currentQuestion.explanation}
                 </p>
-                <div className="pt-3 flex justify-end">
+
+                {/* Visual confirmation badge */}
+                {currentQuestion.visual && (
+                  <div className="bg-white p-3 rounded-xl border border-[#B7E4D3] shadow-2xs">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#1E6B4F] font-bold mb-1">
+                      Visual Match Confirmed:
+                    </div>
+                    <VisualRenderer visual={currentQuestion.visual} size="xs" />
+                  </div>
+                )}
+
+                <div className="pt-2 flex justify-end">
                   <button
                     type="button"
                     onClick={handleNextQuestion}
-                    className="inline-flex items-center gap-2 bg-[#1E6B4F] hover:bg-[#15543D] text-white px-5 py-2 rounded-xl text-sm font-medium transition-colors shadow-xs"
+                    className="inline-flex items-center gap-2 bg-[#1E6B4F] hover:bg-[#15543D] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors shadow-xs cursor-pointer"
                   >
                     <span>{isLastQuestion ? 'Complete lesson' : 'Next question'}</span>
                     <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white/20 text-white rounded">
@@ -340,21 +352,33 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
               </div>
             ) : (
               <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-semibold text-[#92400E]">
-                  <HelpCircle className="w-4 h-4" />
-                  <span>Not quite. Let’s look at what happened.</span>
+                <div className="flex items-center gap-2 text-sm font-bold text-[#92400E]">
+                  <HelpCircle className="w-5 h-5" />
+                  <span>Almost — look at the parts closely:</span>
                 </div>
+
                 <p className="text-sm text-[#1C1917] leading-relaxed">
                   {currentQuestion.hint}
                 </p>
+
+                {/* Visual comparison reminder for non-English learners */}
+                {currentQuestion.visual && (
+                  <div className="bg-white p-3 rounded-xl border border-[#FDE68A] shadow-2xs">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#92400E] font-bold mb-1">
+                      Target to Match:
+                    </div>
+                    <VisualRenderer visual={currentQuestion.visual} size="xs" />
+                  </div>
+                )}
+
                 <div className="pt-2 flex items-center justify-between">
-                  <span className="text-xs text-[#92400E]">
-                    The goal is understanding. Take another look!
+                  <span className="text-xs text-[#92400E] font-medium">
+                    Touch again to retry. Understanding takes practice!
                   </span>
                   <button
                     type="button"
                     onClick={handleRetry}
-                    className="inline-flex items-center gap-1.5 bg-white border border-[#D5D1C7] hover:bg-[#FAF9F5] text-[#1C1917] px-4 py-2 rounded-xl text-xs font-semibold transition-colors shadow-xs cursor-pointer"
+                    className="inline-flex items-center gap-1.5 bg-white border border-[#D5D1C7] hover:bg-[#FAF9F5] text-[#1C1917] px-4 py-2 rounded-xl text-xs font-bold transition-colors shadow-xs cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Try again</span>

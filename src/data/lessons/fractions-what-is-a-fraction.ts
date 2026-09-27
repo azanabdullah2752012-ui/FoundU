@@ -109,10 +109,26 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
         label: 'A bar divided into 4 equal segments with 3 shaded',
       },
       choices: [
-        { id: 'q1-a', text: '1/4' },
-        { id: 'q1-b', text: '2/4' },
-        { id: 'q1-c', text: '3/4' },
-        { id: 'q1-d', text: '4/3' },
+        {
+          id: 'q1-a',
+          text: '1/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 1 },
+        },
+        {
+          id: 'q1-b',
+          text: '2/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 2 },
+        },
+        {
+          id: 'q1-c',
+          text: '3/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 3 },
+        },
+        {
+          id: 'q1-d',
+          text: '4/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 4 },
+        },
       ],
       correctChoiceId: 'q1-c',
       explanation: 'That’s right. The whole is divided into 4 equal parts (the denominator), and 3 of those parts are shaded (the numerator).',
@@ -133,8 +149,16 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
         },
       },
       choices: [
-        { id: 'q2-a', text: '1/2 is larger' },
-        { id: 'q2-b', text: '1/4 is larger' },
+        {
+          id: 'q2-a',
+          text: '1/2 is larger',
+          visual: { type: 'fraction-bar', totalParts: 2, shadedParts: 1 },
+        },
+        {
+          id: 'q2-b',
+          text: '1/4 is larger',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 1 },
+        },
         { id: 'q2-c', text: 'They are equal in size' },
       ],
       correctChoiceId: 'q2-a',
@@ -147,10 +171,26 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
       questionText: 'Which fraction represents three out of four equal parts?',
       promptNote: 'Remember: the parts we are counting sit on top; the total parts sit on the bottom.',
       choices: [
-        { id: 'q3-a', text: '4/3' },
-        { id: 'q3-b', text: '3/4' },
-        { id: 'q3-c', text: '1/3' },
-        { id: 'q3-d', text: '3/1' },
+        {
+          id: 'q3-a',
+          text: '1/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 1 },
+        },
+        {
+          id: 'q3-b',
+          text: '3/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 3 },
+        },
+        {
+          id: 'q3-c',
+          text: '2/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 2 },
+        },
+        {
+          id: 'q3-d',
+          text: '4/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 4 },
+        },
       ],
       correctChoiceId: 'q3-b',
       explanation: 'That’s right. 3 is the top number (how many parts we have) and 4 is the bottom number (the total number of equal parts).',
@@ -171,10 +211,26 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
         },
       },
       choices: [
-        { id: 'q4-a', text: '1/4' },
-        { id: 'q4-b', text: '2/4' },
-        { id: 'q4-c', text: '3/4' },
-        { id: 'q4-d', text: '2/3' },
+        {
+          id: 'q4-a',
+          text: '1/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 1 },
+        },
+        {
+          id: 'q4-b',
+          text: '2/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 2 },
+        },
+        {
+          id: 'q4-c',
+          text: '3/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 3 },
+        },
+        {
+          id: 'q4-d',
+          text: '2/3',
+          visual: { type: 'fraction-bar', totalParts: 3, shadedParts: 2 },
+        },
       ],
       correctChoiceId: 'q4-b',
       explanation: 'That’s right. If you take 2 pieces out of 4, you have covered exactly half of the shape. 2/4 and 1/2 are equivalent.',

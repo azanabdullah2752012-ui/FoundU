@@ -115,10 +115,26 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
         },
       },
       choices: [
-        { id: 'eq-q1-a', text: '2/6' },
-        { id: 'eq-q1-b', text: '2/5' },
-        { id: 'eq-q1-c', text: '1/6' },
-        { id: 'eq-q1-d', text: '3/3' },
+        {
+          id: 'eq-q1-a',
+          text: '2/6',
+          visual: { type: 'fraction-bar', totalParts: 6, shadedParts: 2 },
+        },
+        {
+          id: 'eq-q1-b',
+          text: '2/5',
+          visual: { type: 'fraction-bar', totalParts: 5, shadedParts: 2 },
+        },
+        {
+          id: 'eq-q1-c',
+          text: '1/6',
+          visual: { type: 'fraction-bar', totalParts: 6, shadedParts: 1 },
+        },
+        {
+          id: 'eq-q1-d',
+          text: '3/3',
+          visual: { type: 'fraction-bar', totalParts: 3, shadedParts: 3 },
+        },
       ],
       correctChoiceId: 'eq-q1-a',
       explanation:
@@ -153,10 +169,26 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
         label: '4 out of 8 pieces',
       },
       choices: [
-        { id: 'eq-q3-a', text: '1/4' },
-        { id: 'eq-q3-b', text: '1/2' },
-        { id: 'eq-q3-c', text: '2/3' },
-        { id: 'eq-q3-d', text: '3/4' },
+        {
+          id: 'eq-q3-a',
+          text: '1/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 1 },
+        },
+        {
+          id: 'eq-q3-b',
+          text: '1/2',
+          visual: { type: 'fraction-bar', totalParts: 2, shadedParts: 1 },
+        },
+        {
+          id: 'eq-q3-c',
+          text: '2/3',
+          visual: { type: 'fraction-bar', totalParts: 3, shadedParts: 2 },
+        },
+        {
+          id: 'eq-q3-d',
+          text: '3/4',
+          visual: { type: 'fraction-bar', totalParts: 4, shadedParts: 3 },
+        },
       ],
       correctChoiceId: 'eq-q3-b',
       explanation:

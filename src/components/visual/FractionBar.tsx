@@ -6,7 +6,7 @@ interface FractionBarProps {
   interactive?: boolean;
   onShadedChange?: (newShaded: number) => void;
   label?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   showFractionBadge?: boolean;
   highlightIndexes?: number[];
 }
@@ -22,7 +22,15 @@ export const FractionBar: React.FC<FractionBarProps> = ({
   highlightIndexes,
 }) => {
   const heightClass =
-    size === 'sm' ? 'h-9' : size === 'lg' ? 'h-16' : 'h-12';
+    size === 'xs'
+      ? 'h-6'
+      : size === 'sm'
+      ? 'h-9'
+      : size === 'lg'
+      ? 'h-16'
+      : 'h-12';
+
+  const shouldShowBadge = size === 'xs' ? false : showFractionBadge;
 
   const parts = Array.from({ length: totalParts }, (_, i) => i);
 
@@ -87,7 +95,7 @@ export const FractionBar: React.FC<FractionBarProps> = ({
         })}
       </div>
 
-      {showFractionBadge && (
+      {shouldShowBadge && (
         <div className="flex items-center justify-between mt-3 px-1">
           <div className="flex items-baseline gap-2">
             <div className="flex items-center text-base font-mono font-semibold text-[#1C1917] bg-white px-2.5 py-1 rounded-md border border-[#E8E5DD] shadow-xs">

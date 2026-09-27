@@ -10,6 +10,7 @@ interface VisualRendererProps {
   interactive?: boolean;
   onShadedChange?: (newShaded: number) => void;
   className?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 
 export const VisualRenderer: React.FC<VisualRendererProps> = ({
@@ -17,6 +18,7 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
   interactive = false,
   onShadedChange,
   className = '',
+  size = 'md',
 }) => {
   if (!visual) return null;
 
@@ -30,6 +32,7 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
           onShadedChange={onShadedChange}
           label={visual.label}
           highlightIndexes={visual.highlightIndexes}
+          size={size}
         />
       )}
 
