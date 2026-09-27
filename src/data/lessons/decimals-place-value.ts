@@ -1,0 +1,145 @@
+import type { LessonData } from '../../types';
+
+export const decimalsPlaceValueLesson: LessonData = {
+  id: 'decimals-place-value',
+  topicId: 'decimals',
+  topicTitle: 'Decimals',
+  title: 'Decimal place value',
+  subtitle: 'Understanding tenths, hundredths, and the meaning of the decimal point.',
+  estimatedMinutes: 5,
+  intro: {
+    heading: 'What is a decimal?',
+    coreDefinition: 'A decimal is simply another way of writing a fraction whose denominator is a power of ten.',
+    whyItMatters:
+      'We use a base-10 number system for dollars, meters, and measurements. When an amount is less than 1, the decimal point marks the transition into tenths, hundredths, and thousandths.',
+    keyTakeaway: 'Every step to the right of the decimal point divides the value by 10.',
+  },
+  examples: {
+    heading: 'Breaking down tenths and hundredths',
+    description: 'Look at how 1 whole is divided into 10 equal columns, and each column into 10 smaller squares.',
+    items: [
+      {
+        id: 'dec-1',
+        title: 'One tenth (0.1)',
+        description: '1 column shaded out of 10 equal columns. That is 1/10.',
+        fractionText: '0.1 = 1/10',
+        visual: {
+          type: 'fraction-bar',
+          totalParts: 10,
+          shadedParts: 1,
+          label: '1 out of 10 equal columns shaded (0.1)',
+        },
+        insight: 'The first digit directly after the decimal point tells you how many tenths you have.',
+      },
+      {
+        id: 'dec-2',
+        title: 'Five tenths (0.5)',
+        description: '5 columns shaded out of 10 equal columns.',
+        fractionText: '0.5 = 5/10 = 1/2',
+        equivalentText: 'Exact same amount as one half',
+        visual: {
+          type: 'fraction-bar',
+          totalParts: 10,
+          shadedParts: 5,
+          label: '5 out of 10 equal columns shaded (0.5)',
+        },
+        insight: 'Notice that 0.5 is exactly half of 1 whole.',
+      },
+      {
+        id: 'dec-3',
+        title: 'Seven tenths (0.7)',
+        description: '7 columns shaded out of 10 equal columns.',
+        fractionText: '0.7 = 7/10',
+        visual: {
+          type: 'fraction-bar',
+          totalParts: 10,
+          shadedParts: 7,
+          label: '7 out of 10 equal columns shaded (0.7)',
+        },
+        insight: 'You are 7 tenths of the way to 1 whole. Only 0.3 remains.',
+      },
+    ],
+  },
+  video: {
+    title: 'Visualizing tenths and hundredths',
+    duration: '02:15',
+    durationSeconds: 135,
+    description: 'A 2-minute visual breakdown of the decimal point and why digits shrink by 10x with every step right.',
+    placeholderNote: 'Foundu short visual breakdown (1–4 min per concept)',
+    keyPoints: [
+      'The decimal point marks where whole numbers end and parts begin',
+      'The first slot to the right is tenths (1/10)',
+      'The second slot to the right is hundredths (1/100)',
+      '0.5 means 5 tenths, which equals 1/2',
+    ],
+    transcript: [
+      'Every place value in our counting system is based on ten.',
+      'Tens are ten times smaller than hundreds. Ones are ten times smaller than tens.',
+      'The decimal point simply continues that exact same rule below 1.',
+      'The first place to the right is one-tenth. The next place is one-hundredth.',
+      'So 0.3 is 3 tenths, and 0.5 is 5 tenths or half of one whole.',
+    ],
+  },
+  questions: [
+    {
+      id: 'qd-1',
+      type: 'multiple-choice',
+      questionText: 'What fraction is equal to the decimal 0.1?',
+      promptNote: 'The first position after the decimal point represents tenths.',
+      choices: [
+        { id: 'qd-1-a', text: '1/10' },
+        { id: 'qd-1-b', text: '1/100' },
+        { id: 'qd-1-c', text: '1/2' },
+        { id: 'qd-1-d', text: '10/1' },
+      ],
+      correctChoiceId: 'qd-1-a',
+      explanation: 'That’s right. The first digit after the decimal point is the tenths place, so 0.1 is 1/10.',
+      hint: 'Not quite. The first position directly to the right of the dot represents parts of 10.',
+    },
+    {
+      id: 'qd-2',
+      type: 'comparison',
+      questionText: 'Which is larger?',
+      visual: {
+        type: 'comparison',
+        totalParts: 10,
+        shadedParts: 5,
+        comparison: {
+          fractionA: { numerator: 5, denominator: 10, label: '0.5' },
+          fractionB: { numerator: 2, denominator: 10, label: '0.2' },
+        },
+      },
+      choices: [
+        { id: 'qd-2-a', text: '0.5 is larger' },
+        { id: 'qd-2-b', text: '0.2 is larger' },
+        { id: 'qd-2-c', text: 'They are equal' },
+      ],
+      correctChoiceId: 'qd-2-a',
+      explanation: 'That’s right. 0.5 represents 5 tenths, while 0.2 represents only 2 tenths. 5 tenths is more.',
+      hint: 'Not quite. Compare the tenths: 5 tenths is more than 2 tenths.',
+    },
+    {
+      id: 'qd-3',
+      type: 'multiple-choice',
+      questionText: 'Which decimal represents one half (1/2)?',
+      choices: [
+        { id: 'qd-3-a', text: '0.2' },
+        { id: 'qd-3-b', text: '0.5' },
+        { id: 'qd-3-c', text: '0.12' },
+        { id: 'qd-3-d', text: '0.05' },
+      ],
+      correctChoiceId: 'qd-3-b',
+      explanation: 'That’s right. 5 tenths (5/10) simplifies to 1/2. Therefore 0.5 = 1/2.',
+      hint: 'Not quite. Think about half of 10. Half of 10 tenths is 5 tenths (0.5).',
+    },
+  ],
+  completion: {
+    title: 'You understand decimal place value.',
+    subtitle: 'Nice work. Your foundation just got a little stronger.',
+    summaryPoints: [
+      'The decimal point separates whole numbers from parts.',
+      'The first position represents tenths (1/10).',
+      '0.5 is the exact same amount as 1/2.',
+    ],
+  },
+};
