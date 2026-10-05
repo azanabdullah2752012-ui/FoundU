@@ -8,10 +8,14 @@ Foundu is a calm, modern web learning platform designed to help students and sel
 
 ## ✨ Features
 
+- **🧸 Kid-Proof Real-World Metaphors**: Every lesson provides an instant tangible physical model (chocolate bar sharing, basement elevator levels, wrapped mystery gift boxes, egg cartons) with a dedicated *"Explain like I'm 8"* anchor for learners of any age or language proficiency.
+- **🧠 The Brain Trap (Misconception Buster)**: Direct side-by-side confrontation of the #1 mental mistake per topic (e.g. why $0.38 < 0.40$ despite having more digits, why $\frac{1}{2} + \frac{1}{2} \neq \frac{2}{4}$, why odd numbers aren't always prime) with visual proof of why the false intuition fails.
+- **🎯 Direct Physical Challenges**: Rather than passive reading or guessing A/B/C/D, learners physically manipulate the visual models to solve real targets (balancing scales, slicing fractions to exact targets, setting elevations) with instant verification.
+- **🔊 Calm Acoustic Feedback (Web Audio API)**: Zero-dependency, synthesized warm sound design (organic tactile clicks, warm chord chimes on completion, and calm retry cues) with a navbar toggle and `M` keyboard shortcut.
 - **Zero-Scroll, Viewport-Fitted Learning Flow**: Every lesson is structured into 4 compact, high-impact stages designed to fit without tedious vertical scrolling:
-  1. **01 Intro**: Crisp, jargon-free core definition with an interactive visual manipulative hook.
+  1. **01 Intro**: Crisp core definition, Story vs Rule toggle, and the Brain Trap misconception buster.
   2. **02 Visual Examples**: Interactive tabbed carousel explorer showing focused visual models and intuition insights one at a time.
-  3. **03 Interactive Visual Lab**: Hands-on mathematical laboratories where learners slice, scale, balance, and slide values to see mathematical laws in real time.
+  3. **03 Interactive Visual Lab**: Hands-on mathematical laboratories with a Physical Challenge mode and Free Explore mode.
   4. **04 Active Practice**: Conceptual questions with visual choices, instant visual confirmation, and detailed feedback.
   5. **Complete**: Quiet, dignified recap and progress milestone.
 - **Interactive Visual Manipulatives**:

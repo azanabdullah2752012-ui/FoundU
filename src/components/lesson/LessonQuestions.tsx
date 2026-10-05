@@ -8,6 +8,7 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { VisualRenderer } from '../visual/VisualRenderer';
+import { sound } from '../../utils/sound';
 
 interface LessonQuestionsProps {
   lesson: LessonData;
@@ -35,6 +36,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
   // Sync state if question index changes
   const handleSelectChoice = (choiceId: string) => {
     if (hasSubmitted && isCorrect) return; // prevent altering after correct answer
+    sound.playTap();
     setSelectedChoiceId(choiceId);
     setHasSubmitted(false);
     setIsCorrect(null);
@@ -48,11 +50,15 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
     setHasSubmitted(true);
 
     if (correct) {
+      sound.playSuccess();
       onSaveAnswer(currentQuestion.id, selectedChoiceId);
+    } else {
+      sound.playRetry();
     }
   };
 
   const handleRetry = () => {
+    sound.playTap();
     setHasSubmitted(false);
     setIsCorrect(null);
     setSelectedChoiceId(null);

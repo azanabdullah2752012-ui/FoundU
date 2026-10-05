@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { LessonData } from '../../types';
-import { ArrowLeft, ArrowRight, Eye, Sliders, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Eye, Sliders, CheckCircle2, Target, HelpCircle } from 'lucide-react';
 import { FractionBar } from '../visual/FractionBar';
 import { NumberLine } from '../visual/NumberLine';
 import { SubdivisionSimulator } from '../visual/SubdivisionSimulator';
@@ -14,6 +14,8 @@ import { RatioVisualizer } from '../visual/RatioVisualizer';
 import { MetricLadder } from '../visual/MetricLadder';
 import { DivisionSharing } from '../visual/DivisionSharing';
 import { FractionAddition } from '../visual/FractionAddition';
+import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
+import { sound } from '../../utils/sound';
 
 interface LessonVisualLabProps {
   lesson: LessonData;
@@ -27,6 +29,8 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
   onPrev,
 }) => {
   const { visualLab } = lesson;
+  const pedagogy = PEDAGOGY_REGISTRY[lesson.id];
+  const challenge = pedagogy?.challenge;
 
   // Fraction Slicer state
   const [sliceDenominator, setSliceDenominator] = useState(4);
@@ -37,6 +41,28 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
   const [compDenA, setCompDenA] = useState(3);
   const [compNumB, setCompNumB] = useState(3);
   const [compDenB, setCompDenB] = useState(4);
+
+  // Physical Challenge State
+  const [isChallengeSolved, setIsChallengeSolved] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [labMode, setLabMode] = useState<'challenge' | 'explore'>('challenge');
+
+  // Automatic verification for fraction slicer
+  useEffect(() => {
+    if (challenge && challenge.type === 'fraction-slicer' && challenge.targetNumerator && challenge.targetDenominator) {
+      if (sliceNumerator === challenge.targetNumerator && sliceDenominator === challenge.targetDenominator) {
+        if (!isChallengeSolved) {
+          setIsChallengeSolved(true);
+          sound.playSuccess();
+        }
+      }
+    }
+  }, [sliceNumerator, sliceDenominator, challenge, isChallengeSolved]);
+
+  const handleManualSolve = () => {
+    setIsChallengeSolved(true);
+    sound.playSuccess();
+  };
 
   return (
     <article className="max-w-5xl mx-auto py-4 sm:py-6 animate-in fade-in duration-200">
@@ -56,12 +82,110 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
           </h1>
         </div>
 
-        {/* Instructions banner */}
-        <div className="bg-white border border-[#E8E5DD] rounded-xl px-3 py-1.5 flex items-center gap-2 text-xs text-[#6B6861] shadow-2xs self-start sm:self-auto">
-          <Sliders className="w-3.5 h-3.5 text-[#D45B34] shrink-0" />
-          <span>{visualLab.instructions}</span>
+        {/* Mode switch & Instructions */}
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          {challenge && (
+            <div className="flex items-center bg-[#FAF9F5] p-0.5 rounded-lg border border-[#E8E5DD] text-xs">
+              <button
+                type="button"
+                onClick={() => setLabMode('challenge')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-all flex items-center gap-1 cursor-pointer ${
+                  labMode === 'challenge'
+                    ? 'bg-white text-[#D45B34] shadow-2xs font-semibold'
+                    : 'text-[#6B6861] hover:text-[#1C1917]'
+                }`}
+              >
+                <Target className="w-3 h-3" />
+                <span>Challenge</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setLabMode('explore')}
+                className={`px-2.5 py-1 rounded-md font-medium transition-all flex items-center gap-1 cursor-pointer ${
+                  labMode === 'explore'
+                    ? 'bg-white text-[#1C1917] shadow-2xs font-semibold'
+                    : 'text-[#6B6861] hover:text-[#1C1917]'
+                }`}
+              >
+                <Sliders className="w-3 h-3" />
+                <span>Explore</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Feature 2: Direct Physical Challenge Banner */}
+      {challenge && labMode === 'challenge' && (
+        <div
+          className={`mb-3.5 p-3.5 rounded-2xl border transition-all animate-in fade-in duration-150 ${
+            isChallengeSolved
+              ? 'bg-[#F0F9F5] border-[#B7E4D3] text-[#1E6B4F]'
+              : 'bg-[#FFFBF5] border-[#F0DDC5] text-[#1C1917]'
+          }`}
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div className="flex items-start sm:items-center gap-2.5">
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
+                  isChallengeSolved
+                    ? 'bg-[#1E6B4F] text-white shadow-xs'
+                    : 'bg-[#D45B34] text-white'
+                }`}
+              >
+                {isChallengeSolved ? (
+                  <CheckCircle2 className="w-4 h-4" />
+                ) : (
+                  <Target className="w-4 h-4" />
+                )}
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-mono uppercase tracking-wider font-bold">
+                    {isChallengeSolved ? 'Challenge Complete' : 'Physical Challenge'}
+                  </span>
+                  {isChallengeSolved && (
+                    <span className="text-[10px] font-mono bg-white text-[#1E6B4F] px-1.5 py-0.2 rounded font-bold border border-[#B7E4D3]">
+                      ✨ Verified
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs sm:text-sm font-semibold">
+                  {isChallengeSolved ? challenge.successMessage : challenge.prompt}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+              {!isChallengeSolved && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setShowHint(!showHint)}
+                    className="text-xs text-[#9E9B93] hover:text-[#6B6861] flex items-center gap-1 cursor-pointer"
+                  >
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    <span>{showHint ? 'Hide Hint' : 'Hint'}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleManualSolve}
+                    className="text-xs bg-white border border-[#E8E5DD] hover:border-[#D45B34] text-[#1C1917] px-2.5 py-1 rounded-lg font-medium transition-colors cursor-pointer shadow-2xs"
+                  >
+                    Check Model ✓
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {showHint && !isChallengeSolved && (
+            <div className="mt-2.5 pt-2 border-t border-[#F0DDC5] text-xs text-[#6B6861] font-mono">
+              💡 <strong>Hint:</strong> {challenge.hint}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Main Interactive Stage */}
       <div className="mb-4">

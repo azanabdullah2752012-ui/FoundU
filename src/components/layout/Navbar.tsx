@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard, Volume2, VolumeX } from 'lucide-react';
 import type { UserProgress } from '../../types';
+import { sound } from '../../utils/sound';
 
 interface NavbarProps {
   currentView: 'home' | 'library' | 'lesson';
@@ -22,6 +23,22 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeLessonTitle,
 }) => {
   const [showBrandMeaning, setShowBrandMeaning] = useState(false);
+  const [isMuted, setIsMuted] = useState(sound.getMuted());
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === 'm' || e.key === 'M') {
+        setIsMuted(sound.toggleMute());
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleToggleSound = () => {
+    setIsMuted(sound.toggleMute());
+  };
 
   const completedCount = progress.completedLessons.length;
 
@@ -107,6 +124,29 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <BookOpen className="w-3.5 h-3.5" />
             <span>Topics</span>
+          </button>
+
+          {/* Sound Toggle Button */}
+          <button
+            type="button"
+            onClick={handleToggleSound}
+            className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 border border-transparent hover:border-[#E8E5DD] ${
+              isMuted ? 'text-[#9E9B93] hover:text-[#1C1917] hover:bg-[#F4F2EB]' : 'text-[#1C1917] hover:bg-[#F4F2EB]'
+            }`}
+            title={isMuted ? 'Unmute sounds (Press M)' : 'Mute sounds (Press M)'}
+            aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
+          >
+            {isMuted ? (
+              <VolumeX className="w-3.5 h-3.5 text-[#9E9B93]" />
+            ) : (
+              <Volume2 className="w-3.5 h-3.5 text-[#1E6B4F]" />
+            )}
+            <span className="hidden lg:inline text-[11px] font-mono">
+              {isMuted ? 'Muted' : 'Sound'}
+            </span>
+            <kbd className="hidden sm:inline px-1 py-0.2 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#6B6861] shadow-2xs">
+              M
+            </kbd>
           </button>
 
           {/* Keyboard Shortcuts Trigger Button */}

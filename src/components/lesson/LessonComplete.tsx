@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { LessonData } from '../../types';
 import { ArrowRight, CheckCircle2, RotateCcw, BookOpen } from 'lucide-react';
+import { sound } from '../../utils/sound';
 
 interface LessonCompleteProps {
   lesson: LessonData;
@@ -15,6 +16,10 @@ export const LessonComplete: React.FC<LessonCompleteProps> = ({
   onExploreTopics,
   onRestartLesson,
 }) => {
+  useEffect(() => {
+    sound.playCelebration();
+  }, []);
+
   return (
     <article className="max-w-2xl mx-auto py-12 sm:py-16 text-center animate-in fade-in duration-300">
       {/* Calm, purposeful completion mark */}
