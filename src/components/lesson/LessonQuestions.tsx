@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { LessonData, Question } from '../../types';
 import {
   ArrowLeft,
@@ -80,8 +80,8 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
     }
   };
 
-  // Speed keyboard navigation
-  React.useEffect(() => {
+  // Keyboard navigation
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
         e.target instanceof HTMLInputElement ||
@@ -91,69 +91,59 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
         return;
       }
 
-      // Choice selection via number keys 1-4 or letters a-d
-      const numKey = parseInt(e.key, 10);
-      if (!isNaN(numKey) && numKey >= 1 && numKey <= currentQuestion.choices.length) {
-        if (!hasSubmitted || !isCorrect) {
+      // Keys 1..4 select corresponding choice
+      if (['1', '2', '3', '4'].includes(e.key)) {
+        const choiceIdx = parseInt(e.key, 10) - 1;
+        if (currentQuestion.choices[choiceIdx]) {
           e.preventDefault();
-          const targetChoice = currentQuestion.choices[numKey - 1];
-          if (targetChoice) {
-            handleSelectChoice(targetChoice.id);
-          }
+          handleSelectChoice(currentQuestion.choices[choiceIdx].id);
         }
-      } else {
-        const letterIndex = ['a', 'b', 'c', 'd'].indexOf(e.key.toLowerCase());
-        if (letterIndex !== -1 && letterIndex < currentQuestion.choices.length) {
-          if (!hasSubmitted || !isCorrect) {
-            e.preventDefault();
-            const targetChoice = currentQuestion.choices[letterIndex];
-            if (targetChoice) {
-              handleSelectChoice(targetChoice.id);
-            }
-          }
-        }
+        return;
       }
 
-      // Enter to submit or advance
+      // Enter key checks answer or advances
       if (e.key === 'Enter') {
         e.preventDefault();
         if (!hasSubmitted && selectedChoiceId) {
           handleCheckAnswer();
         } else if (hasSubmitted && isCorrect) {
           handleNextQuestion();
-        } else if (hasSubmitted && !isCorrect) {
+        }
+        return;
+      }
+
+      // R key retries
+      if (e.key.toLowerCase() === 'r') {
+        if (hasSubmitted && !isCorrect) {
+          e.preventDefault();
           handleRetry();
         }
+        return;
       }
 
-      // R to retry
-      if (e.key.toLowerCase() === 'r' && hasSubmitted && !isCorrect) {
-        e.preventDefault();
-        handleRetry();
-      }
-
-      // P for previous
-      if (e.key.toLowerCase() === 'p' && !e.metaKey && !e.ctrlKey) {
+      // P key goes to previous
+      if (e.key.toLowerCase() === 'p') {
         e.preventDefault();
         handlePrevQuestion();
+        return;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [
-    currentQuestionIndex,
     currentQuestion,
     selectedChoiceId,
     hasSubmitted,
     isCorrect,
+    currentQuestionIndex,
     isLastQuestion,
   ]);
 
   return (
-    <article className="max-w-2xl mx-auto py-8 sm:py-12 animate-in fade-in duration-200">
+    <article className="max-w-4xl mx-auto py-3 sm:py-5 animate-in fade-in duration-200">
       {/* Stage Badge & Step Indicator */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
             STAGE 04
@@ -173,7 +163,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
       </div>
 
       {/* Progress Pill Bar */}
-      <div className="flex gap-1.5 mb-8">
+      <div className="flex gap-1.5 mb-4">
         {questions.map((q, idx) => {
           const isDone = idx < currentQuestionIndex;
           const isCurrent = idx === currentQuestionIndex;
@@ -192,215 +182,202 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
         })}
       </div>
 
-      {/* Question Card */}
-      <div className="bg-white border border-[#E8E5DD] rounded-2xl p-6 sm:p-8 shadow-xs mb-6">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1C1917] mb-2">
-          {currentQuestion.questionText}
-        </h2>
+      {/* Main Question Card: Responsive 2-Column when visual is present */}
+      <div className="bg-white border border-[#E8E5DD] rounded-2xl p-5 sm:p-6 shadow-xs mb-3">
+        <div className={currentQuestion.visual ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-start' : 'space-y-4'}>
+          {/* Question Text & Prompt Visual */}
+          <div className={currentQuestion.visual ? 'md:col-span-5 space-y-3' : 'space-y-2'}>
+            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#1C1917] leading-snug">
+              {currentQuestion.questionText}
+            </h2>
 
-        {currentQuestion.promptNote && (
-          <p className="text-sm text-[#6B6861] mb-4">
-            {currentQuestion.promptNote}
-          </p>
-        )}
+            {currentQuestion.promptNote && (
+              <p className="text-xs sm:text-sm text-[#6B6861]">
+                {currentQuestion.promptNote}
+              </p>
+            )}
 
-        {/* Visual prompt if present */}
-        {currentQuestion.visual && (
-          <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-4 sm:p-5 my-5">
-            <VisualRenderer visual={currentQuestion.visual} />
-          </div>
-        )}
-
-        {/* Choices List */}
-        <div className="space-y-3 mt-6">
-          {currentQuestion.choices.map((choice, idx) => {
-            const isSelected = selectedChoiceId === choice.id;
-            const shortcutNum = idx + 1;
-
-            let borderClass = 'border-[#E8E5DD] hover:border-[#D5D1C7]';
-            let bgClass = 'bg-white hover:bg-[#FAF9F5]';
-            let textClass = 'text-[#1C1917]';
-
-            if (isSelected) {
-              borderClass = 'border-[#1C1917] ring-1 ring-[#1C1917]';
-              bgClass = 'bg-[#FAF9F5]';
-            }
-
-            if (hasSubmitted) {
-              if (choice.id === currentQuestion.correctChoiceId) {
-                borderClass = 'border-[#1E6B4F] bg-[#F0F9F5] ring-1 ring-[#1E6B4F]';
-                textClass = 'text-[#1E6B4F] font-semibold';
-              } else if (isSelected && !isCorrect) {
-                borderClass = 'border-[#D45B34] bg-[#FDF4F0] ring-1 ring-[#D45B34]';
-                textClass = 'text-[#D45B34]';
-              }
-            }
-
-            return (
-              <button
-                key={choice.id}
-                type="button"
-                onClick={() => handleSelectChoice(choice.id)}
-                disabled={hasSubmitted && isCorrect === true}
-                className={`w-full text-left p-3.5 sm:p-4 rounded-xl border ${borderClass} ${bgClass} transition-all flex items-center justify-between group cursor-pointer`}
-              >
-                <div className="flex items-center gap-3">
-                  {/* Keyboard key badge for speed */}
-                  <kbd
-                    className={`px-1.5 py-0.5 rounded text-[10px] sm:text-xs font-mono font-medium border transition-colors ${
-                      isSelected
-                        ? 'bg-[#1C1917] border-[#1C1917] text-white'
-                        : 'bg-[#FAF9F5] border-[#D5D1C7] text-[#6B6861] group-hover:border-[#1C1917]'
-                    }`}
-                  >
-                    {shortcutNum}
-                  </kbd>
-
-                  <div
-                    className={`w-4 h-4 rounded-full border flex items-center justify-center text-xs font-mono transition-colors ${
-                      isSelected
-                        ? 'border-[#1C1917] bg-[#1C1917] text-white'
-                        : 'border-[#D5D1C7] text-[#9E9B93]'
-                    }`}
-                  >
-                    {isSelected && (
-                      <span className="w-1 h-1 rounded-full bg-white" />
-                    )}
-                  </div>
-                  <span className={`text-sm sm:text-base ${textClass}`}>{choice.text}</span>
-                </div>
-
-                {choice.visual && (
-                  <div className="w-28 sm:w-36 shrink-0 my-auto ml-2">
-                    <VisualRenderer visual={choice.visual} size="xs" className="my-0" />
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Action Button: Check Answer */}
-        {!hasSubmitted && (
-          <div className="mt-6 pt-4 border-t border-[#E8E5DD] flex items-center justify-between">
-            <span className="text-[11px] font-mono text-[#9E9B93] hidden sm:inline">
-              Select an option above, then press Enter
-            </span>
-            <button
-              type="button"
-              onClick={handleCheckAnswer}
-              disabled={!selectedChoiceId}
-              className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-xs flex items-center gap-1.5 ${
-                selectedChoiceId
-                  ? 'bg-[#1C1917] hover:bg-[#D45B34] text-white cursor-pointer'
-                  : 'bg-[#F4F2EB] text-[#9E9B93] cursor-not-allowed'
-              }`}
-            >
-              <span>Check answer</span>
-              {selectedChoiceId && (
-                <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white/20 text-white rounded">
-                  Enter ↵
-                </kbd>
-              )}
-            </button>
-          </div>
-        )}
-
-        {/* Feedback Section */}
-        {hasSubmitted && (
-          <div
-            className={`mt-6 p-5 rounded-xl border animate-in fade-in duration-200 ${
-              isCorrect
-                ? 'bg-[#F0F9F5] border-[#B7E4D3]'
-                : 'bg-[#FFFBEB] border-[#FDE68A]'
-            }`}
-          >
-            {isCorrect ? (
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-bold text-[#1E6B4F]">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>That’s right!</span>
-                </div>
-
-                <p className="text-sm text-[#1C1917] leading-relaxed">
-                  {currentQuestion.explanation}
-                </p>
-
-                {/* Visual confirmation badge */}
-                {currentQuestion.visual && (
-                  <div className="bg-white p-3 rounded-xl border border-[#B7E4D3] shadow-2xs">
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#1E6B4F] font-bold mb-1">
-                      Visual Match Confirmed:
-                    </div>
-                    <VisualRenderer visual={currentQuestion.visual} size="xs" />
-                  </div>
-                )}
-
-                <div className="pt-2 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={handleNextQuestion}
-                    className="inline-flex items-center gap-2 bg-[#1E6B4F] hover:bg-[#15543D] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-colors shadow-xs cursor-pointer"
-                  >
-                    <span>{isLastQuestion ? 'Complete lesson' : 'Next question'}</span>
-                    <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white/20 text-white rounded">
-                      Enter ↵
-                    </kbd>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                <div className="flex items-center gap-2 text-sm font-bold text-[#92400E]">
-                  <HelpCircle className="w-5 h-5" />
-                  <span>Almost — look at the parts closely:</span>
-                </div>
-
-                <p className="text-sm text-[#1C1917] leading-relaxed">
-                  {currentQuestion.hint}
-                </p>
-
-                {/* Visual comparison reminder for non-English learners */}
-                {currentQuestion.visual && (
-                  <div className="bg-white p-3 rounded-xl border border-[#FDE68A] shadow-2xs">
-                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#92400E] font-bold mb-1">
-                      Target to Match:
-                    </div>
-                    <VisualRenderer visual={currentQuestion.visual} size="xs" />
-                  </div>
-                )}
-
-                <div className="pt-2 flex items-center justify-between">
-                  <span className="text-xs text-[#92400E] font-medium">
-                    Touch again to retry. Understanding takes practice!
-                  </span>
-                  <button
-                    type="button"
-                    onClick={handleRetry}
-                    className="inline-flex items-center gap-1.5 bg-white border border-[#D5D1C7] hover:bg-[#FAF9F5] text-[#1C1917] px-4 py-2 rounded-xl text-xs font-bold transition-colors shadow-xs cursor-pointer"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    <span>Try again</span>
-                    <kbd className="text-[10px] font-mono px-1 py-0.2 bg-[#F4F2EB] text-[#6B6861] border border-[#D5D1C7] rounded">
-                      R
-                    </kbd>
-                  </button>
-                </div>
+            {currentQuestion.visual && (
+              <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-3 sm:p-4 my-2">
+                <VisualRenderer visual={currentQuestion.visual} size="sm" className="my-0" />
               </div>
             )}
           </div>
-        )}
+
+          {/* Choices & Immediate Actions */}
+          <div className={currentQuestion.visual ? 'md:col-span-7 space-y-3' : 'space-y-3 pt-2'}>
+            <div className="space-y-2">
+              {currentQuestion.choices.map((choice, idx) => {
+                const isSelected = selectedChoiceId === choice.id;
+                const shortcutNum = idx + 1;
+
+                let borderClass = 'border-[#E8E5DD] hover:border-[#D5D1C7]';
+                let bgClass = 'bg-white hover:bg-[#FAF9F5]';
+                let textClass = 'text-[#1C1917]';
+
+                if (isSelected) {
+                  borderClass = 'border-[#1C1917] ring-1 ring-[#1C1917]';
+                  bgClass = 'bg-[#FAF9F5]';
+                }
+
+                if (hasSubmitted) {
+                  if (choice.id === currentQuestion.correctChoiceId) {
+                    borderClass = 'border-[#1E6B4F] bg-[#F0F9F5] ring-1 ring-[#1E6B4F]';
+                    textClass = 'text-[#1E6B4F] font-semibold';
+                  } else if (isSelected && !isCorrect) {
+                    borderClass = 'border-[#D45B34] bg-[#FDF4F0] ring-1 ring-[#D45B34]';
+                    textClass = 'text-[#D45B34]';
+                  }
+                }
+
+                return (
+                  <button
+                    key={choice.id}
+                    type="button"
+                    onClick={() => handleSelectChoice(choice.id)}
+                    disabled={hasSubmitted && isCorrect === true}
+                    className={`w-full text-left p-3 rounded-xl border ${borderClass} ${bgClass} transition-all flex items-center justify-between group cursor-pointer`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <kbd
+                        className={`px-1.5 py-0.5 rounded text-[10px] font-mono font-medium border transition-colors ${
+                          isSelected
+                            ? 'bg-[#1C1917] border-[#1C1917] text-white'
+                            : 'bg-[#FAF9F5] border-[#D5D1C7] text-[#6B6861] group-hover:border-[#1C1917]'
+                        }`}
+                      >
+                        {shortcutNum}
+                      </kbd>
+
+                      <div
+                        className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center text-xs font-mono transition-colors ${
+                          isSelected
+                            ? 'border-[#1C1917] bg-[#1C1917] text-white'
+                            : 'border-[#D5D1C7] text-[#9E9B93]'
+                        }`}
+                      >
+                        {isSelected && (
+                          <span className="w-1 h-1 rounded-full bg-white" />
+                        )}
+                      </div>
+                      <span className={`text-xs sm:text-sm font-medium ${textClass}`}>
+                        {choice.text}
+                      </span>
+                    </div>
+
+                    {choice.visual && (
+                      <div className="w-24 sm:w-28 shrink-0 my-auto ml-2">
+                        <VisualRenderer visual={choice.visual} size="xs" className="my-0" />
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Action Button: Check Answer */}
+            {!hasSubmitted && (
+              <div className="pt-2 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-[#9E9B93]">
+                  Select an option, then press Enter
+                </span>
+                <button
+                  type="button"
+                  onClick={handleCheckAnswer}
+                  disabled={!selectedChoiceId}
+                  className={`px-4 py-2 rounded-xl font-medium text-xs sm:text-sm transition-all shadow-xs flex items-center gap-1.5 ${
+                    selectedChoiceId
+                      ? 'bg-[#1C1917] hover:bg-[#D45B34] text-white cursor-pointer'
+                      : 'bg-[#F4F2EB] text-[#9E9B93] cursor-not-allowed'
+                  }`}
+                >
+                  <span>Check answer</span>
+                  {selectedChoiceId && (
+                    <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white/20 text-white rounded">
+                      Enter ↵
+                    </kbd>
+                  )}
+                </button>
+              </div>
+            )}
+
+            {/* Feedback Section */}
+            {hasSubmitted && (
+              <div
+                className={`p-3.5 rounded-xl border animate-in fade-in duration-150 ${
+                  isCorrect
+                    ? 'bg-[#F0F9F5] border-[#B7E4D3]'
+                    : 'bg-[#FFFBEB] border-[#FDE68A]'
+                }`}
+              >
+                {isCorrect ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1E6B4F]">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>That’s right!</span>
+                    </div>
+
+                    <p className="text-xs text-[#1C1917] leading-relaxed">
+                      {currentQuestion.explanation}
+                    </p>
+
+                    <div className="pt-1 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={handleNextQuestion}
+                        className="inline-flex items-center gap-2 bg-[#1E6B4F] hover:bg-[#15543D] text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors shadow-xs cursor-pointer"
+                      >
+                        <span>{isLastQuestion ? 'Complete lesson' : 'Next question'}</span>
+                        <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white/20 text-white rounded">
+                          Enter ↵
+                        </kbd>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#92400E]">
+                      <HelpCircle className="w-4 h-4" />
+                      <span>Almost — take another look:</span>
+                    </div>
+
+                    <p className="text-xs text-[#1C1917] leading-relaxed">
+                      {currentQuestion.hint}
+                    </p>
+
+                    <div className="pt-1 flex items-center justify-between">
+                      <span className="text-[11px] text-[#92400E] font-medium">
+                        Touch again to retry!
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleRetry}
+                        className="inline-flex items-center gap-1.5 bg-white border border-[#D5D1C7] hover:bg-[#FAF9F5] text-[#1C1917] px-3 py-1.5 rounded-xl text-xs font-bold transition-colors shadow-xs cursor-pointer"
+                      >
+                        <RotateCcw className="w-3 h-3" />
+                        <span>Try again</span>
+                        <kbd className="text-[10px] font-mono px-1 py-0.2 bg-[#F4F2EB] text-[#6B6861] border border-[#D5D1C7] rounded">
+                          R
+                        </kbd>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Navigation footer between questions / stages */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-[#6B6861] gap-3 pt-2">
+      {/* Navigation footer between questions */}
+      <div className="flex items-center justify-between text-xs text-[#6B6861] pt-1">
         <button
           type="button"
           onClick={handlePrevQuestion}
-          className="inline-flex items-center gap-1.5 text-[#6B6861] hover:text-[#1C1917] transition-colors"
+          className="inline-flex items-center gap-1.5 text-[#6B6861] hover:text-[#1C1917] transition-colors cursor-pointer"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-3.5 h-3.5" />
           <span>
             {currentQuestionIndex === 0
               ? 'Back to Visual Lab'
@@ -411,14 +388,11 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
           </kbd>
         </button>
 
-        {/* Speed shortcuts reminder */}
-        <div className="flex items-center gap-1.5 text-[11px] text-[#9E9B93] bg-[#FAF9F5] px-2.5 py-1 rounded-lg border border-[#E8E5DD]">
-          <span className="font-mono text-[#D45B34] font-medium">Speed:</span>
+        <div className="flex items-center gap-1.5 text-[11px] text-[#9E9B93] bg-[#FAF9F5] px-2 py-0.5 rounded-lg border border-[#E8E5DD]">
+          <span className="font-mono text-[#D45B34] font-medium">Shortcuts:</span>
           <span><kbd className="px-1 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917]">1-4</kbd> Pick</span>
           <span>•</span>
           <span><kbd className="px-1 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917]">Enter ↵</kbd> Next</span>
-          <span>•</span>
-          <span><kbd className="px-1 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917]">R</kbd> Retry</span>
         </div>
       </div>
     </article>

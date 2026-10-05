@@ -28,8 +28,8 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
   const isComplete = currentStage === 'complete';
 
   return (
-    <div className="border-b border-[#E8E5DD] bg-white/70 backdrop-blur-xs py-3.5 px-4 sm:px-6">
-      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div className="sticky top-0 z-40 border-b border-[#E8E5DD] bg-white/90 backdrop-blur-md py-2 sm:py-2.5 px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
         {/* Back and lesson title */}
         <div className="flex items-center gap-3">
           <button
