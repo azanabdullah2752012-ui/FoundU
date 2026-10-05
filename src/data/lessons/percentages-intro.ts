@@ -61,22 +61,16 @@ export const percentagesIntroLesson: LessonData = {
       },
     ],
   },
-  video: {
-    title: 'The meaning of per centum',
-    duration: '02:00',
-    durationSeconds: 120,
-    description: 'A 2-minute visual exploration of why 100 was chosen as the universal comparison baseline.',
-    placeholderNote: 'Foundu short visual breakdown (1–4 min per concept)',
-    keyPoints: [
-      '“Cent” comes from the Latin word for 100 (like century or cent)',
-      'Percent is always a comparison against 100',
-      '50% = 50/100 = 1/2',
-      '100% = 100/100 = 1 whole',
-    ],
-    transcript: [
-      'Whenever you see the percent sign, think: out of one hundred.',
-      'If you score 80%, you got 80 points for every 100 available.',
-      'It creates a universal ruler that everyone can understand instantly.',
+  visualLab: {
+    title: 'The Universal 100-Grid Ruler Lab',
+    subtitle: 'Slide from 0% to 100%. Watch the grid, the fraction, and the decimal synchronize live.',
+    interactiveType: 'percentage-grid',
+    instructions: 'Drag the slider or tap preset chips (10%, 25%, 50%, 75%, 100%) to see how many squares out of 100 get filled.',
+    keyInsights: [
+      '“Percent” literally means “out of one hundred” (Latin: per centum)',
+      'A 100-square grid provides a universal visual ruler for any proportion',
+      '50% fills exactly half the grid (50/100 = 1/2 = 0.50)',
+      '100% fills all 100 squares completely (100/100 = 1 Whole = 1.00)',
     ],
   },
   questions: [

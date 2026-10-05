@@ -403,7 +403,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
           <ArrowLeft className="w-4 h-4" />
           <span>
             {currentQuestionIndex === 0
-              ? 'Back to video'
+              ? 'Back to Visual Lab'
               : `Question ${currentQuestionIndex}`}
           </span>
           <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white border border-[#E8E5DD] rounded text-[#9E9B93]">

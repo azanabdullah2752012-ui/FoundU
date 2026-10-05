@@ -1,14 +1,48 @@
-export type Stage = 'intro' | 'examples' | 'video' | 'questions' | 'complete';
+export type Stage = 'intro' | 'examples' | 'visuals' | 'questions' | 'complete';
 
 export interface VisualData {
-  type: 'fraction-bar' | 'fraction-circle' | 'comparison' | 'number-line';
-  totalParts: number;
-  shadedParts: number;
+  type:
+    | 'fraction-bar'
+    | 'fraction-circle'
+    | 'comparison'
+    | 'number-line'
+    | 'decimal-grid'
+    | 'percentage-grid'
+    | 'array-grid'
+    | 'balance-scale'
+    | 'thermometer';
+  totalParts?: number;
+  shadedParts?: number;
   highlightIndexes?: number[];
   label?: string;
   comparison?: {
     fractionA: { numerator: number; denominator: number; label: string };
     fractionB: { numerator: number; denominator: number; label: string };
+  };
+  decimalGrid?: {
+    tenths: number;
+    hundredths?: number;
+    total?: number;
+    mode?: 'tenths' | 'hundredths';
+  };
+  percentage?: {
+    percent: number;
+    showFraction?: boolean;
+    showDecimal?: boolean;
+  };
+  arrayGrid?: {
+    rows: number;
+    cols: number;
+  };
+  balanceScale?: {
+    leftX: number;
+    leftConstant: number;
+    rightConstant: number;
+  };
+  thermometer?: {
+    value: number;
+    min?: number;
+    max?: number;
   };
 }
 
@@ -40,6 +74,25 @@ export interface ExampleItem {
   insight: string;
 }
 
+export interface VisualLabData {
+  title: string;
+  subtitle: string;
+  interactiveType:
+    | 'fraction-slicer'
+    | 'subdivision-multiplier'
+    | 'fraction-comparison'
+    | 'decimal-grid'
+    | 'decimal-duel'
+    | 'percentage-grid'
+    | 'percentage-converter'
+    | 'balance-scale'
+    | 'array-grid'
+    | 'thermometer';
+  instructions: string;
+  keyInsights: string[];
+  initialConfig?: Record<string, unknown>;
+}
+
 export interface LessonData {
   id: string;
   topicId: string;
@@ -52,21 +105,14 @@ export interface LessonData {
     coreDefinition: string;
     whyItMatters: string;
     keyTakeaway: string;
+    visualHookType?: 'fraction-slice' | 'decimal-grid' | 'percentage-grid' | 'balance-scale' | 'array-grid' | 'thermometer';
   };
   examples: {
     heading: string;
     description: string;
     items: ExampleItem[];
   };
-  video: {
-    title: string;
-    duration: string;
-    durationSeconds: number;
-    description: string;
-    placeholderNote: string;
-    keyPoints: string[];
-    transcript: string[];
-  };
+  visualLab: VisualLabData;
   questions: Question[];
   completion: {
     title: string;

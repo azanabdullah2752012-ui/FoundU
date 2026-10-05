@@ -3,7 +3,7 @@ import type { LessonData, Stage } from '../../types';
 import { LessonProgress } from './LessonProgress';
 import { LessonIntro } from './LessonIntro';
 import { LessonExamples } from './LessonExamples';
-import { LessonVideo } from './LessonVideo';
+import { LessonVisualLab } from './LessonVisualLab';
 import { LessonQuestions } from './LessonQuestions';
 import { LessonComplete } from './LessonComplete';
 
@@ -56,7 +56,7 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
           onStageChange('examples');
         } else if (e.key === '3') {
           e.preventDefault();
-          onStageChange('video');
+          onStageChange('visuals');
         } else if (e.key === '4') {
           e.preventDefault();
           onStageChange('questions');
@@ -80,10 +80,18 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
       } else if (currentStage === 'examples') {
         if (e.key === 'Enter' || e.key.toLowerCase() === 'n') {
           e.preventDefault();
-          onStageChange('video');
+          onStageChange('visuals');
         } else if (e.key.toLowerCase() === 'p') {
           e.preventDefault();
           onStageChange('intro');
+        }
+      } else if (currentStage === 'visuals') {
+        if (e.key === 'Enter' || e.key.toLowerCase() === 'n') {
+          e.preventDefault();
+          onStageChange('questions');
+        } else if (e.key.toLowerCase() === 'p') {
+          e.preventDefault();
+          onStageChange('examples');
         }
       } else if (currentStage === 'complete') {
         if (e.key === 'Enter') {
@@ -133,13 +141,13 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
         {currentStage === 'examples' && (
           <LessonExamples
             lesson={lesson}
-            onNext={() => onStageChange('video')}
+            onNext={() => onStageChange('visuals')}
             onPrev={() => onStageChange('intro')}
           />
         )}
 
-        {currentStage === 'video' && (
-          <LessonVideo
+        {currentStage === 'visuals' && (
+          <LessonVisualLab
             lesson={lesson}
             onNext={() => onStageChange('questions')}
             onPrev={() => onStageChange('examples')}
@@ -150,7 +158,7 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
           <LessonQuestions
             lesson={lesson}
             onComplete={handleLessonComplete}
-            onPrev={() => onStageChange('video')}
+            onPrev={() => onStageChange('visuals')}
             savedAnswers={savedAnswers}
             onSaveAnswer={onSaveAnswer}
           />

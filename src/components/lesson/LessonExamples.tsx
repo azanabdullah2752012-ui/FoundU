@@ -5,6 +5,7 @@ import { FractionBar } from '../visual/FractionBar';
 import { NumberLine } from '../visual/NumberLine';
 import { EqualPartsBuster } from '../visual/EqualPartsBuster';
 import { SubdivisionSimulator } from '../visual/SubdivisionSimulator';
+import { VisualRenderer } from '../visual/VisualRenderer';
 
 interface LessonExamplesProps {
   lesson: LessonData;
@@ -81,12 +82,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
 
             {/* Visual representation */}
             <div className="p-4 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD]/80 mb-4">
-              <FractionBar
-                totalParts={item.visual.totalParts}
-                shadedParts={item.visual.shadedParts}
-                size="md"
-                showFractionBadge={false}
-              />
+              <VisualRenderer visual={item.visual} size="md" />
             </div>
 
             {/* Intuition insight */}
@@ -196,9 +192,9 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
         <button
           type="button"
           onClick={onNext}
-          className="inline-flex items-center gap-2 bg-[#1C1917] hover:bg-[#D45B34] text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-colors shadow-xs group"
+          className="inline-flex items-center gap-2 bg-[#1C1917] hover:bg-[#D45B34] text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-colors shadow-xs group cursor-pointer"
         >
-          <span>Watch explanation video</span>
+          <span>Enter Visual Lab</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </button>
       </div>

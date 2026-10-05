@@ -77,26 +77,16 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       },
     ],
   },
-  video: {
-    title: 'The paper folding demonstration of equivalence',
-    duration: '02:30',
-    durationSeconds: 150,
-    description: 'A 2-minute visual breakdown showing why multiplying top and bottom is physically just making more cuts.',
-    placeholderNote: 'Foundu visual concept breakdown (1–4 min per concept)',
-    keyPoints: [
+  visualLab: {
+    title: 'The Subdivision Multiplier Lab',
+    subtitle: 'Multiply cuts without altering the shaded area. Watch 1/2 transform into 2/4, 3/6, and 4/8 in real time.',
+    interactiveType: 'subdivision-multiplier',
+    instructions: 'Tap the multiplier buttons (×1, ×2, ×3, ×4) to slice each piece into smaller equal sections. Notice the total orange area stays fixed.',
+    keyInsights: [
       'Equivalent fractions cover the exact same physical area',
       'Multiplying the denominator cuts the whole into more pieces',
       'Multiplying the numerator counts the corresponding smaller pieces',
-      'The Golden Rule: Whatever you multiply the bottom by, you must multiply the top by',
-    ],
-    transcript: [
-      'Take a single piece of paper and fold it in half. Shade one side.',
-      'That shaded area is 1/2.',
-      'Now, fold the paper again without coloring anything new. Open it up.',
-      'You now see four sections, and two of them are shaded: 2/4.',
-      'Did the shaded area change? Not by a single millimeter.',
-      'All we did was make another fold. We doubled the cuts, so we doubled the pieces.',
-      'That is why (1 × 2) / (2 × 2) = 2/4. That is the entire secret to equivalent fractions.',
+      'The Golden Rule: whatever you multiply the bottom by, you multiply the top by',
     ],
   },
   questions: [

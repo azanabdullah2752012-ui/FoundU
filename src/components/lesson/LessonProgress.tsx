@@ -13,7 +13,7 @@ interface LessonProgressProps {
 const STAGES: { id: Stage; label: string; index: string }[] = [
   { id: 'intro', label: 'Intro', index: '01' },
   { id: 'examples', label: 'Examples', index: '02' },
-  { id: 'video', label: 'Video', index: '03' },
+  { id: 'visuals', label: 'Visual Lab', index: '03' },
   { id: 'questions', label: 'Questions', index: '04' },
 ];
 

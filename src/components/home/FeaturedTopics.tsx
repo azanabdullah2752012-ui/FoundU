@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Topic } from '../../types';
-import { ArrowRight, PieChart, Dot, Percent, Scale, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, PieChart, Dot, Percent, Scale, RefreshCw, Binary, Calculator, Variable, CheckCircle2 } from 'lucide-react';
 
 interface FeaturedTopicsProps {
   topics: Topic[];
@@ -13,6 +13,9 @@ const topicIcons: Record<string, React.ReactNode> = {
   fractions: <PieChart className="w-5 h-5 text-[#D45B34]" />,
   decimals: <Dot className="w-5 h-5 text-[#D45B34]" />,
   percentages: <Percent className="w-5 h-5 text-[#D45B34]" />,
+  numbers: <Binary className="w-5 h-5 text-[#D45B34]" />,
+  arithmetic: <Calculator className="w-5 h-5 text-[#D45B34]" />,
+  'early-algebra': <Variable className="w-5 h-5 text-[#D45B34]" />,
   ratios: <Scale className="w-5 h-5 text-[#D45B34]" />,
   conversions: <RefreshCw className="w-5 h-5 text-[#D45B34]" />,
 };
@@ -23,9 +26,8 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
   onSelectLesson,
   onExploreAll,
 }) => {
-  // Filter for the 5 MVP focus areas
-  const mvpTopicIds = ['fractions', 'decimals', 'percentages', 'ratios', 'conversions'];
-  const mvpTopics = topics.filter((t) => mvpTopicIds.includes(t.id));
+  // Show active foundational topics with available visual lessons
+  const featuredTopics = topics.filter((t) => t.lessons.some((l) => l.isAvailable));
 
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
@@ -49,7 +51,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {mvpTopics.map((topic) => {
+        {featuredTopics.map((topic) => {
           const availableLesson = topic.lessons.find((l) => l.isAvailable);
 
           return (

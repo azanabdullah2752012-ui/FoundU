@@ -1,14 +1,26 @@
 import type { LessonData, Topic } from '../types';
 import { fractionsWhatIsAFractionLesson } from './lessons/fractions-what-is-a-fraction';
 import { fractionsEquivalentFractionsLesson } from './lessons/fractions-equivalent-fractions';
+import { fractionsComparingFractionsLesson } from './lessons/fractions-comparing-fractions';
 import { decimalsPlaceValueLesson } from './lessons/decimals-place-value';
+import { decimalsComparingDecimalsLesson } from './lessons/decimals-comparing-decimals';
 import { percentagesIntroLesson } from './lessons/percentages-intro';
+import { percentagesFractionToPercentLesson } from './lessons/percentages-fraction-to-percent';
+import { numbersNegativeNumbersLesson } from './lessons/numbers-negative-numbers';
+import { arithmeticMultiplicationAsArraysLesson } from './lessons/arithmetic-multiplication-as-arrays';
+import { algebraTheBalanceScaleLesson } from './lessons/algebra-the-balance-scale';
 
 export const ALL_LESSONS: Record<string, LessonData> = {
   'fractions-what-is-a-fraction': fractionsWhatIsAFractionLesson,
   'fractions-equivalent-fractions': fractionsEquivalentFractionsLesson,
+  'fractions-comparing-fractions': fractionsComparingFractionsLesson,
   'decimals-place-value': decimalsPlaceValueLesson,
+  'decimals-comparing-decimals': decimalsComparingDecimalsLesson,
   'percentages-what-percentages-mean': percentagesIntroLesson,
+  'percentages-fraction-to-percent': percentagesFractionToPercentLesson,
+  'numbers-negative-numbers': numbersNegativeNumbersLesson,
+  'arithmetic-multiplication-as-arrays': arithmeticMultiplicationAsArraysLesson,
+  'algebra-the-balance-scale': algebraTheBalanceScaleLesson,
 };
 
 export const FOUNDATION_TOPICS: Topic[] = [
@@ -36,18 +48,18 @@ export const FOUNDATION_TOPICS: Topic[] = [
         statusTag: 'AVAILABLE',
       },
       {
-        id: 'fractions-simplifying-fractions',
-        title: 'Simplifying fractions',
-        description: 'Finding the clearest, smallest terms to write any fraction.',
-        estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
         id: 'fractions-comparing-fractions',
         title: 'Comparing fractions',
         description: 'Determining which fraction is larger without guessing.',
         estimatedMinutes: 6,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
+      },
+      {
+        id: 'fractions-simplifying-fractions',
+        title: 'Simplifying fractions',
+        description: 'Finding the clearest, smallest terms to write any fraction.',
+        estimatedMinutes: 7,
         isAvailable: false,
         statusTag: 'COMING SOON',
       },
@@ -81,8 +93,8 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Comparing decimals',
         description: 'Why 0.4 is bigger than 0.35, despite 35 being a bigger number.',
         estimatedMinutes: 5,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'decimals-fraction-to-decimal',
@@ -114,14 +126,105 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Fractions ↔ Percentages',
         description: 'Connecting halves, quarters, and fifths to standard percentage values.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'percentages-finding-percentages',
         title: 'Finding percentages',
         description: 'Quick mental strategies to calculate 10%, 25%, and 50% of anything.',
         estimatedMinutes: 7,
+        isAvailable: false,
+        statusTag: 'COMING SOON',
+      },
+    ],
+  },
+  {
+    id: 'numbers',
+    title: 'Numbers',
+    slug: 'numbers',
+    iconName: 'Binary',
+    description: 'Place value, negative numbers, factors, multiples, and primes.',
+    lessons: [
+      {
+        id: 'numbers-negative-numbers',
+        title: 'Negative numbers on the line',
+        description: 'Moving left and right of zero with intuitive temperature and balance models.',
+        estimatedMinutes: 6,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
+      },
+      {
+        id: 'numbers-place-value',
+        title: 'Place value & magnitude',
+        description: 'The architecture of ones, tens, hundreds, and thousands.',
+        estimatedMinutes: 5,
+        isAvailable: false,
+        statusTag: 'COMING SOON',
+      },
+      {
+        id: 'numbers-factors-and-primes',
+        title: 'Factors & prime numbers',
+        description: 'The fundamental building blocks that multiply into all numbers.',
+        estimatedMinutes: 7,
+        isAvailable: false,
+        statusTag: 'COMING SOON',
+      },
+    ],
+  },
+  {
+    id: 'arithmetic',
+    title: 'Arithmetic',
+    slug: 'arithmetic',
+    iconName: 'Calculator',
+    description: 'The deep mechanics of addition, subtraction, multiplication, and division.',
+    lessons: [
+      {
+        id: 'arithmetic-multiplication-as-arrays',
+        title: 'Multiplication as grids & arrays',
+        description: 'Why multiplying is counting equal groups, not just memorizing a table.',
+        estimatedMinutes: 6,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
+      },
+      {
+        id: 'arithmetic-division-as-sharing',
+        title: 'Division as sharing & grouping',
+        description: 'The two ways to think about division and how remainders work.',
+        estimatedMinutes: 7,
+        isAvailable: false,
+        statusTag: 'COMING SOON',
+      },
+      {
+        id: 'arithmetic-order-of-operations',
+        title: 'Order of operations',
+        description: 'The logical reason why operations are performed in a specific sequence.',
+        estimatedMinutes: 6,
+        isAvailable: false,
+        statusTag: 'COMING SOON',
+      },
+    ],
+  },
+  {
+    id: 'early-algebra',
+    title: 'Early Algebra',
+    slug: 'early-algebra',
+    iconName: 'Variable',
+    description: 'Variables, expressions, simple balance equations, and coordinates.',
+    lessons: [
+      {
+        id: 'algebra-the-balance-scale',
+        title: 'Equations as balance scales',
+        description: 'Whatever you do to one side, you must do to the other.',
+        estimatedMinutes: 7,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
+      },
+      {
+        id: 'algebra-what-is-a-variable',
+        title: 'What is a variable?',
+        description: 'Demystifying the letter x: a placeholder for an unknown number waiting to be found.',
+        estimatedMinutes: 6,
         isAvailable: false,
         statusTag: 'COMING SOON',
       },
@@ -180,97 +283,6 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Time & rates',
         description: 'Hours, minutes, seconds, and converting rates naturally.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-    ],
-  },
-  {
-    id: 'numbers',
-    title: 'Numbers',
-    slug: 'numbers',
-    iconName: 'Binary',
-    description: 'Place value, negative numbers, factors, multiples, and primes.',
-    lessons: [
-      {
-        id: 'numbers-place-value',
-        title: 'Place value & magnitude',
-        description: 'The architecture of ones, tens, hundreds, and thousands.',
-        estimatedMinutes: 5,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
-        id: 'numbers-negative-numbers',
-        title: 'Negative numbers on the line',
-        description: 'Moving left and right of zero with intuitive temperature and balance models.',
-        estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
-        id: 'numbers-factors-and-primes',
-        title: 'Factors & prime numbers',
-        description: 'The fundamental building blocks that multiply into all numbers.',
-        estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-    ],
-  },
-  {
-    id: 'arithmetic',
-    title: 'Arithmetic',
-    slug: 'arithmetic',
-    iconName: 'Calculator',
-    description: 'The deep mechanics of addition, subtraction, multiplication, and division.',
-    lessons: [
-      {
-        id: 'arithmetic-multiplication-as-arrays',
-        title: 'Multiplication as grids & arrays',
-        description: 'Why multiplying is counting equal groups, not just memorizing a table.',
-        estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
-        id: 'arithmetic-division-as-sharing',
-        title: 'Division as sharing & grouping',
-        description: 'The two ways to think about division and how remainders work.',
-        estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
-        id: 'arithmetic-order-of-operations',
-        title: 'Order of operations',
-        description: 'The logical reason why operations are performed in a specific sequence.',
-        estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-    ],
-  },
-  {
-    id: 'early-algebra',
-    title: 'Early Algebra',
-    slug: 'early-algebra',
-    iconName: 'Variable',
-    description: 'Variables, expressions, simple balance equations, and coordinates.',
-    lessons: [
-      {
-        id: 'algebra-what-is-a-variable',
-        title: 'What is a variable?',
-        description: 'Demystifying the letter x: a placeholder for an unknown number waiting to be found.',
-        estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
-      },
-      {
-        id: 'algebra-the-balance-scale',
-        title: 'Equations as balance scales',
-        description: 'Whatever you do to one side, you must do to the other.',
-        estimatedMinutes: 7,
         isAvailable: false,
         statusTag: 'COMING SOON',
       },

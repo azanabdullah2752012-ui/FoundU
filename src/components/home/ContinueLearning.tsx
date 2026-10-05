@@ -21,7 +21,7 @@ export const ContinueLearning: React.FC<ContinueLearningProps> = ({
   const stageLabels: Record<Stage, string> = {
     intro: 'Intro (01/04)',
     examples: 'Examples (02/04)',
-    video: 'Video (03/04)',
+    visuals: 'Visual Lab (03/04)',
     questions: 'Questions (04/04)',
     complete: 'Completed',
   };

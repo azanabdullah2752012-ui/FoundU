@@ -74,26 +74,16 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
       },
     ],
   },
-  video: {
-    title: 'The intuition behind fractions',
-    duration: '02:40',
-    durationSeconds: 160,
-    description: 'A focused, 2-minute visual breakdown of equal sharing, numerators, and denominators.',
-    placeholderNote: 'Foundu short visual breakdown (1–4 min per concept)',
-    keyPoints: [
-      'Why equality of parts is the rule that makes fractions work',
-      'The denominator (bottom) = number of equal cuts',
-      'The numerator (top) = number of cuts we actually possess',
-      'Why larger denominators make smaller slices',
-    ],
-    transcript: [
-      'Imagine a single strip of paper. It represents one whole.',
-      'If we cut it directly down the middle, we get two pieces. For a fraction to work, those pieces must be equal.',
-      'Each piece is one out of two: 1/2.',
-      'Now, if we cut both of those pieces in half again, we have four pieces. Each piece is 1/4.',
-      'Notice what happens: because we made more cuts, each individual piece got smaller.',
-      'If you take two of those small pieces, you have 2/4. Lay it next to the 1/2 piece — they match perfectly.',
-      'That is the entire foundation of fractions: counting equal pieces of a whole.',
+  visualLab: {
+    title: 'The Slicing & Shading Lab',
+    subtitle: 'Choose how many equal cuts to make, shade pieces, and watch the fraction coordinate update live.',
+    interactiveType: 'fraction-slicer',
+    instructions: 'Select how many pieces to divide the whole into (2, 3, 4, 6, 8), then tap the orange pieces to change the fraction.',
+    keyInsights: [
+      'The denominator (bottom) strictly counts the total equal pieces',
+      'The numerator (top) counts how many of those pieces are shaded',
+      'When you make more cuts, each individual piece becomes smaller',
+      'If the top number equals the bottom number (like 4/4), you have 1 whole unit',
     ],
   },
   questions: [

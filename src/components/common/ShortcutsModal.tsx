@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Play, Zap, HelpCircle, Layers, Navigation } from 'lucide-react';
+import { X, Sliders, Zap, HelpCircle, Layers, Navigation } from 'lucide-react';
 
 interface ShortcutsModalProps {
   isOpen: boolean;
@@ -48,28 +48,31 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
 
         {/* Shortcuts categories */}
         <div className="space-y-5 text-xs">
-          {/* Video & Playback Speed */}
+          {/* Visual Lab & Manipulatives */}
           <div>
             <div className="flex items-center gap-1.5 font-semibold text-[#1C1917] uppercase tracking-wider text-[11px] mb-2 font-mono">
-              <Play className="w-3.5 h-3.5 text-[#D45B34]" />
-              <span>Video & Playback Speed</span>
+              <Sliders className="w-3.5 h-3.5 text-[#D45B34]" />
+              <span>Visual Lab & Manipulatives</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-[#FAF9F5] p-3 rounded-xl border border-[#E8E5DD]">
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Play / Pause</span>
+                <span className="text-[#6B6861]">Advance Stage / Next</span>
                 <kbd className="px-2 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[11px] text-[#1C1917] shadow-2xs">
-                  Space
+                  Enter ↵ / N
                 </kbd>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Standard Speed (1x)</span>
+                <span className="text-[#6B6861]">Previous Stage</span>
                 <kbd className="px-2 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[11px] text-[#1C1917] shadow-2xs">
-                  1
+                  P
                 </kbd>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Speed (1.25x / 1.5x / 2x)</span>
+                <span className="text-[#6B6861]">Slice / Shade Parts</span>
                 <div className="flex gap-1">
+                  <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
+                    1
+                  </kbd>
                   <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
                     2
                   </kbd>
@@ -82,32 +85,10 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Slow Speed (0.75x)</span>
+                <span className="text-[#6B6861]">Exit to Library</span>
                 <kbd className="px-2 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[11px] text-[#1C1917] shadow-2xs">
-                  0
+                  Esc
                 </kbd>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Step Speed Down / Up</span>
-                <div className="flex gap-1">
-                  <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
-                    [
-                  </kbd>
-                  <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
-                    ]
-                  </kbd>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-[#6B6861]">Seek -5s / +5s</span>
-                <div className="flex gap-1">
-                  <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
-                    ←
-                  </kbd>
-                  <kbd className="px-1.5 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917] shadow-2xs">
-                    →
-                  </kbd>
-                </div>
               </div>
             </div>
           </div>

@@ -60,24 +60,16 @@ export const decimalsPlaceValueLesson: LessonData = {
       },
     ],
   },
-  video: {
-    title: 'Visualizing tenths and hundredths',
-    duration: '02:15',
-    durationSeconds: 135,
-    description: 'A 2-minute visual breakdown of the decimal point and why digits shrink by 10x with every step right.',
-    placeholderNote: 'Foundu short visual breakdown (1–4 min per concept)',
-    keyPoints: [
-      'The decimal point marks where whole numbers end and parts begin',
-      'The first slot to the right is tenths (1/10)',
-      'The second slot to the right is hundredths (1/100)',
-      '0.5 means 5 tenths, which equals 1/2',
-    ],
-    transcript: [
-      'Every place value in our counting system is based on ten.',
-      'Tens are ten times smaller than hundreds. Ones are ten times smaller than tens.',
-      'The decimal point simply continues that exact same rule below 1.',
-      'The first place to the right is one-tenth. The next place is one-hundredth.',
-      'So 0.3 is 3 tenths, and 0.5 is 5 tenths or half of one whole.',
+  visualLab: {
+    title: 'The Base-10 Tenths & Hundredths Grid Lab',
+    subtitle: 'Explore the 100-cell grid. Toggle between whole tenths (columns) and single hundredths (squares).',
+    interactiveType: 'decimal-grid',
+    instructions: 'Click columns in Tenths mode to shade 0.1 at a time, or switch to Hundredths mode to shade single squares (0.01).',
+    keyInsights: [
+      'The first slot after the point counts whole tenths (columns of 10)',
+      'The second slot counts individual hundredths (single unit squares)',
+      '1 full column (0.10) contains exactly 10 hundredths squares',
+      '0.5 is 5 full columns, which fills exactly half the 100-square grid',
     ],
   },
   questions: [
