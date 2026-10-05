@@ -10,6 +10,10 @@ import { PercentageGrid } from '../visual/PercentageGrid';
 import { BalanceScale } from '../visual/BalanceScale';
 import { ArrayMultiplier } from '../visual/ArrayMultiplier';
 import { NegativeLine } from '../visual/NegativeLine';
+import { RatioVisualizer } from '../visual/RatioVisualizer';
+import { MetricLadder } from '../visual/MetricLadder';
+import { DivisionSharing } from '../visual/DivisionSharing';
+import { FractionAddition } from '../visual/FractionAddition';
 
 interface LessonVisualLabProps {
   lesson: LessonData;
@@ -290,6 +294,26 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
         {/* Type 10: Thermometer / Negative Line */}
         {visualLab.interactiveType === 'thermometer' && (
           <NegativeLine initialValue={-3} interactive={true} min={-7} max={7} />
+        )}
+
+        {/* Type 11: Ratio Scaler */}
+        {visualLab.interactiveType === 'ratio-scaler' && (
+          <RatioVisualizer baseA={2} baseB={3} interactive={true} />
+        )}
+
+        {/* Type 12: Metric Ladder */}
+        {visualLab.interactiveType === 'metric-ladder' && (
+          <MetricLadder initialValue={3.5} interactive={true} />
+        )}
+
+        {/* Type 13: Division Sharing */}
+        {visualLab.interactiveType === 'division-sharing' && (
+          <DivisionSharing initialTotal={13} initialGroups={4} interactive={true} />
+        )}
+
+        {/* Type 14: Fraction Addition */}
+        {visualLab.interactiveType === 'fraction-addition' && (
+          <FractionAddition initialA={{ num: 1, den: 4 }} initialB={{ num: 2, den: 4 }} interactive={true} />
         )}
       </div>
 

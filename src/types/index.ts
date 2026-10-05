@@ -10,7 +10,10 @@ export interface VisualData {
     | 'percentage-grid'
     | 'array-grid'
     | 'balance-scale'
-    | 'thermometer';
+    | 'thermometer'
+    | 'ratio-model'
+    | 'metric-ladder'
+    | 'place-value-blocks';
   totalParts?: number;
   shadedParts?: number;
   highlightIndexes?: number[];
@@ -43,6 +46,24 @@ export interface VisualData {
     value: number;
     min?: number;
     max?: number;
+  };
+  ratioModel?: {
+    partA: number;
+    partB: number;
+    labelA?: string;
+    labelB?: string;
+    scale?: number;
+  };
+  metricLadder?: {
+    value: number;
+    fromUnit: string;
+    toUnit: string;
+  };
+  placeValue?: {
+    thousands?: number;
+    hundreds?: number;
+    tens?: number;
+    ones?: number;
   };
 }
 
@@ -87,7 +108,12 @@ export interface VisualLabData {
     | 'percentage-converter'
     | 'balance-scale'
     | 'array-grid'
-    | 'thermometer';
+    | 'thermometer'
+    | 'ratio-scaler'
+    | 'metric-ladder'
+    | 'place-value-blocks'
+    | 'division-sharing'
+    | 'fraction-addition';
   instructions: string;
   keyInsights: string[];
   initialConfig?: Record<string, unknown>;

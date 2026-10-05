@@ -9,6 +9,8 @@ import { PercentageGrid } from './PercentageGrid';
 import { BalanceScale } from './BalanceScale';
 import { ArrayMultiplier } from './ArrayMultiplier';
 import { NegativeLine } from './NegativeLine';
+import { RatioVisualizer } from './RatioVisualizer';
+import { MetricLadder } from './MetricLadder';
 
 interface VisualRendererProps {
   visual?: VisualData;
@@ -115,6 +117,26 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
           label={visual.label}
           min={visual.thermometer?.min ?? -7}
           max={visual.thermometer?.max ?? 7}
+        />
+      )}
+
+      {visual.type === 'ratio-model' && (
+        <RatioVisualizer
+          baseA={visual.ratioModel?.partA ?? 2}
+          baseB={visual.ratioModel?.partB ?? 3}
+          labelA={visual.ratioModel?.labelA ?? 'Blue'}
+          labelB={visual.ratioModel?.labelB ?? 'Orange'}
+          initialScale={visual.ratioModel?.scale ?? 1}
+          interactive={interactive}
+          label={visual.label}
+        />
+      )}
+
+      {visual.type === 'metric-ladder' && (
+        <MetricLadder
+          initialValue={visual.metricLadder?.value ?? 3.5}
+          interactive={interactive}
+          label={visual.label}
         />
       )}
     </div>

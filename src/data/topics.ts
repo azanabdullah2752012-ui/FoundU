@@ -2,25 +2,53 @@ import type { LessonData, Topic } from '../types';
 import { fractionsWhatIsAFractionLesson } from './lessons/fractions-what-is-a-fraction';
 import { fractionsEquivalentFractionsLesson } from './lessons/fractions-equivalent-fractions';
 import { fractionsComparingFractionsLesson } from './lessons/fractions-comparing-fractions';
+import { fractionsSimplifyingFractionsLesson } from './lessons/fractions-simplifying-fractions';
+import { fractionsAddingFractionsLesson } from './lessons/fractions-adding-fractions';
 import { decimalsPlaceValueLesson } from './lessons/decimals-place-value';
 import { decimalsComparingDecimalsLesson } from './lessons/decimals-comparing-decimals';
+import { decimalsFractionToDecimalLesson } from './lessons/decimals-fraction-to-decimal';
 import { percentagesIntroLesson } from './lessons/percentages-intro';
 import { percentagesFractionToPercentLesson } from './lessons/percentages-fraction-to-percent';
+import { percentagesFindingPercentagesLesson } from './lessons/percentages-finding-percentages';
 import { numbersNegativeNumbersLesson } from './lessons/numbers-negative-numbers';
+import { numbersPlaceValueLesson } from './lessons/numbers-place-value';
+import { numbersFactorsAndPrimesLesson } from './lessons/numbers-factors-and-primes';
 import { arithmeticMultiplicationAsArraysLesson } from './lessons/arithmetic-multiplication-as-arrays';
+import { arithmeticDivisionAsSharingLesson } from './lessons/arithmetic-division-as-sharing';
+import { arithmeticOrderOfOperationsLesson } from './lessons/arithmetic-order-of-operations';
 import { algebraTheBalanceScaleLesson } from './lessons/algebra-the-balance-scale';
+import { algebraWhatIsAVariableLesson } from './lessons/algebra-what-is-a-variable';
+import { ratiosWhatRatiosRepresentLesson } from './lessons/ratios-what-ratios-represent';
+import { ratiosEquivalentRatiosLesson } from './lessons/ratios-equivalent-ratios';
+import { ratiosProportionsLesson } from './lessons/ratios-proportions';
+import { conversionsMetricLadderLesson } from './lessons/conversions-metric-ladder';
+import { conversionsTimeAndRatesLesson } from './lessons/conversions-time-and-rates';
 
 export const ALL_LESSONS: Record<string, LessonData> = {
   'fractions-what-is-a-fraction': fractionsWhatIsAFractionLesson,
   'fractions-equivalent-fractions': fractionsEquivalentFractionsLesson,
   'fractions-comparing-fractions': fractionsComparingFractionsLesson,
+  'fractions-simplifying-fractions': fractionsSimplifyingFractionsLesson,
+  'fractions-adding-fractions': fractionsAddingFractionsLesson,
   'decimals-place-value': decimalsPlaceValueLesson,
   'decimals-comparing-decimals': decimalsComparingDecimalsLesson,
+  'decimals-fraction-to-decimal': decimalsFractionToDecimalLesson,
   'percentages-what-percentages-mean': percentagesIntroLesson,
   'percentages-fraction-to-percent': percentagesFractionToPercentLesson,
+  'percentages-finding-percentages': percentagesFindingPercentagesLesson,
   'numbers-negative-numbers': numbersNegativeNumbersLesson,
+  'numbers-place-value': numbersPlaceValueLesson,
+  'numbers-factors-and-primes': numbersFactorsAndPrimesLesson,
   'arithmetic-multiplication-as-arrays': arithmeticMultiplicationAsArraysLesson,
+  'arithmetic-division-as-sharing': arithmeticDivisionAsSharingLesson,
+  'arithmetic-order-of-operations': arithmeticOrderOfOperationsLesson,
   'algebra-the-balance-scale': algebraTheBalanceScaleLesson,
+  'algebra-what-is-a-variable': algebraWhatIsAVariableLesson,
+  'ratios-what-ratios-represent': ratiosWhatRatiosRepresentLesson,
+  'ratios-equivalent-ratios': ratiosEquivalentRatiosLesson,
+  'ratios-proportions': ratiosProportionsLesson,
+  'conversions-metric-ladder': conversionsMetricLadderLesson,
+  'conversions-time-and-rates': conversionsTimeAndRatesLesson,
 };
 
 export const FOUNDATION_TOPICS: Topic[] = [
@@ -59,17 +87,17 @@ export const FOUNDATION_TOPICS: Topic[] = [
         id: 'fractions-simplifying-fractions',
         title: 'Simplifying fractions',
         description: 'Finding the clearest, smallest terms to write any fraction.',
-        estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        estimatedMinutes: 6,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'fractions-adding-fractions',
         title: 'Adding fractions',
         description: 'Combining pieces with like and unlike denominators.',
-        estimatedMinutes: 8,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        estimatedMinutes: 7,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -101,8 +129,8 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Fractions ↔ Decimals',
         description: 'Translating back and forth between fractions and decimals effortlessly.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -133,9 +161,9 @@ export const FOUNDATION_TOPICS: Topic[] = [
         id: 'percentages-finding-percentages',
         title: 'Finding percentages',
         description: 'Quick mental strategies to calculate 10%, 25%, and 50% of anything.',
-        estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        estimatedMinutes: 6,
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -159,16 +187,16 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Place value & magnitude',
         description: 'The architecture of ones, tens, hundreds, and thousands.',
         estimatedMinutes: 5,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'numbers-factors-and-primes',
         title: 'Factors & prime numbers',
         description: 'The fundamental building blocks that multiply into all numbers.',
         estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -192,16 +220,16 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'Division as sharing & grouping',
         description: 'The two ways to think about division and how remainders work.',
         estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'arithmetic-order-of-operations',
         title: 'Order of operations',
         description: 'The logical reason why operations are performed in a specific sequence.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -225,8 +253,8 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'What is a variable?',
         description: 'Demystifying the letter x: a placeholder for an unknown number waiting to be found.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -242,24 +270,24 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'What ratios represent',
         description: 'Comparing one quantity to another: parts to parts and parts to whole.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'ratios-equivalent-ratios',
         title: 'Equivalent ratios & scaling',
         description: 'Multiplying both sides equally to preserve the relationship.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'ratios-proportions',
         title: 'Solving proportions',
         description: 'The underlying balance of proportional relationships.',
         estimatedMinutes: 7,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
@@ -275,16 +303,16 @@ export const FOUNDATION_TOPICS: Topic[] = [
         title: 'The metric ladder',
         description: 'Milli, centi, deci, and kilo: shifting the decimal point with confidence.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
       {
         id: 'conversions-time-and-rates',
         title: 'Time & rates',
         description: 'Hours, minutes, seconds, and converting rates naturally.',
         estimatedMinutes: 6,
-        isAvailable: false,
-        statusTag: 'COMING SOON',
+        isAvailable: true,
+        statusTag: 'AVAILABLE',
       },
     ],
   },
