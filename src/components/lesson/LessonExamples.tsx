@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import type { LessonData } from '../../types';
 import { ChevronLeft, ChevronRight, Eye, Layers } from 'lucide-react';
 import { VisualRenderer } from '../visual/VisualRenderer';
-import { VoiceListenButton } from '../common/VoiceListenButton';
 import { sound } from '../../utils/sound';
 
 interface LessonExamplesProps {
@@ -107,11 +106,6 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
                 Example {activeIdx + 1} of {items.length}
               </span>
               <div className="flex items-center gap-2">
-                <VoiceListenButton
-                  text={`${currentItem.title}. ${currentItem.description}. Key visual takeaway: ${currentItem.insight}`}
-                  label="Listen"
-                  size="sm"
-                />
                 <span className="font-mono text-3xl font-black text-[#D45B34]">
                   {currentItem.fractionText}
                 </span>

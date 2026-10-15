@@ -9,7 +9,6 @@ import { NegativeLine } from '../visual/NegativeLine';
 import { RatioVisualizer } from '../visual/RatioVisualizer';
 import { MetricLadder } from '../visual/MetricLadder';
 import { DivisionSharing } from '../visual/DivisionSharing';
-import { VoiceListenButton } from '../common/VoiceListenButton';
 import { VisualPointerGuide } from '../common/VisualPointerGuide';
 import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
 import { sound } from '../../utils/sound';
@@ -83,20 +82,13 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Visual Intuition & Editorial Text */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
-                STEP 01
-              </span>
-              <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
-                The Visual Idea
-              </span>
-            </div>
-            <VoiceListenButton
-              text={`${lesson.intro.heading}. ${pedagogy.metaphor.scenario}. Core rule: ${pedagogy.metaphor.kidExplanation || lesson.intro.coreDefinition}`}
-              label="Listen"
-              size="sm"
-            />
+          <div className="flex items-center gap-2">
+            <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
+              STEP 01
+            </span>
+            <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
+              The Visual Idea
+            </span>
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-[#1C1917] leading-tight">
@@ -128,15 +120,8 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
           {/* Brain Trap Card: Visual Comparison */}
           <div className="bg-white border border-[#E8E5DD] rounded-2xl p-4 shadow-xs space-y-2.5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-sans font-bold text-[#D45B34] uppercase tracking-wider">
-                ⚠️ Avoid This Trap
-              </span>
-              <VoiceListenButton
-                text={`Mistake to avoid: ${pedagogy.brainTrap.trapStatement}. The visual truth: ${pedagogy.brainTrap.trueConcept}`}
-                label="Listen"
-                size="sm"
-              />
+            <div className="flex items-center gap-2 text-xs font-sans font-bold text-[#D45B34] uppercase tracking-wider">
+              <span>⚠️ Avoid This Trap</span>
             </div>
 
             <div className="space-y-2">
