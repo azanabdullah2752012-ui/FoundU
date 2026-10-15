@@ -3,11 +3,9 @@ import type { Topic } from '../../types';
 import { ArrowRight, PieChart, Dot, Percent, Scale, RefreshCw, Binary, Calculator, Variable, CheckCircle2 } from 'lucide-react';
 
 import { TopicMiniVisual } from '../common/TopicMiniVisual';
-import { TOPIC_BILINGUAL, TRANSLATIONS, type Language } from '../../utils/language';
 
 interface FeaturedTopicsProps {
   topics: Topic[];
-  language: Language;
   completedLessons: string[];
   onSelectLesson: (lessonId: string) => void;
   onExploreAll: () => void;
@@ -24,15 +22,23 @@ const topicIcons: Record<string, React.ReactNode> = {
   conversions: <RefreshCw className="w-5 h-5 text-[#D45B34]" />,
 };
 
+const TOPIC_VISUAL_HINTS: Record<string, string> = {
+  fractions: 'Equal parts of a whole disc or pie',
+  decimals: 'Base 10 units & 50p/cent breakdown',
+  percentages: 'Parts per 100 & battery charge',
+  numbers: 'Values below zero & elevator basement',
+  arithmetic: 'Dot arrays, grouping & sharing equally',
+  'early-algebra': 'Balance scale keeping both sides equal',
+  ratios: 'Mixing proportions & recipe ratios',
+  conversions: 'Units, meter scale & conversions',
+};
+
 export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
   topics,
-  language,
   completedLessons,
   onSelectLesson,
   onExploreAll,
 }) => {
-  const isHindi = language === 'hi';
-  const t = TRANSLATIONS[language];
   // Show active foundational topics with available visual lessons
   const featuredTopics = topics.filter((t) => t.lessons.some((l) => l.isAvailable));
 
@@ -41,12 +47,10 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-[#1C1917]">
-            {isHindi ? 'बुनियादी विषय (Core Foundations)' : 'Core Foundation Areas'}
+            Core Foundation Areas
           </h2>
           <p className="text-sm text-[#6B6861]">
-            {isHindi
-              ? 'तस्वीरों और असली दुनिया के उदाहरणों से समझें। हर पाठ दिमाग में पक्की समझ बनाता है।'
-              : 'Start with the basic building blocks. Each lesson builds a permanent intuition.'}
+            Start with the basic building blocks. Each lesson builds a permanent visual intuition.
           </p>
         </div>
         <button
@@ -54,7 +58,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
           onClick={onExploreAll}
           className="text-xs sm:text-sm font-semibold text-[#D45B34] hover:text-[#BC4B26] transition-colors flex items-center gap-1.5 cursor-pointer bg-white px-3 py-1.5 rounded-full border border-[#E8E5DD] shadow-2xs"
         >
-          <span>{t.allTopics}</span>
+          <span>View All Topics</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
@@ -62,7 +66,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {featuredTopics.map((topic) => {
           const availableLesson = topic.lessons.find((l) => l.isAvailable);
-          const b = TOPIC_BILINGUAL[topic.id];
+          const hint = TOPIC_VISUAL_HINTS[topic.id];
 
           return (
             <div
@@ -77,11 +81,11 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-[#1C1917] leading-snug">
-                        {isHindi && b ? b.hiTitle : topic.title}
+                        {topic.title}
                       </h3>
-                      {b && (
+                      {hint && (
                         <p className="text-xs text-[#D45B34] font-medium">
-                          {isHindi ? b.anchorHint : b.hiSubtitle}
+                          {hint}
                         </p>
                       )}
                     </div>
@@ -129,11 +133,11 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                           onClick={() => onSelectLesson(lesson.id)}
                           className="text-[11px] font-mono font-bold text-[#D45B34] hover:underline shrink-0 cursor-pointer"
                         >
-                          {isDone ? (isHindi ? 'दोहराएँ' : 'Review') : (isHindi ? 'शुरू करें' : 'Start')}
+                          {isDone ? 'Review' : 'Start'}
                         </button>
                       ) : (
                         <span className="text-[10px] font-mono text-[#9E9B93] bg-[#F4F2EB] px-1.5 py-0.5 rounded shrink-0">
-                          {isHindi ? 'जल्द ही' : 'SOON'}
+                          SOON
                         </span>
                       )}
                     </div>
@@ -147,7 +151,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                       onClick={() => onSelectLesson(availableLesson.id)}
                       className="w-full py-2.5 bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] border border-[#E8E5DD] hover:border-[#D45B34]/30 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                     >
-                      <span>{isHindi ? `सीखें: ${availableLesson.title}` : `Learn ${availableLesson.title}`}</span>
+                      <span>Learn {availableLesson.title}</span>
                       <ArrowRight className="w-3.5 h-3.5 text-[#D45B34]" />
                     </button>
                   </div>

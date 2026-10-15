@@ -1,27 +1,24 @@
 import React from 'react';
 import type { Stage } from '../../types';
 import { ArrowLeft, Check } from 'lucide-react';
-import { type Language } from '../../utils/language';
 
 interface LessonProgressProps {
   currentStage: Stage;
-  language?: Language;
   onSelectStage: (stage: Stage) => void;
   onExit: () => void;
   lessonTitle: string;
   topicTitle: string;
 }
 
-const STAGES: { id: Stage; labelEn: string; labelHi: string; icon: string }[] = [
-  { id: 'intro', labelEn: 'Look', labelHi: 'देखो', icon: '👁️' },
-  { id: 'examples', labelEn: 'Examples', labelHi: 'मिसाल', icon: '📖' },
-  { id: 'visuals', labelEn: 'Play Lab', labelHi: 'चलाओ', icon: '🖐️' },
-  { id: 'questions', labelEn: 'Check', labelHi: 'परखो', icon: '🎯' },
+const STAGES: { id: Stage; label: string; icon: string }[] = [
+  { id: 'intro', label: 'Look', icon: '👁️' },
+  { id: 'examples', label: 'Examples', icon: '📖' },
+  { id: 'visuals', label: 'Play Lab', icon: '🖐️' },
+  { id: 'questions', label: 'Check', icon: '🎯' },
 ];
 
 export const LessonProgress: React.FC<LessonProgressProps> = ({
   currentStage,
-  language = 'en',
   onSelectStage,
   onExit,
   lessonTitle,
@@ -29,7 +26,6 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
 }) => {
   const currentStageIndex = STAGES.findIndex((s) => s.id === currentStage);
   const isComplete = currentStage === 'complete';
-  const isHindi = language === 'hi';
 
   return (
     <div className="sticky top-0 z-40 border-b border-[#E8E5DD] bg-white/95 backdrop-blur-md py-2.5 px-4 sm:px-6 shadow-2xs">
@@ -44,7 +40,7 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
             aria-label="Return to topics"
           >
             <ArrowLeft className="w-4 h-4 text-[#D45B34]" />
-            <span className="hidden sm:inline">{isHindi ? 'वापस' : 'Back'}</span>
+            <span className="hidden sm:inline">Back</span>
           </button>
           <div>
             <div className="text-[10px] font-mono uppercase tracking-wider text-[#9E9B93]">
@@ -78,7 +74,7 @@ export const LessonProgress: React.FC<LessonProgressProps> = ({
                 aria-current={isCurrent ? 'step' : undefined}
               >
                 <span>{isPast ? <Check className="w-3.5 h-3.5 inline text-[#1E6B4F]" /> : s.icon}</span>
-                <span className="hidden sm:inline">{isHindi ? s.labelHi : s.labelEn}</span>
+                <span className="hidden sm:inline">{s.label}</span>
               </button>
             );
           })}

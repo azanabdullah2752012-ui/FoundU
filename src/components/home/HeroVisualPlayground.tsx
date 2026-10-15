@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import { sound } from '../../utils/sound';
 import { Gummy } from '../brand/Gummy';
-import { type Language } from '../../utils/language';
 import { Sparkles } from 'lucide-react';
 
 interface HeroVisualPlaygroundProps {
-  language: Language;
   onStartLesson: (lessonId: string) => void;
 }
 
 export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
-  language,
   onStartLesson,
 }) => {
   const [totalSlices, setTotalSlices] = useState<number>(4);
   const [selectedCount, setSelectedCount] = useState<number>(1);
-
-  const isHindi = language === 'hi';
 
   const handleSliceClick = (index: number) => {
     sound.playTap();
@@ -85,11 +80,11 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
       <div className="flex items-center justify-between gap-2 mb-4">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF4F0] border border-[#F3C3B2] text-xs font-mono font-bold text-[#D45B34]">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>{isHindi ? 'रोटी के टुकड़े • चला कर देखें' : 'TOUCH & SLICE TO PLAY'}</span>
+          <span>TOUCH &amp; SLICE TO PLAY</span>
         </div>
 
         <span className="text-xs font-mono text-[#9E9B93]">
-          {isHindi ? 'टुकड़ों पर टैप करें' : 'Tap any slice'}
+          Tap any slice
         </span>
       </div>
 
@@ -108,9 +103,7 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
           <div className="flex items-center gap-2 mt-3 text-xs font-mono text-[#6B6861]">
             <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#D45B34]" />
             <span>
-              {isHindi
-                ? `${selectedCount} टुकड़ा चुना`
-                : `${selectedCount} of ${totalSlices} slices`}
+              {selectedCount} of {totalSlices} slices selected
             </span>
           </div>
         </div>
@@ -121,8 +114,8 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
           <div className="p-4 rounded-2xl bg-[#FAF9F5] border border-[#E8E5DD]">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#9E9B93] block">
-                  {isHindi ? 'भिन्न (Fraction)' : 'Fraction'}
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#9E9B93] block font-bold">
+                  Fraction
                 </span>
                 <div className="flex items-center gap-3 mt-1">
                   <div className="flex flex-col items-center justify-center font-bold text-2xl text-[#1C1917]">
@@ -132,10 +125,10 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
                   </div>
                   <div className="text-xs text-[#6B6861] leading-tight">
                     <p className="font-semibold text-[#1C1917]">
-                      {isHindi ? `${totalSlices} में से ${selectedCount} हिस्से` : `${selectedCount} out of ${totalSlices} pieces`}
+                      {selectedCount} out of {totalSlices} pieces
                     </p>
                     <p className="font-mono text-[11px] text-[#9E9B93] mt-0.5">
-                      = {fractionPercent}% {isHindi ? 'पूरी रोटी का' : 'of the whole'}
+                      = {fractionPercent}% of the whole
                     </p>
                   </div>
                 </div>
@@ -146,11 +139,7 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
                 <Gummy
                   size="sm"
                   color="terracotta"
-                  speechText={
-                    isHindi
-                      ? `${selectedCount}/${totalSlices} रोटी!`
-                      : `${selectedCount}/${totalSlices} slice!`
-                  }
+                  speechText={`${selectedCount}/${totalSlices} slice!`}
                 />
               </div>
             </div>
@@ -159,7 +148,7 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
           {/* Slices Preset Selector (Big Tap Buttons) */}
           <div>
             <label className="text-[11px] font-mono uppercase text-[#9E9B93] block mb-2 font-bold">
-              {isHindi ? 'कितने बराबर टुकड़े करने हैं?' : 'How many equal pieces?'}
+              How many equal pieces?
             </label>
             <div className="grid grid-cols-4 gap-2">
               {[2, 3, 4, 6].map((num) => (
@@ -173,7 +162,7 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
                       : 'bg-white text-[#1C1917] border-[#E8E5DD] hover:bg-[#FAF9F5]'
                   }`}
                 >
-                  {isHindi ? `${num} भाग` : `${num} pcs`}
+                  {num} pcs
                 </button>
               ))}
             </div>
@@ -185,7 +174,7 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
             onClick={() => onStartLesson('fractions-what-is-a-fraction')}
             className="w-full py-2.5 px-4 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-medium text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
           >
-            <span>{isHindi ? 'भिन्न का पूरा पाठ शुरू करें ▶' : 'Learn All About Fractions ▶'}</span>
+            <span>Learn All About Fractions ▶</span>
           </button>
         </div>
       </div>

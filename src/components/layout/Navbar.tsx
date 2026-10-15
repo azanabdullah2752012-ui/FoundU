@@ -6,12 +6,8 @@ import { Gummy } from '../brand/Gummy';
 import { PickleCorpLogo } from '../brand/PickleCorpLogo';
 import type { PickleCorpUser } from '../brand/PickleCorpLoginModal';
 
-import { type Language } from '../../utils/language';
-
 interface NavbarProps {
   currentView: 'home' | 'library' | 'lesson';
-  language: Language;
-  onToggleLanguage: () => void;
   onNavigateHome: () => void;
   onNavigateLibrary: () => void;
   onContinueLesson?: () => void;
@@ -26,8 +22,6 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
-  language,
-  onToggleLanguage,
   onNavigateHome,
   onNavigateLibrary,
   onContinueLesson,
@@ -125,21 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5">
-          {/* Language Switcher Pill */}
-          <button
-            type="button"
-            onClick={onToggleLanguage}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1.5 border border-[#E8E5DD] bg-white hover:border-[#D45B34]/40 hover:bg-[#FAF9F5] shadow-2xs text-[#1C1917] cursor-pointer active:scale-95"
-            title="Change Language / भाषा बदलें"
-            aria-label="Toggle language"
-          >
-            <span className="text-sm leading-none">🌐</span>
-            <span className="font-bold text-[#1C1917]">
-              {language === 'hi' ? 'हिन्दी' : 'English'}
-            </span>
-          </button>
-
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Home Button */}
           <button
             type="button"
@@ -151,7 +131,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Home className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">{language === 'hi' ? 'होम' : 'Home'}</span>
+            <span className="hidden sm:inline">Home</span>
           </button>
 
           {/* Topics Button */}
@@ -165,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <BookOpen className="w-3.5 h-3.5 text-[#D45B34]" />
-            <span>{language === 'hi' ? 'सारे विषय' : 'Topics'}</span>
+            <span>Topics</span>
           </button>
 
           {/* Concept Search Trigger */}
@@ -174,11 +154,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               onClick={onOpenSearch}
               className="p-2 sm:px-2.5 sm:py-1.5 rounded-xl text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white cursor-pointer shadow-2xs"
-              title={language === 'hi' ? 'खोजें (Search)' : 'Search concepts'}
+              title="Search concepts"
               aria-label="Search concepts"
             >
               <Search className="w-3.5 h-3.5 text-[#1C1917]" />
-              <span className="hidden md:inline">{language === 'hi' ? 'खोजें' : 'Search'}</span>
+              <span className="hidden md:inline">Search</span>
             </button>
           )}
 
@@ -189,7 +169,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className={`p-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1 border border-transparent hover:border-[#E8E5DD] cursor-pointer ${
               isMuted ? 'text-[#9E9B93] hover:text-[#1C1917] hover:bg-[#F4F2EB]' : 'text-[#1E6B4F] hover:bg-[#F4F2EB]'
             }`}
-            title={isMuted ? (language === 'hi' ? 'आवाज़ चालू करें' : 'Unmute') : (language === 'hi' ? 'आवाज़ बंद करें' : 'Mute')}
+            title={isMuted ? 'Unmute audio' : 'Mute audio'}
             aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
           >
             {isMuted ? (

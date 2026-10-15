@@ -7,12 +7,10 @@ import { LessonVisualLab } from './LessonVisualLab';
 import { LessonQuestions } from './LessonQuestions';
 import { LessonComplete } from './LessonComplete';
 
-import { type Language } from '../../utils/language';
 import { sound } from '../../utils/sound';
 
 interface LessonContainerProps {
   lesson: LessonData;
-  language?: Language;
   currentStage: Stage;
   onStageChange: (newStage: Stage) => void;
   onExit: () => void;
@@ -25,7 +23,6 @@ interface LessonContainerProps {
 
 export const LessonContainer: React.FC<LessonContainerProps> = ({
   lesson,
-  language = 'en',
   currentStage,
   onStageChange,
   onExit,
@@ -128,7 +125,6 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
       {/* Top stage progression indicator */}
       <LessonProgress
         currentStage={currentStage}
-        language={language}
         onSelectStage={(stage) => onStageChange(stage)}
         onExit={onExit}
         lessonTitle={lesson.title}
@@ -201,7 +197,7 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
                 }}
                 className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
               >
-                {language === 'hi' ? '◀ पिछला' : '◀ Previous'}
+                ◀ Previous
               </button>
             ) : (
               <button
@@ -209,15 +205,15 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
                 onClick={onExit}
                 className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#6B6861] font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
               >
-                {language === 'hi' ? 'सारे विषय' : 'Topics'}
+                Topics
               </button>
             )}
 
             <div className="text-xs font-mono font-bold text-[#6B6861] hidden sm:block">
-              {currentStage === 'intro' && (language === 'hi' ? 'कदम 1: असली मिसाल देखो 👁️' : 'Step 1: Look at the visual metaphor')}
-              {currentStage === 'examples' && (language === 'hi' ? 'कदम 2: मिसालें समझो 📖' : 'Step 2: Understand real examples')}
-              {currentStage === 'visuals' && (language === 'hi' ? 'कदम 3: हाथ से चला कर देखो 🖐️' : 'Step 3: Play & manipulate the lab')}
-              {currentStage === 'questions' && (language === 'hi' ? 'कदम 4: समझ की जाँच 🎯' : 'Step 4: Check your intuition')}
+              {currentStage === 'intro' && 'Step 1: Look at the visual metaphor 👁️'}
+              {currentStage === 'examples' && 'Step 2: Understand real examples 📖'}
+              {currentStage === 'visuals' && 'Step 3: Play & manipulate the lab 🖐️'}
+              {currentStage === 'questions' && 'Step 4: Check your intuition 🎯'}
             </div>
 
             {currentStage !== 'questions' ? (
@@ -231,11 +227,11 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
                 }}
                 className="px-6 py-2.5 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-1.5 active:scale-98"
               >
-                <span>{language === 'hi' ? 'अगला कदम ▶' : 'Next Step ▶'}</span>
+                <span>Next Step ▶</span>
               </button>
             ) : (
               <div className="text-xs text-[#9E9B93] italic font-medium">
-                {language === 'hi' ? 'ऊपर सवाल चुन कर आगे बढ़ें' : 'Choose answer above'}
+                Choose answer above
               </div>
             )}
           </div>
