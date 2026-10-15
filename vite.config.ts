@@ -3,11 +3,11 @@ import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/FoundU/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/FoundU/' : '/',
   plugins: [
     react(),
     tailwindcss(),
   ],
-})
+}))
 
