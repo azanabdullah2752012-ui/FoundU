@@ -8,6 +8,8 @@ import { PhilosophySection } from './components/home/PhilosophySection';
 import { TopicLibrary } from './components/library/TopicLibrary';
 import { LessonContainer } from './components/lesson/LessonContainer';
 import { ShortcutsModal } from './components/common/ShortcutsModal';
+import { CommandPalette } from './components/search/CommandPalette';
+import { MasteryDrawer } from './components/mastery/MasteryDrawer';
 import { FOUNDATION_TOPICS, getLessonById } from './data/topics';
 import { useProgress } from './hooks/useProgress';
 import type { Stage } from './types';
@@ -16,6 +18,8 @@ export function App() {
   const [currentView, setCurrentView] = useState<'home' | 'library' | 'lesson'>('home');
   const [activeLessonId, setActiveLessonId] = useState<string>('fractions-what-is-a-fraction');
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMasteryOpen, setIsMasteryOpen] = useState(false);
 
   const {
     progress,
@@ -47,6 +51,13 @@ export function App() {
         return;
       }
 
+      // 'Cmd+K' / 'Ctrl+K' or '/' opens Command Palette
+      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !e.shiftKey)) {
+        e.preventDefault();
+        setIsSearchOpen(true);
+        return;
+      }
+
       // '?' opens shortcuts modal
       if (e.key === '?' || (e.shiftKey && e.key === '/')) {
         e.preventDefault();
@@ -54,15 +65,19 @@ export function App() {
         return;
       }
 
-      // Escape closes shortcuts modal
-      if (e.key === 'Escape' && isShortcutsOpen) {
-        e.preventDefault();
-        setIsShortcutsOpen(false);
-        return;
+      // Escape closes open modals / drawers
+      if (e.key === 'Escape') {
+        if (isSearchOpen || isMasteryOpen || isShortcutsOpen) {
+          e.preventDefault();
+          setIsSearchOpen(false);
+          setIsMasteryOpen(false);
+          setIsShortcutsOpen(false);
+          return;
+        }
       }
 
-      // If shortcuts modal is open, don't trigger background navigation
-      if (isShortcutsOpen) return;
+      // If any modal/drawer is open, don't trigger background navigation
+      if (isShortcutsOpen || isSearchOpen || isMasteryOpen) return;
 
       // Global fast navigation: 'h' for Home, 't' for Topics
       if (e.key.toLowerCase() === 'h' && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -78,7 +93,7 @@ export function App() {
 
     window.addEventListener('keydown', handleGlobalShortcuts);
     return () => window.removeEventListener('keydown', handleGlobalShortcuts);
-  }, [isShortcutsOpen]);
+  }, [isShortcutsOpen, isSearchOpen, isMasteryOpen]);
 
   const handleStartLearning = () => {
     // Navigate straight to the flagship Fractions lesson or last active
@@ -122,8 +137,25 @@ export function App() {
         }}
         onContinueLesson={handleStartLearning}
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenMastery={() => setIsMasteryOpen(true)}
         progress={progress}
         activeLessonTitle={activeLesson?.title}
+      />
+
+      {/* Global Concept Command Palette */}
+      <CommandPalette
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onSelectLesson={handleSelectLesson}
+      />
+
+      {/* Foundational Mastery Drawer */}
+      <MasteryDrawer
+        isOpen={isMasteryOpen}
+        onClose={() => setIsMasteryOpen(false)}
+        progress={progress}
+        onSelectLesson={handleSelectLesson}
       />
 
       {/* Global Keyboard Shortcuts Modal */}

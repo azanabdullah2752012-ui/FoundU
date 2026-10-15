@@ -35,7 +35,8 @@ export interface PhysicalChallenge {
     | 'ratio-scaler'
     | 'metric-ladder'
     | 'division-sharing'
-    | 'fraction-addition';
+    | 'fraction-addition'
+    | 'angle-explorer';
   // Target values to check in interactive state
   targetNumerator?: number;
   targetDenominator?: number;

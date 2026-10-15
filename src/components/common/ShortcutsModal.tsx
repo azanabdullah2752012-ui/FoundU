@@ -174,6 +174,12 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
                 </div>
               </div>
               <div className="flex items-center justify-between">
+                <span className="text-[#6B6861]">Concept Search</span>
+                <kbd className="px-2 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[11px] text-[#1C1917] shadow-2xs">
+                  ⌘K / /
+                </kbd>
+              </div>
+              <div className="flex items-center justify-between">
                 <span className="text-[#6B6861]">Show Shortcuts</span>
                 <kbd className="px-2 py-0.5 bg-white border border-[#D5D1C7] rounded font-mono text-[11px] text-[#1C1917] shadow-2xs">
                   ?

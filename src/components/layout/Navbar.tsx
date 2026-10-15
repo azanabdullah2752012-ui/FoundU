@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard, Volume2, VolumeX } from 'lucide-react';
+import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard, Volume2, VolumeX, Search } from 'lucide-react';
 import type { UserProgress } from '../../types';
 import { sound } from '../../utils/sound';
 
@@ -9,6 +9,8 @@ interface NavbarProps {
   onNavigateLibrary: () => void;
   onContinueLesson?: () => void;
   onOpenShortcuts: () => void;
+  onOpenSearch?: () => void;
+  onOpenMastery?: () => void;
   progress: UserProgress;
   activeLessonTitle?: string;
 }
@@ -19,6 +21,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigateLibrary,
   onContinueLesson,
   onOpenShortcuts,
+  onOpenSearch,
+  onOpenMastery,
   progress,
   activeLessonTitle,
 }) => {
@@ -126,11 +130,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Topics</span>
           </button>
 
+          {/* Concept Search Command Palette Trigger */}
+          {onOpenSearch && (
+            <button
+              type="button"
+              onClick={onOpenSearch}
+              className="px-2.5 py-1.5 rounded-lg text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white cursor-pointer shadow-2xs"
+              title="Search concepts (Press ⌘K or /)"
+              aria-label="Search concepts"
+            >
+              <Search className="w-3.5 h-3.5 text-[#1C1917]" />
+              <span className="hidden sm:inline">Search</span>
+              <kbd className="hidden sm:inline px-1 py-0.2 bg-[#FAF9F5] border border-[#D5D1C7] rounded font-mono text-[9px] text-[#6B6861]">
+                ⌘K
+              </kbd>
+            </button>
+          )}
+
           {/* Sound Toggle Button */}
           <button
             type="button"
             onClick={handleToggleSound}
-            className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 border border-transparent hover:border-[#E8E5DD] ${
+            className={`p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium transition-colors flex items-center gap-1.5 border border-transparent hover:border-[#E8E5DD] cursor-pointer ${
               isMuted ? 'text-[#9E9B93] hover:text-[#1C1917] hover:bg-[#F4F2EB]' : 'text-[#1C1917] hover:bg-[#F4F2EB]'
             }`}
             title={isMuted ? 'Unmute sounds (Press M)' : 'Mute sounds (Press M)'}
@@ -153,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={onOpenShortcuts}
-            className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-transparent hover:border-[#E8E5DD]"
+            className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-transparent hover:border-[#E8E5DD] cursor-pointer"
             title="Keyboard shortcuts for speed (Press '?')"
             aria-label="Keyboard shortcuts"
           >
@@ -164,26 +185,39 @@ export const Navbar: React.FC<NavbarProps> = ({
             </kbd>
           </button>
 
-          {/* Current or Completed Counter */}
-          {completedCount > 0 ? (
-            <div className="flex items-center gap-1.5 text-xs text-[#1E6B4F] bg-[#F0F9F5] border border-[#B7E4D3] px-2.5 py-1 rounded-full font-medium ml-1">
-              <CheckCircle2 className="w-3.5 h-3.5" />
+          {/* Mastery Drawer Trigger */}
+          {onOpenMastery && (
+            <button
+              type="button"
+              onClick={onOpenMastery}
+              className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium ml-1 transition-colors cursor-pointer border shadow-2xs ${
+                completedCount > 0
+                  ? 'text-[#1E6B4F] bg-[#F0F9F5] border-[#B7E4D3] hover:bg-[#E4F5ED]'
+                  : 'text-[#6B6861] bg-white border-[#E8E5DD] hover:bg-[#FAF9F5]'
+              }`}
+              title="View Foundational Mastery Ledger"
+              aria-label="View mastery progress"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#1E6B4F]" />
               <span>
-                {completedCount} completed
+                {completedCount > 0 ? `${completedCount} Mastered` : 'Mastery'}
               </span>
-            </div>
-          ) : progress.inProgressLessonId && onContinueLesson && currentView !== 'lesson' ? (
+            </button>
+          )}
+
+          {/* Resume In-Progress Lesson */}
+          {progress.inProgressLessonId && onContinueLesson && currentView !== 'lesson' && (
             <button
               type="button"
               onClick={onContinueLesson}
-              className="text-xs text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] hover:bg-[#F9ECE7] px-2.5 py-1 rounded-full font-medium ml-1 transition-colors flex items-center gap-1"
+              className="text-xs text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] hover:bg-[#F9ECE7] px-2.5 py-1 rounded-full font-medium ml-1 transition-colors flex items-center gap-1 cursor-pointer"
             >
               <span>Resume</span>
               <span className="max-w-[120px] truncate hidden md:inline font-mono">
                 {activeLessonTitle || 'Lesson'}
               </span>
             </button>
-          ) : null}
+          )}
         </div>
       </div>
     </header>

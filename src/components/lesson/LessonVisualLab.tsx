@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import type { LessonData } from '../../types';
 import { ArrowLeft, ArrowRight, Eye, Sliders, CheckCircle2, Target, HelpCircle } from 'lucide-react';
 import { FractionBar } from '../visual/FractionBar';
@@ -14,6 +14,7 @@ import { RatioVisualizer } from '../visual/RatioVisualizer';
 import { MetricLadder } from '../visual/MetricLadder';
 import { DivisionSharing } from '../visual/DivisionSharing';
 import { FractionAddition } from '../visual/FractionAddition';
+import { AngleExplorer } from '../visual/AngleExplorer';
 import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
 import { sound } from '../../utils/sound';
 
@@ -47,17 +48,38 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
   const [showHint, setShowHint] = useState(false);
   const [labMode, setLabMode] = useState<'challenge' | 'explore'>('challenge');
 
-  // Automatic verification for fraction slicer
-  useEffect(() => {
-    if (challenge && challenge.type === 'fraction-slicer' && challenge.targetNumerator && challenge.targetDenominator) {
-      if (sliceNumerator === challenge.targetNumerator && sliceDenominator === challenge.targetDenominator) {
-        if (!isChallengeSolved) {
-          setIsChallengeSolved(true);
-          sound.playSuccess();
+  const checkFractionTarget = useCallback(
+    (num: number, den: number) => {
+      if (
+        challenge &&
+        challenge.type === 'fraction-slicer' &&
+        challenge.targetNumerator &&
+        challenge.targetDenominator
+      ) {
+        if (num === challenge.targetNumerator && den === challenge.targetDenominator) {
+          if (!isChallengeSolved) {
+            setIsChallengeSolved(true);
+            sound.playSuccess();
+          }
         }
       }
+    },
+    [challenge, isChallengeSolved]
+  );
+
+  const handleDenominatorChange = (d: number) => {
+    const nextNum = sliceNumerator > d ? d : sliceNumerator;
+    setSliceDenominator(d);
+    if (sliceNumerator > d) {
+      setSliceNumerator(nextNum);
     }
-  }, [sliceNumerator, sliceDenominator, challenge, isChallengeSolved]);
+    checkFractionTarget(nextNum, d);
+  };
+
+  const handleNumeratorChange = (num: number) => {
+    setSliceNumerator(num);
+    checkFractionTarget(num, sliceDenominator);
+  };
 
   const handleManualSolve = () => {
     setIsChallengeSolved(true);
@@ -213,10 +235,7 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
                   <button
                     key={d}
                     type="button"
-                    onClick={() => {
-                      setSliceDenominator(d);
-                      if (sliceNumerator > d) setSliceNumerator(d);
-                    }}
+                    onClick={() => handleDenominatorChange(d)}
                     className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
                       sliceDenominator === d
                         ? 'bg-[#1C1917] text-white shadow-xs'
@@ -235,7 +254,7 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
                 totalParts={sliceDenominator}
                 shadedParts={sliceNumerator}
                 interactive={true}
-                onShadedChange={(newVal) => setSliceNumerator(newVal)}
+                onShadedChange={handleNumeratorChange}
                 size="md"
                 showFractionBadge={false}
               />
@@ -438,6 +457,21 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
         {/* Type 14: Fraction Addition */}
         {visualLab.interactiveType === 'fraction-addition' && (
           <FractionAddition initialA={{ num: 1, den: 4 }} initialB={{ num: 2, den: 4 }} interactive={true} />
+        )}
+
+        {/* Type 15: Angle Explorer */}
+        {visualLab.interactiveType === 'angle-explorer' && (
+          <AngleExplorer
+            initialAngle={45}
+            targetMin={120}
+            targetMax={140}
+            interactive={true}
+            onTargetReached={(solved) => {
+              if (solved && !isChallengeSolved) {
+                setIsChallengeSolved(true);
+              }
+            }}
+          />
         )}
       </div>
 

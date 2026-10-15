@@ -13,11 +13,17 @@ export interface VisualData {
     | 'thermometer'
     | 'ratio-model'
     | 'metric-ladder'
-    | 'place-value-blocks';
+    | 'place-value-blocks'
+    | 'angle-explorer';
   totalParts?: number;
   shadedParts?: number;
   highlightIndexes?: number[];
   label?: string;
+  angleData?: {
+    angle: number;
+    targetMin?: number;
+    targetMax?: number;
+  };
   comparison?: {
     fractionA: { numerator: number; denominator: number; label: string };
     fractionB: { numerator: number; denominator: number; label: string };
@@ -113,7 +119,8 @@ export interface VisualLabData {
     | 'metric-ladder'
     | 'place-value-blocks'
     | 'division-sharing'
-    | 'fraction-addition';
+    | 'fraction-addition'
+    | 'angle-explorer';
   instructions: string;
   keyInsights: string[];
   initialConfig?: Record<string, unknown>;

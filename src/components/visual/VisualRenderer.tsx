@@ -11,6 +11,7 @@ import { ArrayMultiplier } from './ArrayMultiplier';
 import { NegativeLine } from './NegativeLine';
 import { RatioVisualizer } from './RatioVisualizer';
 import { MetricLadder } from './MetricLadder';
+import { AngleExplorer } from './AngleExplorer';
 
 interface VisualRendererProps {
   visual?: VisualData;
@@ -135,6 +136,16 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
       {visual.type === 'metric-ladder' && (
         <MetricLadder
           initialValue={visual.metricLadder?.value ?? 3.5}
+          interactive={interactive}
+          label={visual.label}
+        />
+      )}
+
+      {visual.type === 'angle-explorer' && (
+        <AngleExplorer
+          initialAngle={visual.angleData?.angle ?? 45}
+          targetMin={visual.angleData?.targetMin}
+          targetMax={visual.angleData?.targetMax}
           interactive={interactive}
           label={visual.label}
         />

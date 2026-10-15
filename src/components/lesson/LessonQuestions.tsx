@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import type { LessonData, Question } from '../../types';
 import {
   ArrowLeft,
@@ -34,15 +34,18 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   // Sync state if question index changes
-  const handleSelectChoice = (choiceId: string) => {
-    if (hasSubmitted && isCorrect) return; // prevent altering after correct answer
-    sound.playTap();
-    setSelectedChoiceId(choiceId);
-    setHasSubmitted(false);
-    setIsCorrect(null);
-  };
+  const handleSelectChoice = useCallback(
+    (choiceId: string) => {
+      if (hasSubmitted && isCorrect) return; // prevent altering after correct answer
+      sound.playTap();
+      setSelectedChoiceId(choiceId);
+      setHasSubmitted(false);
+      setIsCorrect(null);
+    },
+    [hasSubmitted, isCorrect]
+  );
 
-  const handleCheckAnswer = () => {
+  const handleCheckAnswer = useCallback(() => {
     if (!selectedChoiceId) return;
 
     const correct = selectedChoiceId === currentQuestion.correctChoiceId;
@@ -55,16 +58,16 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
     } else {
       sound.playRetry();
     }
-  };
+  }, [selectedChoiceId, currentQuestion, onSaveAnswer]);
 
-  const handleRetry = () => {
+  const handleRetry = useCallback(() => {
     sound.playTap();
     setHasSubmitted(false);
     setIsCorrect(null);
     setSelectedChoiceId(null);
-  };
+  }, []);
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = useCallback(() => {
     if (isLastQuestion) {
       onComplete();
     } else {
@@ -73,9 +76,9 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
       setHasSubmitted(false);
       setIsCorrect(null);
     }
-  };
+  }, [isLastQuestion, onComplete]);
 
-  const handlePrevQuestion = () => {
+  const handlePrevQuestion = useCallback(() => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prev) => prev - 1);
       setSelectedChoiceId(null);
@@ -84,7 +87,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
     } else {
       onPrev();
     }
-  };
+  }, [currentQuestionIndex, onPrev]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -142,8 +145,11 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
     selectedChoiceId,
     hasSubmitted,
     isCorrect,
-    currentQuestionIndex,
-    isLastQuestion,
+    handleSelectChoice,
+    handleCheckAnswer,
+    handleRetry,
+    handleNextQuestion,
+    handlePrevQuestion,
   ]);
 
   return (
