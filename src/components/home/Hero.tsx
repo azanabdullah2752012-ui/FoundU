@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, BookOpen } from 'lucide-react';
-import { Gummy } from '../brand/Gummy';
+import { PickleCorpLogo } from '../brand/PickleCorpLogo';
 
 interface HeroProps {
   onStartLearning: () => void;
@@ -14,16 +14,9 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section className="py-12 sm:py-20 text-center px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-3xl mx-auto">
-        {/* Pickle Corp & Gummy Mascot Pill */}
-        <div className="flex flex-col items-center justify-center mb-5">
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E8E5DD] shadow-2xs text-xs font-mono text-[#6B6861] hover:border-[#D45B34]/30 transition-all">
-            <Gummy size="sm" color="green" speechText="Poke me!" />
-            <span className="font-bold text-[#1C1917]">A Pickle Corp™ Project</span>
-            <span className="text-[#9E9B93]">•</span>
-            <span className="text-[#6B6861] hidden sm:inline">Azan &amp; Thanvi</span>
-            <span className="text-[#9E9B93] hidden sm:inline">•</span>
-            <span className="text-[#D45B34] font-semibold">Foundu</span>
-          </div>
+        {/* Pickle Corp Official Logo & Gummy Mascot Pill */}
+        <div className="flex flex-col items-center justify-center mb-6">
+          <PickleCorpLogo variant="badge" showMascot={true} gummyColor="green" />
         </div>
 
         {/* Primary Headline */}

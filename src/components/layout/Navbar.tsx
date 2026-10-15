@@ -3,6 +3,7 @@ import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard, Volume2, VolumeX, S
 import type { UserProgress } from '../../types';
 import { sound } from '../../utils/sound';
 import { Gummy } from '../brand/Gummy';
+import { PickleCorpLogo } from '../brand/PickleCorpLogo';
 import type { PickleCorpUser } from '../brand/PickleCorpLoginModal';
 
 interface NavbarProps {
@@ -77,26 +78,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </button>
 
-          {/* Pickle Corp Brand & Gummy Mascot */}
-          <div className="hidden sm:flex items-center gap-2 pl-2.5 border-l border-[#E8E5DD]">
-            <Gummy
-              size="sm"
-              color={currentUser?.gummyColor || 'green'}
-              className="hover:scale-105 transition-transform"
+          {/* Pickle Corp Official Brand Logo & Gummy Mascot */}
+          <div className="hidden sm:flex items-center pl-3 border-l border-[#E8E5DD]">
+            <PickleCorpLogo
+              variant="compact"
+              showMascot={true}
+              gummyColor={currentUser?.gummyColor || 'green'}
             />
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="text-[11px] font-mono font-extrabold text-[#1C1917] tracking-tight">
-                  Pickle Corp™
-                </span>
-                <span className="text-[8px] font-mono font-bold bg-[#FDF4F0] border border-[#F3C3B2] text-[#D45B34] px-1 rounded uppercase">
-                  Studio
-                </span>
-              </div>
-              <span className="text-[9px] font-mono text-[#9E9B93] -mt-0.5">
-                Favors over fiat
-              </span>
-            </div>
           </div>
 
           {/* Meaning hint popover trigger */}
