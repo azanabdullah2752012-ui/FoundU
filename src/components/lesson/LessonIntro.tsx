@@ -10,6 +10,7 @@ import { RatioVisualizer } from '../visual/RatioVisualizer';
 import { MetricLadder } from '../visual/MetricLadder';
 import { DivisionSharing } from '../visual/DivisionSharing';
 import { VoiceListenButton } from '../common/VoiceListenButton';
+import { VisualPointerGuide } from '../common/VisualPointerGuide';
 import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
 import { sound } from '../../utils/sound';
 
@@ -192,9 +193,12 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
                   <span>
                     Bar cut into {sliceCount} equal pieces
                   </span>
-                  <span className="font-mono font-bold text-base text-[#D45B34]">
-                    {selectedSlices}/{sliceCount}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <VisualPointerGuide text="Tap any slice!" />
+                    <span className="font-mono font-bold text-base text-[#D45B34]">
+                      {selectedSlices}/{sliceCount}
+                    </span>
+                  </div>
                 </div>
 
                 <div className="h-16 w-full flex gap-2">

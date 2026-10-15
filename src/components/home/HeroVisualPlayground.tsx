@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { sound } from '../../utils/sound';
 import { Gummy } from '../brand/Gummy';
 import { Sparkles, RotateCcw } from 'lucide-react';
+import { VisualPointerGuide } from '../common/VisualPointerGuide';
 
 export const HeroVisualPlayground: React.FC = () => {
   const [totalSlices, setTotalSlices] = useState<number>(4);
@@ -125,6 +126,7 @@ export const HeroVisualPlayground: React.FC = () => {
         {/* Interactive Disc & Rotary Slices Selector */}
         <div className="md:col-span-6 flex flex-col items-center">
           <div className="relative w-52 h-52 sm:w-56 sm:h-56 rounded-full bg-[#EDE8DE] p-3 border-2 border-[#DFD9CD] shadow-inner flex items-center justify-center">
+            <VisualPointerGuide text="Tap slices!" className="absolute -top-3 left-1/2 -translate-x-1/2 z-20" />
             {/* Degree Marks Background */}
             <svg viewBox="0 0 200 200" className="w-full h-full">
               {/* Outer calibration ring */}
