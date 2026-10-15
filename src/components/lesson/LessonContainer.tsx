@@ -7,8 +7,12 @@ import { LessonVisualLab } from './LessonVisualLab';
 import { LessonQuestions } from './LessonQuestions';
 import { LessonComplete } from './LessonComplete';
 
+import { type Language } from '../../utils/language';
+import { sound } from '../../utils/sound';
+
 interface LessonContainerProps {
   lesson: LessonData;
+  language?: Language;
   currentStage: Stage;
   onStageChange: (newStage: Stage) => void;
   onExit: () => void;
@@ -21,6 +25,7 @@ interface LessonContainerProps {
 
 export const LessonContainer: React.FC<LessonContainerProps> = ({
   lesson,
+  language = 'en',
   currentStage,
   onStageChange,
   onExit,
@@ -123,6 +128,7 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
       {/* Top stage progression indicator */}
       <LessonProgress
         currentStage={currentStage}
+        language={language}
         onSelectStage={(stage) => onStageChange(stage)}
         onExit={onExit}
         lessonTitle={lesson.title}
@@ -130,7 +136,7 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
       />
 
       {/* Main Lesson Stage Content */}
-      <main className="flex-1 px-4 sm:px-6">
+      <main className="flex-1 px-4 sm:px-6 pb-20">
         {currentStage === 'intro' && (
           <LessonIntro
             lesson={lesson}
@@ -179,6 +185,62 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
           />
         )}
       </main>
+
+      {/* Persistent Simple Bottom Navigation Bar */}
+      {currentStage !== 'complete' && (
+        <div className="sticky bottom-0 z-30 border-t border-[#E8E5DD] bg-white/95 backdrop-blur-md py-3 px-4 sm:px-6 shadow-md">
+          <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+            {currentStage !== 'intro' ? (
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playTap();
+                  if (currentStage === 'examples') onStageChange('intro');
+                  else if (currentStage === 'visuals') onStageChange('examples');
+                  else if (currentStage === 'questions') onStageChange('visuals');
+                }}
+                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
+              >
+                {language === 'hi' ? '◀ पिछला' : '◀ Previous'}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={onExit}
+                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#6B6861] font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
+              >
+                {language === 'hi' ? 'सारे विषय' : 'Topics'}
+              </button>
+            )}
+
+            <div className="text-xs font-mono font-bold text-[#6B6861] hidden sm:block">
+              {currentStage === 'intro' && (language === 'hi' ? 'कदम 1: असली मिसाल देखो 👁️' : 'Step 1: Look at the visual metaphor')}
+              {currentStage === 'examples' && (language === 'hi' ? 'कदम 2: मिसालें समझो 📖' : 'Step 2: Understand real examples')}
+              {currentStage === 'visuals' && (language === 'hi' ? 'कदम 3: हाथ से चला कर देखो 🖐️' : 'Step 3: Play & manipulate the lab')}
+              {currentStage === 'questions' && (language === 'hi' ? 'कदम 4: समझ की जाँच 🎯' : 'Step 4: Check your intuition')}
+            </div>
+
+            {currentStage !== 'questions' ? (
+              <button
+                type="button"
+                onClick={() => {
+                  sound.playTap();
+                  if (currentStage === 'intro') onStageChange('examples');
+                  else if (currentStage === 'examples') onStageChange('visuals');
+                  else if (currentStage === 'visuals') onStageChange('questions');
+                }}
+                className="px-6 py-2.5 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-1.5 active:scale-98"
+              >
+                <span>{language === 'hi' ? 'अगला कदम ▶' : 'Next Step ▶'}</span>
+              </button>
+            ) : (
+              <div className="text-xs text-[#9E9B93] italic font-medium">
+                {language === 'hi' ? 'ऊपर सवाल चुन कर आगे बढ़ें' : 'Choose answer above'}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

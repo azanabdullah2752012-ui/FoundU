@@ -13,9 +13,12 @@ import {
   Calculator,
   Variable,
 } from 'lucide-react';
+import { TopicMiniVisual } from '../common/TopicMiniVisual';
+import { TOPIC_BILINGUAL, type Language } from '../../utils/language';
 
 interface TopicLibraryProps {
   topics: Topic[];
+  language?: Language;
   completedLessons: string[];
   onSelectLesson: (lessonId: string) => void;
   onBackToHome?: () => void;
@@ -34,11 +37,13 @@ const topicIconMap: Record<string, React.ReactNode> = {
 
 export const TopicLibrary: React.FC<TopicLibraryProps> = ({
   topics,
+  language = 'en',
   completedLessons,
   onSelectLesson,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterMode, setFilterMode] = useState<'all' | 'available'>('all');
+  const isHindi = language === 'hi';
 
   const filteredTopics = topics
     .map((topic) => {
@@ -139,13 +144,20 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
                 </div>
                 <div>
                   <h2 className="text-xl font-bold tracking-tight text-[#1C1917]">
-                    {topic.title}
+                    {isHindi && TOPIC_BILINGUAL[topic.id]
+                      ? TOPIC_BILINGUAL[topic.id].hiTitle
+                      : topic.title}
                   </h2>
                   <p className="text-xs text-[#6B6861] mt-0.5">
-                    {topic.description}
+                    {isHindi && TOPIC_BILINGUAL[topic.id]
+                      ? TOPIC_BILINGUAL[topic.id].hiSubtitle
+                      : topic.description}
                   </p>
                 </div>
               </div>
+
+              {/* Topic Mini Visual */}
+              <TopicMiniVisual topicId={topic.id} />
             </div>
 
             {/* Lessons List in Topic */}

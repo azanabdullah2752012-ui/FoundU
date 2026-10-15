@@ -2,8 +2,12 @@ import React from 'react';
 import type { Topic } from '../../types';
 import { ArrowRight, PieChart, Dot, Percent, Scale, RefreshCw, Binary, Calculator, Variable, CheckCircle2 } from 'lucide-react';
 
+import { TopicMiniVisual } from '../common/TopicMiniVisual';
+import { TOPIC_BILINGUAL, TRANSLATIONS, type Language } from '../../utils/language';
+
 interface FeaturedTopicsProps {
   topics: Topic[];
+  language: Language;
   completedLessons: string[];
   onSelectLesson: (lessonId: string) => void;
   onExploreAll: () => void;
@@ -22,10 +26,13 @@ const topicIcons: Record<string, React.ReactNode> = {
 
 export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
   topics,
+  language,
   completedLessons,
   onSelectLesson,
   onExploreAll,
 }) => {
+  const isHindi = language === 'hi';
+  const t = TRANSLATIONS[language];
   // Show active foundational topics with available visual lessons
   const featuredTopics = topics.filter((t) => t.lessons.some((l) => l.isAvailable));
 
@@ -34,44 +41,56 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-2xl font-bold tracking-tight text-[#1C1917]">
-            Core Foundation Areas
+            {isHindi ? 'बुनियादी विषय (Core Foundations)' : 'Core Foundation Areas'}
           </h2>
           <p className="text-sm text-[#6B6861]">
-            Start with the basic building blocks. Each lesson builds a permanent intuition.
+            {isHindi
+              ? 'तस्वीरों और असली दुनिया के उदाहरणों से समझें। हर पाठ दिमाग में पक्की समझ बनाता है।'
+              : 'Start with the basic building blocks. Each lesson builds a permanent intuition.'}
           </p>
         </div>
         <button
           type="button"
           onClick={onExploreAll}
-          className="text-xs sm:text-sm font-medium text-[#D45B34] hover:text-[#BC4B26] transition-colors flex items-center gap-1"
+          className="text-xs sm:text-sm font-semibold text-[#D45B34] hover:text-[#BC4B26] transition-colors flex items-center gap-1.5 cursor-pointer bg-white px-3 py-1.5 rounded-full border border-[#E8E5DD] shadow-2xs"
         >
-          <span>View all 8 topics</span>
+          <span>{t.allTopics}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {featuredTopics.map((topic) => {
           const availableLesson = topic.lessons.find((l) => l.isAvailable);
+          const b = TOPIC_BILINGUAL[topic.id];
 
           return (
             <div
               key={topic.id}
-              className="bg-white border border-[#E8E5DD] hover:border-[#D5D1C7] rounded-2xl p-5 shadow-xs transition-all flex flex-col justify-between"
+              className="bg-white border-2 border-[#E8E5DD] hover:border-[#D45B34]/50 rounded-3xl p-5 shadow-xs transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="p-2 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD]">
-                    {topicIcons[topic.id] || <PieChart className="w-5 h-5 text-[#D45B34]" />}
+                <div className="flex items-start justify-between mb-3 gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2.5 rounded-2xl bg-[#FAF9F5] border border-[#E8E5DD] shrink-0">
+                      {topicIcons[topic.id] || <PieChart className="w-5 h-5 text-[#D45B34]" />}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-[#1C1917] leading-snug">
+                        {isHindi && b ? b.hiTitle : topic.title}
+                      </h3>
+                      {b && (
+                        <p className="text-xs text-[#D45B34] font-medium">
+                          {isHindi ? b.anchorHint : b.hiSubtitle}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <span className="text-[11px] font-mono text-[#9E9B93]">
-                    {topic.lessons.length} lessons
-                  </span>
+
+                  {/* Rich Visual Mini-Manipulative */}
+                  <TopicMiniVisual topicId={topic.id} />
                 </div>
 
-                <h3 className="text-lg font-bold text-[#1C1917] mb-1">
-                  {topic.title}
-                </h3>
                 <p className="text-xs text-[#6B6861] mb-4 leading-relaxed">
                   {topic.description}
                 </p>
@@ -108,13 +127,13 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                         <button
                           type="button"
                           onClick={() => onSelectLesson(lesson.id)}
-                          className="text-[11px] font-mono font-medium text-[#D45B34] hover:underline shrink-0"
+                          className="text-[11px] font-mono font-bold text-[#D45B34] hover:underline shrink-0 cursor-pointer"
                         >
-                          {isDone ? 'Review' : 'Start'}
+                          {isDone ? (isHindi ? 'दोहराएँ' : 'Review') : (isHindi ? 'शुरू करें' : 'Start')}
                         </button>
                       ) : (
                         <span className="text-[10px] font-mono text-[#9E9B93] bg-[#F4F2EB] px-1.5 py-0.5 rounded shrink-0">
-                          SOON
+                          {isHindi ? 'जल्द ही' : 'SOON'}
                         </span>
                       )}
                     </div>
@@ -126,10 +145,10 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                     <button
                       type="button"
                       onClick={() => onSelectLesson(availableLesson.id)}
-                      className="w-full py-2 bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] border border-[#E8E5DD] rounded-xl text-xs font-medium transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                      className="w-full py-2.5 bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] border border-[#E8E5DD] hover:border-[#D45B34]/30 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                     >
-                      <span>Learn {availableLesson.title}</span>
-                      <ArrowRight className="w-3 h-3 text-[#D45B34]" />
+                      <span>{isHindi ? `सीखें: ${availableLesson.title}` : `Learn ${availableLesson.title}`}</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-[#D45B34]" />
                     </button>
                   </div>
                 )}

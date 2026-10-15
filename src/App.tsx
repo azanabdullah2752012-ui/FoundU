@@ -13,15 +13,23 @@ import { MasteryDrawer } from './components/mastery/MasteryDrawer';
 import { PickleCorpLoginModal, type PickleCorpUser } from './components/brand/PickleCorpLoginModal';
 import { FOUNDATION_TOPICS, getLessonById } from './data/topics';
 import { useProgress } from './hooks/useProgress';
+import { getLanguage, setLanguagePreference, type Language } from './utils/language';
 import type { Stage } from './types';
 
 export function App() {
   const [currentView, setCurrentView] = useState<'home' | 'library' | 'lesson'>('home');
+  const [language, setLanguage] = useState<Language>(getLanguage);
   const [activeLessonId, setActiveLessonId] = useState<string>('fractions-what-is-a-fraction');
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMasteryOpen, setIsMasteryOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleToggleLanguage = () => {
+    const next: Language = language === 'en' ? 'hi' : 'en';
+    setLanguage(next);
+    setLanguagePreference(next);
+  };
 
   const [pickleUser, setPickleUser] = useState<PickleCorpUser>(() => {
     try {
@@ -162,6 +170,8 @@ export function App() {
       {/* Navigation Header */}
       <Navbar
         currentView={currentView}
+        language={language}
+        onToggleLanguage={handleToggleLanguage}
         onNavigateHome={() => {
           setCurrentView('home');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -214,9 +224,14 @@ export function App() {
         {currentView === 'home' && (
           <div className="animate-in fade-in duration-150">
             <Hero
+              language={language}
               onStartLearning={handleStartLearning}
               onExploreTopics={() => {
                 setCurrentView('library');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              onStartLesson={(lessonId) => {
+                handleSelectLesson(lessonId);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             />
@@ -242,6 +257,7 @@ export function App() {
             {/* Core 5 MVP Foundation Subjects */}
             <FeaturedTopics
               topics={FOUNDATION_TOPICS}
+              language={language}
               completedLessons={progress.completedLessons}
               onSelectLesson={handleSelectLesson}
               onExploreAll={() => {
@@ -258,6 +274,7 @@ export function App() {
         {currentView === 'library' && (
           <TopicLibrary
             topics={FOUNDATION_TOPICS}
+            language={language}
             completedLessons={progress.completedLessons}
             onSelectLesson={handleSelectLesson}
             onBackToHome={() => {
@@ -270,6 +287,7 @@ export function App() {
         {currentView === 'lesson' && activeLesson && (
           <LessonContainer
             lesson={activeLesson}
+            language={language}
             currentStage={currentStage}
             onStageChange={handleStageChange}
             onExit={handleExitLesson}
