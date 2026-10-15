@@ -55,25 +55,25 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-[#E8E5DD] transition-all">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Brand / Logo */}
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={onNavigateHome}
-            className="flex items-center gap-2.5 text-left group focus:outline-none"
+            className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
             aria-label="Foundu home"
           >
-            {/* Geometric Foundation Icon */}
-            <div className="w-8 h-8 rounded-lg bg-[#1C1917] text-white flex items-center justify-center font-mono font-bold text-sm tracking-wider group-hover:bg-[#D45B34] transition-colors shadow-xs">
+            {/* Geometric Foundation Stamp */}
+            <div className="w-8 h-8 rounded-xl bg-[#1C1917] text-white flex items-center justify-center font-mono font-bold text-sm tracking-wider group-hover:bg-[#D45B34] transition-colors shadow-xs">
               F
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-lg tracking-tight text-[#1C1917] group-hover:text-[#D45B34] transition-colors">
+              <span className="font-extrabold text-lg tracking-tight text-[#1C1917] group-hover:text-[#D45B34] transition-colors leading-none">
                 FOUNDU
               </span>
-              <span className="text-[10px] uppercase font-mono tracking-widest text-[#9E9B93] -mt-1 hidden sm:inline">
-                Foundations
+              <span className="text-[9px] uppercase font-mono tracking-widest text-[#9E9B93] mt-0.5">
+                Atelier
               </span>
             </div>
           </button>
@@ -88,13 +88,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Meaning hint popover trigger */}
-          <div className="relative">
+          <div className="relative hidden md:block">
             <button
               type="button"
               onClick={() => setShowBrandMeaning(!showBrandMeaning)}
               onMouseEnter={() => setShowBrandMeaning(true)}
               onMouseLeave={() => setShowBrandMeaning(false)}
-              className="p-1 text-[#9E9B93] hover:text-[#6B6861] transition-colors rounded-full focus:outline-none"
+              className="p-1 text-[#9E9B93] hover:text-[#6B6861] transition-colors rounded-full focus:outline-none cursor-pointer"
               aria-label="About the Foundu name"
             >
               <HelpCircle className="w-3.5 h-3.5" />
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={onNavigateHome}
-            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`btn-tactile px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
               currentView === 'home'
                 ? 'bg-[#1C1917] text-white shadow-xs'
                 : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB]'
@@ -138,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={onNavigateLibrary}
-            className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 ${
+            className={`btn-tactile px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
               currentView === 'library'
                 ? 'bg-[#1C1917] text-white shadow-xs'
                 : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB]'
@@ -153,7 +153,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenSearch}
-              className="p-2 sm:px-2.5 sm:py-1.5 rounded-xl text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white cursor-pointer shadow-2xs"
+              className="btn-tactile p-2 sm:px-2.5 sm:py-1.5 rounded-xl text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white cursor-pointer shadow-2xs"
               title="Search concepts"
               aria-label="Search concepts"
             >
@@ -166,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             type="button"
             onClick={handleToggleSound}
-            className={`p-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1 border border-transparent hover:border-[#E8E5DD] cursor-pointer ${
+            className={`btn-tactile p-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1 border border-transparent hover:border-[#E8E5DD] cursor-pointer ${
               isMuted ? 'text-[#9E9B93] hover:text-[#1C1917] hover:bg-[#F4F2EB]' : 'text-[#1E6B4F] hover:bg-[#F4F2EB]'
             }`}
             title={isMuted ? 'Unmute audio' : 'Mute audio'}

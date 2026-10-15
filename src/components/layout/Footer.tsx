@@ -5,7 +5,7 @@ import { PickleCorpTorchIcon } from '../brand/PickleCorpLogo';
 export const Footer: React.FC = () => {
   return (
     <footer className="border-t border-[#E8E5DD] bg-[#FAF9F5] mt-auto py-12 px-4 sm:px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center gap-2">

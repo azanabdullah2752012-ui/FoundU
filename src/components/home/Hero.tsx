@@ -1,68 +1,95 @@
 import React from 'react';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { ArrowRight, BookOpen, Check } from 'lucide-react';
 import { PickleCorpLogo } from '../brand/PickleCorpLogo';
 import { HeroVisualPlayground } from './HeroVisualPlayground';
 
 interface HeroProps {
   onStartLearning: () => void;
   onExploreTopics: () => void;
-  onStartLesson: (lessonId: string) => void;
+  onStartLesson?: (lessonId: string) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onStartLearning,
   onExploreTopics,
-  onStartLesson,
 }) => {
   return (
-    <section className="py-8 sm:py-16 text-center px-4 sm:px-6 relative overflow-hidden">
-      <div className="max-w-3xl mx-auto">
-        {/* Pickle Corp Official Logo & Gummy Mascot Pill */}
-        <div className="flex flex-col items-center justify-center mb-5">
-          <PickleCorpLogo variant="badge" showMascot={true} gummyColor="terracotta" />
-        </div>
+    <section className="pt-8 pb-14 sm:pt-14 sm:pb-20 px-4 sm:px-6 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
+          {/* Left Column: Authoritative Editorial Manifesto */}
+          <div className="lg:col-span-6 space-y-6 text-left">
+            {/* Brand Eyebrow Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E8E5DD] shadow-2xs">
+              <PickleCorpLogo variant="compact" showMascot={false} />
+              <span className="w-1 h-1 rounded-full bg-[#D45B34]" />
+              <span className="font-mono text-[11px] font-bold tracking-wider text-[#6B6861] uppercase">
+                Foundations Atelier
+              </span>
+            </div>
 
-        {/* Primary Headline */}
-        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-[#1C1917] mb-3 leading-[1.15]">
-          UNDERSTAND THE BASICS.
-        </h1>
+            {/* Editorial Headline */}
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-[#1C1917] leading-[1.08]">
+              Math was meant to be{' '}
+              <span className="text-[#D45B34] underline decoration-[#F3C3B2] decoration-2 underline-offset-8">
+                seen
+              </span>
+              , not memorized.
+            </h1>
 
-        {/* Supporting Copy */}
-        <p className="text-base sm:text-lg text-[#6B6861] mb-6 max-w-xl mx-auto leading-relaxed">
-          Touch, slice, and turn the pieces. No confusing formulas or embarrassment. Pure visual intuition you can see with your own eyes.
-        </p>
+            {/* Reassuring Subtitle */}
+            <p className="text-base sm:text-lg text-[#6B6861] leading-relaxed max-w-lg">
+              Touch the pieces, balance the scales, and feel how numbers physically work.
+              No abstract Greek symbols, no test anxiety, and zero embarrassment.
+            </p>
 
-        {/* Interactive Visual Manipulative Playground */}
-        <HeroVisualPlayground
-          onStartLesson={onStartLesson}
-        />
+            {/* Actions: Confident Primary CTA with secondary anchor */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+              <button
+                type="button"
+                onClick={onStartLearning}
+                className="btn-tactile inline-flex items-center justify-center gap-2.5 bg-[#1C1917] hover:bg-[#D45B34] text-white px-7 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-sm group cursor-pointer"
+              >
+                <span>Start with Fractions</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#F3C3B2]" />
+              </button>
 
-        {/* Big Clear Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
-          <button
-            type="button"
-            onClick={onStartLearning}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#1C1917] hover:bg-[#D45B34] text-white px-8 py-4 rounded-2xl font-bold text-base transition-colors shadow-sm group cursor-pointer active:scale-98"
-          >
-            <span>START LEARNING</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
+              <button
+                type="button"
+                onClick={onExploreTopics}
+                className="btn-tactile inline-flex items-center justify-center gap-2 bg-white border border-[#E8E5DD] hover:bg-[#FAF9F5] hover:border-[#D5D1C7] text-[#1C1917] px-6 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-2xs cursor-pointer"
+              >
+                <BookOpen className="w-4 h-4 text-[#D45B34]" />
+                <span>All 8 Topics</span>
+              </button>
+            </div>
 
-          <button
-            type="button"
-            onClick={onExploreTopics}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white border border-[#E8E5DD] hover:bg-[#FAF9F5] text-[#1C1917] px-7 py-4 rounded-2xl font-bold text-base transition-colors shadow-xs cursor-pointer active:scale-98"
-          >
-            <BookOpen className="w-4 h-4 text-[#D45B34]" />
-            <span>EXPLORE ALL TOPICS</span>
-          </button>
-        </div>
+            {/* Reassurance quote */}
+            <p className="text-xs text-[#9E9B93] italic pt-1">
+              “I never really got this in school.” &nbsp;—&nbsp; That’s completely okay. We start from real objects.
+            </p>
 
-        {/* Supporting quiet reassurance */}
-        <div className="mt-8 pt-6 border-t border-[#E8E5DD]/70 max-w-lg mx-auto">
-          <p className="text-xs text-[#9E9B93] italic">
-            “I never really got this in school.” &nbsp;—&nbsp; That’s completely okay. Let’s start from the beginning.
-          </p>
+            {/* Quiet craft signals */}
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-3 border-t border-[#E8E5DD]/70 text-xs text-[#6B6861] font-mono">
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[#1E6B4F]" />
+                100% Visual Manipulatives
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[#1E6B4F]" />
+                Zero Academic Jargon
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-[#1E6B4F]" />
+                Free for Every Mind
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: Signature Interactive Manipulative Workbench */}
+          <div className="lg:col-span-6">
+            <HeroVisualPlayground />
+          </div>
         </div>
       </div>
     </section>

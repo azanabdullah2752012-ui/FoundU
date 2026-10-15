@@ -66,11 +66,11 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
     .filter((topic) => topic.lessons.length > 0);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 animate-in fade-in duration-200">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 animate-in fade-in duration-200">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-2">
-          <span className="font-mono text-xs uppercase tracking-wider text-[#D45B34]">
+          <span className="font-mono text-xs uppercase tracking-wider text-[#D45B34] font-bold">
             Curriculum
           </span>
           <span className="text-[#9E9B93] text-xs">•</span>
@@ -78,12 +78,12 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
             8 Foundation Areas
           </span>
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1C1917] mb-2">
-          YOUR FOUNDATION
+        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1C1917] mb-2">
+          Foundations Curriculum
         </h1>
         <p className="text-base text-[#6B6861] max-w-2xl leading-relaxed">
-          The essential concepts people are expected to know, broken down with zero jargon.
-          Select any available lesson to start strengthening your understanding.
+          The essential concepts everyone is expected to know, broken down with zero jargon.
+          Select any available module to start strengthening your visual understanding.
         </p>
       </div>
 
@@ -96,15 +96,15 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
             placeholder="Search concepts, e.g. fractions, decimals, place value..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E5DD] rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#D45B34] text-[#1C1917] placeholder:text-[#9E9B93]"
+            className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E5DD] rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#D45B34] text-[#1C1917] placeholder:text-[#9E9B93] shadow-2xs"
           />
         </div>
 
-        <div className="flex items-center gap-1.5 self-start sm:self-auto bg-[#F4F2EB] p-1 rounded-xl">
+        <div className="flex items-center gap-1.5 self-start sm:self-auto bg-[#F4F2EB] p-1 rounded-xl border border-[#E8E5DD]">
           <button
             type="button"
             onClick={() => setFilterMode('all')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`btn-tactile px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
               filterMode === 'all'
                 ? 'bg-white text-[#1C1917] shadow-xs'
                 : 'text-[#6B6861] hover:text-[#1C1917]'
@@ -115,7 +115,7 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
           <button
             type="button"
             onClick={() => setFilterMode('available')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`btn-tactile px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
               filterMode === 'available'
                 ? 'bg-white text-[#1C1917] shadow-xs'
                 : 'text-[#6B6861] hover:text-[#1C1917]'
@@ -131,11 +131,11 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
         {filteredTopics.map((topic) => (
           <section
             key={topic.id}
-            className="bg-white border border-[#E8E5DD] rounded-2xl p-6 sm:p-7 shadow-xs"
+            className="card-atelier p-6 sm:p-7 shadow-xs"
           >
             <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-[#E8E5DD]/70">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD]">
+                <div className="p-2.5 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD] shrink-0">
                   {topicIconMap[topic.id] || <PieChart className="w-5 h-5 text-[#D45B34]" />}
                 </div>
                 <div>

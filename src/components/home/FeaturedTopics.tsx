@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Topic } from '../../types';
-import { ArrowRight, PieChart, Dot, Percent, Scale, RefreshCw, Binary, Calculator, Variable, CheckCircle2 } from 'lucide-react';
-
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 import { TopicMiniVisual } from '../common/TopicMiniVisual';
 
 interface FeaturedTopicsProps {
@@ -11,26 +10,15 @@ interface FeaturedTopicsProps {
   onExploreAll: () => void;
 }
 
-const topicIcons: Record<string, React.ReactNode> = {
-  fractions: <PieChart className="w-5 h-5 text-[#D45B34]" />,
-  decimals: <Dot className="w-5 h-5 text-[#D45B34]" />,
-  percentages: <Percent className="w-5 h-5 text-[#D45B34]" />,
-  numbers: <Binary className="w-5 h-5 text-[#D45B34]" />,
-  arithmetic: <Calculator className="w-5 h-5 text-[#D45B34]" />,
-  'early-algebra': <Variable className="w-5 h-5 text-[#D45B34]" />,
-  ratios: <Scale className="w-5 h-5 text-[#D45B34]" />,
-  conversions: <RefreshCw className="w-5 h-5 text-[#D45B34]" />,
-};
-
-const TOPIC_VISUAL_HINTS: Record<string, string> = {
-  fractions: 'Equal parts of a whole disc or pie',
-  decimals: 'Base 10 units & 50p/cent breakdown',
-  percentages: 'Parts per 100 & battery charge',
-  numbers: 'Values below zero & elevator basement',
-  arithmetic: 'Dot arrays, grouping & sharing equally',
-  'early-algebra': 'Balance scale keeping both sides equal',
-  ratios: 'Mixing proportions & recipe ratios',
-  conversions: 'Units, meter scale & conversions',
+const TOPIC_METAPHORS: Record<string, { label: string; number: string }> = {
+  fractions: { label: 'Equal slices of a whole disc', number: '01' },
+  decimals: { label: 'Base-10 units & 50p coins', number: '02' },
+  percentages: { label: 'Battery charge out of 100', number: '03' },
+  numbers: { label: 'Basement floors below ground', number: '04' },
+  arithmetic: { label: 'Dot arrays & equal sharing', number: '05' },
+  'early-algebra': { label: 'Two-pan balance scale', number: '06' },
+  ratios: { label: 'Mixing tea & paint proportions', number: '07' },
+  conversions: { label: 'Unit ladders & meter powers', number: '08' },
 };
 
 export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
@@ -39,123 +27,102 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
   onSelectLesson,
   onExploreAll,
 }) => {
-  // Show active foundational topics with available visual lessons
-  const featuredTopics = topics.filter((t) => t.lessons.some((l) => l.isAvailable));
-
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-      <div className="flex items-center justify-between mb-6">
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      {/* Section Header with Clear Baselines */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-[#E8E5DD]">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-[#1C1917]">
-            Core Foundation Areas
+          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D45B34] font-bold mb-1.5">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Bedrock Curriculum</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#1C1917]">
+            The 8 Foundation Modules
           </h2>
-          <p className="text-sm text-[#6B6861]">
-            Start with the basic building blocks. Each lesson builds a permanent visual intuition.
+          <p className="text-sm text-[#6B6861] mt-1 max-w-xl">
+            Every advanced calculation in science, technology, and finances builds upon these eight concepts.
           </p>
         </div>
+
         <button
           type="button"
           onClick={onExploreAll}
-          className="text-xs sm:text-sm font-semibold text-[#D45B34] hover:text-[#BC4B26] transition-colors flex items-center gap-1.5 cursor-pointer bg-white px-3 py-1.5 rounded-full border border-[#E8E5DD] shadow-2xs"
+          className="btn-tactile self-start sm:self-auto text-xs sm:text-sm font-bold text-[#1C1917] hover:text-[#D45B34] transition-colors flex items-center gap-2 cursor-pointer bg-white px-4 py-2 rounded-xl border border-[#E8E5DD] shadow-2xs shrink-0"
         >
-          <span>View All Topics</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <span>Curriculum View</span>
+          <ArrowRight className="w-3.5 h-3.5 text-[#D45B34]" />
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {featuredTopics.map((topic) => {
-          const availableLesson = topic.lessons.find((l) => l.isAvailable);
-          const hint = TOPIC_VISUAL_HINTS[topic.id];
+      {/* 8 Foundation Module Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {topics.map((topic) => {
+          const availableLesson = topic.lessons.find((l) => l.isAvailable) || topic.lessons[0];
+          const isDone = availableLesson ? completedLessons.includes(availableLesson.id) : false;
+          const meta = TOPIC_METAPHORS[topic.id] || { label: 'Foundation block', number: '00' };
 
           return (
             <div
               key={topic.id}
-              className="bg-white border-2 border-[#E8E5DD] hover:border-[#D45B34]/50 rounded-3xl p-5 shadow-xs transition-all flex flex-col justify-between"
+              onClick={() => {
+                if (availableLesson && availableLesson.isAvailable) {
+                  onSelectLesson(availableLesson.id);
+                } else {
+                  onExploreAll();
+                }
+              }}
+              className="card-atelier p-5 flex flex-col justify-between group cursor-pointer select-none"
             >
+              {/* Card Header: Module Number & State */}
               <div>
-                <div className="flex items-start justify-between mb-3 gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="p-2.5 rounded-2xl bg-[#FAF9F5] border border-[#E8E5DD] shrink-0">
-                      {topicIcons[topic.id] || <PieChart className="w-5 h-5 text-[#D45B34]" />}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-[#1C1917] leading-snug">
-                        {topic.title}
-                      </h3>
-                      {hint && (
-                        <p className="text-xs text-[#D45B34] font-medium">
-                          {hint}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                <div className="flex items-center justify-between pb-3 border-b border-[#E8E5DD]/60">
+                  <span className="font-mono text-xs font-bold text-[#9E9B93] group-hover:text-[#D45B34] transition-colors">
+                    MODULE {meta.number}
+                  </span>
 
-                  {/* Rich Visual Mini-Manipulative */}
-                  <TopicMiniVisual topicId={topic.id} />
+                  {isDone ? (
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-[#1E6B4F] bg-[#F0F9F5] border border-[#B7E4D3] px-2 py-0.5 rounded-full">
+                      <CheckCircle2 className="w-3 h-3" />
+                      MASTERED
+                    </span>
+                  ) : availableLesson?.isAvailable ? (
+                    <span className="text-[10px] font-mono font-bold text-[#1E6B4F] bg-[#F0F9F5] px-2 py-0.5 rounded-full">
+                      LAB READY
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-mono text-[#9E9B93] bg-[#F4F2EB] px-2 py-0.5 rounded-full">
+                      IN STUDIO
+                    </span>
+                  )}
                 </div>
 
-                <p className="text-xs text-[#6B6861] mb-4 leading-relaxed">
-                  {topic.description}
-                </p>
+                {/* Focal Visual Miniature Artifact */}
+                <div className="py-4 my-2 flex items-center justify-center bg-[#FAF9F5] group-hover:bg-[#F5F2EA] rounded-2xl border border-[#E8E5DD]/70 transition-colors">
+                  <div className="scale-110 sm:scale-120 transform transition-transform">
+                    <TopicMiniVisual topicId={topic.id} />
+                  </div>
+                </div>
+
+                {/* Topic Title & Core Metaphor */}
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-[#1C1917] group-hover:text-[#D45B34] transition-colors">
+                    {topic.title}
+                  </h3>
+                  <p className="text-xs text-[#D45B34] font-medium">
+                    {meta.label}
+                  </p>
+                  <p className="text-xs text-[#6B6861] line-clamp-2 leading-relaxed pt-1">
+                    {topic.description}
+                  </p>
+                </div>
               </div>
 
-              {/* Lessons preview */}
-              <div className="border-t border-[#E8E5DD]/70 pt-3 space-y-2">
-                {topic.lessons.slice(0, 2).map((lesson) => {
-                  const isDone = completedLessons.includes(lesson.id);
-
-                  return (
-                    <div
-                      key={lesson.id}
-                      className="flex items-center justify-between text-xs"
-                    >
-                      <div className="flex items-center gap-2 truncate pr-2">
-                        {isDone ? (
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#1E6B4F] shrink-0" />
-                        ) : (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#D5D1C7] shrink-0" />
-                        )}
-                        <span
-                          className={`truncate ${
-                            lesson.isAvailable
-                              ? 'text-[#1C1917] font-medium'
-                              : 'text-[#9E9B93]'
-                          }`}
-                        >
-                          {lesson.title}
-                        </span>
-                      </div>
-
-                      {lesson.isAvailable ? (
-                        <button
-                          type="button"
-                          onClick={() => onSelectLesson(lesson.id)}
-                          className="text-[11px] font-mono font-bold text-[#D45B34] hover:underline shrink-0 cursor-pointer"
-                        >
-                          {isDone ? 'Review' : 'Start'}
-                        </button>
-                      ) : (
-                        <span className="text-[10px] font-mono text-[#9E9B93] bg-[#F4F2EB] px-1.5 py-0.5 rounded shrink-0">
-                          SOON
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
-
-                {availableLesson && (
-                  <div className="pt-2">
-                    <button
-                      type="button"
-                      onClick={() => onSelectLesson(availableLesson.id)}
-                      className="w-full py-2.5 bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] border border-[#E8E5DD] hover:border-[#D45B34]/30 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
-                    >
-                      <span>Learn {availableLesson.title}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#D45B34]" />
-                    </button>
-                  </div>
-                )}
+              {/* Bottom Baseline Action Button */}
+              <div className="pt-4 mt-4 border-t border-[#E8E5DD]/60">
+                <div className="w-full py-2.5 px-3 rounded-xl bg-[#FAF9F5] group-hover:bg-[#1C1917] text-[#1C1917] group-hover:text-white border border-[#E8E5DD] group-hover:border-[#1C1917] text-xs font-bold transition-all flex items-center justify-between shadow-2xs">
+                  <span>{isDone ? 'Review Module' : availableLesson?.isAvailable ? 'Enter Module' : 'Preview'}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </div>
           );

@@ -3,133 +3,176 @@ import React from 'react';
 interface TopicMiniVisualProps {
   topicId: string;
   className?: string;
+  size?: 'sm' | 'md' | 'lg';
 }
 
-export const TopicMiniVisual: React.FC<TopicMiniVisualProps> = ({ topicId, className = '' }) => {
+export const TopicMiniVisual: React.FC<TopicMiniVisualProps> = ({
+  topicId,
+  className = '',
+  size = 'md',
+}) => {
+  const sizeClasses =
+    size === 'sm'
+      ? 'w-12 h-12'
+      : size === 'lg'
+      ? 'w-24 h-24'
+      : 'w-16 h-16';
+
   switch (topicId) {
     case 'fractions':
-      // Golden Roti / Pizza with 1 slice separated
+      // Golden Roti / Disc with 1/4 slice highlighted
       return (
-        <div className={`w-14 h-14 relative flex items-center justify-center shrink-0 ${className}`}>
-          <svg viewBox="0 0 44 44" className="w-full h-full select-none">
-            <circle cx="22" cy="22" r="18" fill="#F4EFE6" stroke="#D5D1C7" strokeWidth="2" />
+        <div className={`${sizeClasses} relative flex items-center justify-center shrink-0 select-none ${className}`}>
+          <svg viewBox="0 0 60 60" className="w-full h-full drop-shadow-xs">
+            <circle cx="30" cy="30" r="26" fill="#EDE7DD" stroke="#DFD7CB" strokeWidth="2" />
             {/* 3 remaining slices */}
-            <path d="M 22 22 L 22 4 A 18 18 0 0 1 40 22 Z" fill="#E8DDD0" />
-            <path d="M 22 22 L 40 22 A 18 18 0 0 1 22 40 Z" fill="#DECBB9" />
-            <path d="M 22 22 L 22 40 A 18 18 0 0 1 4 22 Z" fill="#E8DDD0" />
-            {/* Highlighted 1/4 slice in Terracotta */}
+            <path d="M 30 30 L 30 4 A 26 26 0 0 1 56 30 Z" fill="#E4DCD0" />
+            <path d="M 30 30 L 56 30 A 26 26 0 0 1 30 56 Z" fill="#DBD3C5" />
+            <path d="M 30 30 L 30 56 A 26 26 0 0 1 4 30 Z" fill="#E4DCD0" />
+            {/* Highlighted 1/4 slice in Terracotta with separation */}
             <path
-              d="M 22 22 L 4 22 A 18 18 0 0 1 22 4 Z"
+              d="M 30 30 L 4 30 A 26 26 0 0 1 30 4 Z"
               fill="#D45B34"
               stroke="#FAF9F5"
-              strokeWidth="1.5"
+              strokeWidth="2"
             />
-            {/* Center dot */}
-            <circle cx="22" cy="22" r="2.5" fill="#1C1917" />
+            {/* Center brass pivot */}
+            <circle cx="30" cy="30" r="3.5" fill="#1C1917" stroke="#FAF9F5" strokeWidth="1" />
           </svg>
-          <span className="absolute bottom-0 right-0 bg-[#1C1917] text-white font-mono text-[9px] px-1 rounded font-bold">
+          <span className="absolute bottom-0 right-0 bg-[#1C1917] text-white font-mono text-[10px] px-1.5 py-0.2 rounded-md font-bold shadow-xs">
             ¼
           </span>
         </div>
       );
 
     case 'decimals':
-      // 10-block bar with ₹0.50 (half) filled
+      // 10-block base-10 unit bar with 0.50 filled
       return (
-        <div className={`w-14 h-14 relative flex flex-col items-center justify-center shrink-0 p-1 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl ${className}`}>
-          <div className="grid grid-cols-5 gap-0.5 w-full">
-            {[...Array(10)].map((_, i) => (
-              <div
-                key={i}
-                className={`h-3 rounded-xs ${i < 5 ? 'bg-[#D45B34]' : 'bg-[#E8E5DD]'}`}
-              />
-            ))}
+        <div className={`${sizeClasses} relative flex flex-col items-center justify-center shrink-0 p-1.5 select-none ${className}`}>
+          <div className="w-full bg-[#EDE7DD] p-1 rounded-lg border border-[#DFD7CB]">
+            <div className="grid grid-cols-5 gap-1">
+              {[...Array(10)].map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-3.5 rounded-xs transition-colors ${
+                    i < 5 ? 'bg-[#D45B34]' : 'bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-          <span className="font-mono text-[10px] font-bold text-[#1C1917] mt-1">
-            0.50 (50p)
+          <span className="font-mono text-[10px] font-bold text-[#1C1917] mt-1 bg-white px-1.5 py-0.2 rounded border border-[#E8E5DD] shadow-2xs">
+            0.50
           </span>
         </div>
       );
 
     case 'percentages':
-      // Phone battery charge meter
+      // Phone battery charge meter (75%)
       return (
-        <div className={`w-14 h-14 relative flex flex-col items-center justify-center shrink-0 p-1.5 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl ${className}`}>
-          <div className="w-9 h-5 border-2 border-[#1C1917] rounded-sm p-0.5 relative flex items-center">
-            <div className="h-full bg-[#1E6B4F] rounded-xs" style={{ width: '75%' }} />
-            <div className="absolute -right-1.5 top-1.5 w-1 h-2 bg-[#1C1917] rounded-r-xs" />
+        <div className={`${sizeClasses} relative flex flex-col items-center justify-center shrink-0 p-1.5 select-none ${className}`}>
+          <div className="w-12 h-6 border-2 border-[#1C1917] rounded-md p-0.5 relative flex items-center bg-[#EDE7DD]">
+            <div className="h-full bg-[#1E6B4F] rounded-xs shadow-xs" style={{ width: '75%' }} />
+            <div className="absolute -right-2 top-1.5 w-1.5 h-2.5 bg-[#1C1917] rounded-r-xs" />
           </div>
-          <span className="font-mono text-[10px] font-bold text-[#1E6B4F] mt-1">
+          <span className="font-mono text-[10px] font-bold text-[#1E6B4F] mt-1 bg-white px-1.5 py-0.2 rounded border border-[#E8E5DD] shadow-2xs">
             75%
           </span>
         </div>
       );
 
     case 'numbers':
-      // Lift shaft with 0 ground and -1, -2 basement
+      // Elevator depth shaft (passing ground 0 to -2 basement)
       return (
-        <div className={`w-14 h-14 relative flex flex-col items-center justify-center shrink-0 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-1 font-mono text-[9px] ${className}`}>
-          <div className="text-[#6B6861]">+1 Floor</div>
-          <div className="w-full h-0.5 bg-[#1C1917] my-0.5 relative">
-            <span className="absolute -top-2 right-0 text-[8px] text-[#9E9B93]">0</span>
+        <div className={`${sizeClasses} relative flex flex-col items-center justify-center shrink-0 p-1 font-mono select-none ${className}`}>
+          <div className="w-12 bg-[#EDE7DD] rounded-lg p-1 border border-[#DFD7CB] flex flex-col items-center text-[9px]">
+            <span className="text-[#6B6861] font-bold text-[8px]">+1</span>
+            <div className="w-full h-0.5 bg-[#1C1917] my-0.5 relative">
+              <span className="absolute -top-1.5 right-0 text-[7px] text-[#1C1917] font-bold">0</span>
+            </div>
+            <span className="text-[#D45B34] font-bold text-[9px] bg-white px-1 rounded shadow-2xs">
+              -2
+            </span>
           </div>
-          <div className="text-[#D45B34] font-bold bg-[#FDF4F0] px-1 rounded">-2 Basement</div>
         </div>
       );
 
     case 'arithmetic':
-      // 3 x 3 dot grid array
+      // 3 x 3 dot array grid
       return (
-        <div className={`w-14 h-14 relative flex flex-col items-center justify-center shrink-0 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-2 ${className}`}>
-          <div className="grid grid-cols-3 gap-1.5">
-            {[...Array(9)].map((_, i) => (
-              <div key={i} className="w-2 h-2 rounded-full bg-[#D45B34]" />
-            ))}
+        <div className={`${sizeClasses} relative flex flex-col items-center justify-center shrink-0 p-1.5 select-none ${className}`}>
+          <div className="p-1.5 bg-[#EDE7DD] rounded-lg border border-[#DFD7CB]">
+            <div className="grid grid-cols-3 gap-1.5">
+              {[...Array(9)].map((_, i) => (
+                <div key={i} className="w-2.5 h-2.5 rounded-full bg-[#D45B34] shadow-2xs" />
+              ))}
+            </div>
           </div>
-          <span className="font-mono text-[9px] text-[#6B6861] mt-1 font-bold">
+          <span className="font-mono text-[9px] text-[#1C1917] mt-1 font-bold">
             3 × 3 = 9
           </span>
         </div>
       );
 
     case 'early-algebra':
-      // Balance scale
+      // Precision balance scale
       return (
-        <div className={`w-14 h-14 relative flex items-center justify-center shrink-0 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-1 ${className}`}>
-          <svg viewBox="0 0 40 40" className="w-full h-full select-none">
-            {/* Base stand */}
-            <path d="M 20 12 L 20 32 M 12 32 L 28 32" stroke="#1C1917" strokeWidth="2" strokeLinecap="round" />
-            {/* Beam */}
-            <path d="M 6 15 L 34 15" stroke="#D45B34" strokeWidth="2" strokeLinecap="round" />
-            {/* Left pan with 2 cubes */}
-            <path d="M 8 15 L 12 25 L 4 25 Z" fill="#E8E5DD" stroke="#1C1917" strokeWidth="1" />
-            <rect x="6" y="21" width="4" height="4" fill="#D45B34" />
-            {/* Right pan with x box */}
-            <path d="M 32 15 L 36 25 L 28 25 Z" fill="#E8E5DD" stroke="#1C1917" strokeWidth="1" />
-            <rect x="30" y="21" width="4" height="4" fill="#1C1917" />
+        <div className={`${sizeClasses} relative flex items-center justify-center shrink-0 p-1 select-none ${className}`}>
+          <svg viewBox="0 0 50 50" className="w-full h-full drop-shadow-xs">
+            {/* Stand */}
+            <path d="M 25 15 L 25 42 M 14 42 L 36 42" stroke="#1C1917" strokeWidth="2.5" strokeLinecap="round" />
+            <circle cx="25" cy="15" r="3" fill="#D45B34" />
+            {/* Balance Beam */}
+            <path d="M 8 18 L 42 18" stroke="#1C1917" strokeWidth="2" strokeLinecap="round" />
+            {/* Left Pan */}
+            <path d="M 12 18 L 6 32 L 18 32 Z" fill="#E8E5DD" stroke="#1C1917" strokeWidth="1" />
+            <rect x="9" y="27" width="5" height="5" fill="#D45B34" rx="1" />
+            {/* Right Pan */}
+            <path d="M 38 18 L 32 32 L 44 32 Z" fill="#E8E5DD" stroke="#1C1917" strokeWidth="1" />
+            <rect x="35" y="27" width="5" height="5" fill="#1C1917" rx="1" />
           </svg>
-          <span className="absolute bottom-0 right-1 font-mono text-[8px] font-bold text-[#1C1917]">
+          <span className="absolute bottom-0 right-1 font-mono text-[9px] font-bold text-[#1C1917] bg-white px-1 rounded shadow-2xs">
             =
           </span>
         </div>
       );
 
     case 'ratios':
-      // 2 cups milk : 1 cup water (Chai recipe)
+      // Mixing proportions beakers (2 : 1)
       return (
-        <div className={`w-14 h-14 relative flex items-center justify-center shrink-0 bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-1 ${className}`}>
-          <div className="flex items-end gap-1">
-            <div className="w-3.5 h-7 border border-[#1C1917] rounded-b-sm bg-[#F5EBE1] flex flex-col justify-end">
-              <div className="h-4 bg-[#C2976B] rounded-b-xs" />
+        <div className={`${sizeClasses} relative flex items-center justify-center shrink-0 p-1 select-none ${className}`}>
+          <div className="flex items-end gap-1.5 p-1 bg-[#EDE7DD] rounded-lg border border-[#DFD7CB]">
+            {/* Beaker 1 */}
+            <div className="w-4 h-8 border border-[#1C1917] rounded-b-sm bg-white flex flex-col justify-end overflow-hidden">
+              <div className="h-5 bg-[#D45B34]" />
             </div>
-            <span className="font-mono text-xs text-[#9E9B93] font-bold">:</span>
-            <div className="w-3.5 h-5 border border-[#1C1917] rounded-b-sm bg-[#FAF9F5] flex flex-col justify-end">
-              <div className="h-2 bg-[#7EA4AB] rounded-b-xs" />
+            <span className="font-mono text-xs text-[#1C1917] font-bold pb-1">:</span>
+            {/* Beaker 2 */}
+            <div className="w-4 h-6 border border-[#1C1917] rounded-b-sm bg-white flex flex-col justify-end overflow-hidden">
+              <div className="h-2.5 bg-[#1E6B4F]" />
             </div>
           </div>
-          <span className="absolute bottom-0.5 font-mono text-[8px] text-[#6B6861] font-bold">
-            2 : 1
+          <span className="absolute -bottom-1 font-mono text-[9px] text-[#1C1917] font-bold bg-white px-1 rounded shadow-2xs">
+            2:1
           </span>
+        </div>
+      );
+
+    case 'conversions':
+      // Metric unit ladder (1m = 100cm = 1000mm)
+      return (
+        <div className={`${sizeClasses} relative flex flex-col items-center justify-center shrink-0 p-1 select-none font-mono ${className}`}>
+          <div className="w-full bg-[#EDE7DD] rounded-lg p-1.5 border border-[#DFD7CB] flex flex-col gap-0.5 text-[8px] font-bold">
+            <div className="flex items-center justify-between text-[#1C1917]">
+              <span>1 m</span>
+              <span className="text-[#9E9B93]">×100</span>
+            </div>
+            <div className="w-full h-0.5 bg-[#D45B34]" />
+            <div className="flex items-center justify-between text-[#D45B34]">
+              <span>100 cm</span>
+              <span className="text-[7px]">1000 mm</span>
+            </div>
+          </div>
         </div>
       );
 

@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import { sound } from '../../utils/sound';
 import { Gummy } from '../brand/Gummy';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, RotateCcw } from 'lucide-react';
 
-interface HeroVisualPlaygroundProps {
-  onStartLesson: (lessonId: string) => void;
-}
-
-export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
-  onStartLesson,
-}) => {
+export const HeroVisualPlayground: React.FC = () => {
   const [totalSlices, setTotalSlices] = useState<number>(4);
-  const [selectedCount, setSelectedCount] = useState<number>(1);
+  const [selectedCount, setSelectedCount] = useState<number>(3);
 
   const handleSliceClick = (index: number) => {
     sound.playTap();
-    if (index < selectedCount) {
-      setSelectedCount(Math.max(1, index));
+    if (index + 1 === selectedCount) {
+      setSelectedCount(Math.max(0, index));
     } else {
       setSelectedCount(index + 1);
     }
@@ -26,16 +20,32 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
     sound.playSuccess();
     setTotalSlices(newTotal);
     if (selectedCount > newTotal) {
-      setSelectedCount(1);
+      setSelectedCount(Math.min(selectedCount, newTotal));
     }
   };
 
-  const fractionPercent = Math.round((selectedCount / totalSlices) * 100);
+  const handleReset = () => {
+    sound.playTap();
+    setSelectedCount(1);
+  };
 
-  // Generate SVG Pie Wedges
+  const fractionPercent = Math.round((selectedCount / totalSlices) * 100);
+  const decimalValue = (selectedCount / totalSlices).toFixed(2);
+
+  // Dynamic Gummy speech prompt
+  const getGummySpeech = () => {
+    if (selectedCount === 0) return 'Tap a slice to begin!';
+    if (selectedCount === totalSlices) return 'The full whole disc (100%)!';
+    if (fractionPercent === 50) return 'Exactly half! 50%!';
+    if (fractionPercent === 25) return 'One quarter! 25%!';
+    if (fractionPercent === 75) return 'Three quarters! 75%!';
+    return `${selectedCount} of ${totalSlices} pieces (${fractionPercent}%)!`;
+  };
+
+  // Generate SVG Pie Wedges with precision geometry and tactile styling
   const renderPieSlices = () => {
     const center = 100;
-    const radius = 82;
+    const radius = 80;
     const slices = [];
 
     for (let i = 0; i < totalSlices; i++) {
@@ -60,13 +70,23 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
           key={i}
           d={pathData}
           onClick={() => handleSliceClick(i)}
-          className="cursor-pointer transition-all duration-200 hover:opacity-90"
-          fill={isSelected ? '#D45B34' : '#F5EBE1'}
+          className="cursor-pointer transition-colors duration-150 outline-none"
+          fill={isSelected ? '#D45B34' : '#F7F4EE'}
           stroke="#FAF9F5"
-          strokeWidth="3.5"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          role="button"
+          tabIndex={0}
+          aria-label={`Slice ${i + 1} of ${totalSlices}, ${isSelected ? 'selected' : 'unselected'}`}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              handleSliceClick(i);
+            }
+          }}
           style={{
             transformOrigin: `${center}px ${center}px`,
-            filter: isSelected ? 'drop-shadow(0 2px 4px rgba(212, 91, 52, 0.25))' : 'none',
+            filter: isSelected ? 'drop-shadow(0 2px 6px rgba(212, 91, 52, 0.3))' : 'none',
           }}
         />
       );
@@ -75,107 +95,173 @@ export const HeroVisualPlayground: React.FC<HeroVisualPlaygroundProps> = ({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white border-2 border-[#E8E5DD] rounded-3xl p-5 sm:p-7 shadow-sm text-left my-6 relative overflow-hidden">
-      {/* Top Banner Tag */}
-      <div className="flex items-center justify-between gap-2 mb-4">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FDF4F0] border border-[#F3C3B2] text-xs font-mono font-bold text-[#D45B34]">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>TOUCH &amp; SLICE TO PLAY</span>
+    <div className="workbench-panel p-5 sm:p-7 relative select-none">
+      {/* Workbench Precision Header */}
+      <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#E8E5DD]/80">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#1E6B4F] animate-pulse" />
+          <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1C1917]">
+            Tactile Fraction Disc
+          </span>
+          <span className="text-[#9E9B93] text-xs">•</span>
+          <span className="text-[11px] font-mono text-[#6B6861] hidden sm:inline">
+            Interactive Manipulative
+          </span>
         </div>
 
-        <span className="text-xs font-mono text-[#9E9B93]">
-          Tap any slice
-        </span>
+        <button
+          type="button"
+          onClick={handleReset}
+          className="text-[11px] font-mono text-[#6B6861] hover:text-[#1C1917] flex items-center gap-1 transition-colors px-2 py-0.5 rounded hover:bg-[#F4F2EB] cursor-pointer"
+          title="Reset to 1 slice"
+        >
+          <RotateCcw className="w-3 h-3 text-[#D45B34]" />
+          <span>Reset</span>
+        </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
-        {/* Visual Interactive Disc / Plate */}
-        <div className="sm:col-span-6 flex flex-col items-center justify-center">
-          <div className="relative w-48 h-48 sm:w-52 sm:h-52 bg-[#F4F2EB] rounded-full p-2.5 border-4 border-[#E8E5DD] shadow-inner flex items-center justify-center">
-            <svg viewBox="0 0 200 200" className="w-full h-full select-none">
+      {/* Main Workbench Layout: Disc + Triple Lens */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+        {/* Interactive Disc & Rotary Slices Selector */}
+        <div className="md:col-span-6 flex flex-col items-center">
+          <div className="relative w-52 h-52 sm:w-56 sm:h-56 rounded-full bg-[#EDE8DE] p-3 border-2 border-[#DFD9CD] shadow-inner flex items-center justify-center">
+            {/* Degree Marks Background */}
+            <svg viewBox="0 0 200 200" className="w-full h-full">
+              {/* Outer calibration ring */}
+              <circle
+                cx="100"
+                cy="100"
+                r="92"
+                fill="none"
+                stroke="#D5D0C3"
+                strokeWidth="1"
+                strokeDasharray="2 6"
+              />
               {renderPieSlices()}
+              {/* Center brass pivot */}
+              <circle cx="100" cy="100" r="8" fill="#1C1917" stroke="#FAF9F5" strokeWidth="2.5" />
             </svg>
-
-            {/* Center Pin */}
-            <div className="absolute w-4 h-4 bg-[#1C1917] rounded-full border-2 border-white pointer-events-none shadow-xs" />
           </div>
 
-          <div className="flex items-center gap-2 mt-3 text-xs font-mono text-[#6B6861]">
-            <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#D45B34]" />
-            <span>
-              {selectedCount} of {totalSlices} slices selected
-            </span>
+          {/* Slices Presets: Physical Tactile Buttons */}
+          <div className="mt-4 w-full">
+            <div className="flex items-center justify-between mb-1.5 px-1">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[#9E9B93] font-bold">
+                Cut Equal Pieces:
+              </span>
+              <span className="text-[10px] font-mono text-[#D45B34] font-semibold">
+                {totalSlices} equal wedges
+              </span>
+            </div>
+            <div className="grid grid-cols-5 gap-1.5 bg-[#EDE8DE]/60 p-1 rounded-xl border border-[#DFD9CD]">
+              {[2, 3, 4, 6, 8].map((num) => (
+                <button
+                  key={num}
+                  type="button"
+                  onClick={() => handleTotalChange(num)}
+                  className={`py-1.5 text-center rounded-lg font-mono text-xs font-bold transition-all cursor-pointer ${
+                    totalSlices === num
+                      ? 'bg-[#1C1917] text-white shadow-xs'
+                      : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-white/60'
+                  }`}
+                >
+                  {num}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Clear Math Intuition Display */}
-        <div className="sm:col-span-6 space-y-4">
-          {/* Fraction Breakdown Box */}
-          <div className="p-4 rounded-2xl bg-[#FAF9F5] border border-[#E8E5DD]">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#9E9B93] block font-bold">
+        {/* Triple Lens Equivalence Meter */}
+        <div className="md:col-span-6 flex flex-col justify-between space-y-4">
+          <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-2xl p-4 space-y-3">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-[#9E9B93] font-bold">
+                Triple Equivalence
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#D45B34]">
+                <Sparkles className="w-3 h-3" />
+                Same Concept
+              </span>
+            </div>
+
+            {/* 3 Unified Baseline Lenses */}
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              {/* Fraction */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
+                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
                   Fraction
                 </span>
-                <div className="flex items-center gap-3 mt-1">
-                  <div className="flex flex-col items-center justify-center font-bold text-2xl text-[#1C1917]">
-                    <span className="text-[#D45B34]">{selectedCount}</span>
-                    <span className="w-8 h-0.5 bg-[#1C1917] my-0.5" />
-                    <span>{totalSlices}</span>
-                  </div>
-                  <div className="text-xs text-[#6B6861] leading-tight">
-                    <p className="font-semibold text-[#1C1917]">
-                      {selectedCount} out of {totalSlices} pieces
-                    </p>
-                    <p className="font-mono text-[11px] text-[#9E9B93] mt-0.5">
-                      = {fractionPercent}% of the whole
-                    </p>
-                  </div>
+                <div className="flex flex-col items-center justify-center my-auto">
+                  <span className="font-mono font-bold text-xl text-[#D45B34] leading-none">
+                    {selectedCount}
+                  </span>
+                  <span className="w-5 h-0.5 bg-[#1C1917] my-1" />
+                  <span className="font-mono font-bold text-xl text-[#1C1917] leading-none">
+                    {totalSlices}
+                  </span>
                 </div>
+                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                  pieces
+                </span>
               </div>
 
-              {/* Gummy Reaction */}
-              <div className="shrink-0 flex flex-col items-center">
-                <Gummy
-                  size="sm"
-                  color="terracotta"
-                  speechText={`${selectedCount}/${totalSlices} slice!`}
+              {/* Decimal */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
+                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
+                  Decimal
+                </span>
+                <div className="my-auto">
+                  <span className="font-mono font-bold text-xl text-[#1C1917]">
+                    {decimalValue}
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                  base 1.0
+                </span>
+              </div>
+
+              {/* Percentage */}
+              <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
+                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
+                  Percent
+                </span>
+                <div className="my-auto">
+                  <span className="font-mono font-bold text-xl text-[#1E6B4F]">
+                    {fractionPercent}%
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                  per 100
+                </span>
+              </div>
+            </div>
+
+            {/* Visual Bar Indicator */}
+            <div className="pt-1">
+              <div className="w-full h-2 rounded-full bg-[#E8E5DD] overflow-hidden">
+                <div
+                  className="h-full bg-[#D45B34] transition-all duration-300 rounded-full"
+                  style={{ width: `${fractionPercent}%` }}
                 />
               </div>
             </div>
           </div>
 
-          {/* Slices Preset Selector (Big Tap Buttons) */}
-          <div>
-            <label className="text-[11px] font-mono uppercase text-[#9E9B93] block mb-2 font-bold">
-              How many equal pieces?
-            </label>
-            <div className="grid grid-cols-4 gap-2">
-              {[2, 3, 4, 6].map((num) => (
-                <button
-                  key={num}
-                  type="button"
-                  onClick={() => handleTotalChange(num)}
-                  className={`py-2 px-1 text-center rounded-xl font-mono text-xs font-bold transition-all cursor-pointer border ${
-                    totalSlices === num
-                      ? 'bg-[#1C1917] text-white border-[#1C1917] shadow-xs scale-102'
-                      : 'bg-white text-[#1C1917] border-[#E8E5DD] hover:bg-[#FAF9F5]'
-                  }`}
-                >
-                  {num} pcs
-                </button>
-              ))}
+          {/* Gummy Reaction Box */}
+          <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#FFFDF9] border border-[#F3C3B2]/60">
+            <Gummy
+              size="sm"
+              color="terracotta"
+              className="shrink-0"
+            />
+            <div className="text-xs">
+              <span className="font-bold text-[#1C1917] block">Gummy Guide</span>
+              <p className="text-[#6B6861] leading-snug">
+                {getGummySpeech()}
+              </p>
             </div>
           </div>
-
-          {/* Jump to Full Lesson Button */}
-          <button
-            type="button"
-            onClick={() => onStartLesson('fractions-what-is-a-fraction')}
-            className="w-full py-2.5 px-4 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-medium text-xs sm:text-sm transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-          >
-            <span>Learn All About Fractions ▶</span>
-          </button>
         </div>
       </div>
     </div>
