@@ -145,7 +145,7 @@ export const ArrayMultiplier: React.FC<ArrayMultiplierProps> = ({
           <div className="flex items-center gap-2 text-xs text-[#6B6861] pt-1">
             <Sparkles className="w-4 h-4 text-[#D45B34] shrink-0" />
             <span>
-              Multiplication is not magic tables — it is simply an <strong>area grid</strong>. Counting {rows} rows of {cols} gives exactly the same total as counting {cols} columns of {rows}!
+              Multiplication is not magic tables: it is simply an <strong>area grid</strong>. Counting {rows} rows of {cols} gives exactly the same total as counting {cols} columns of {rows}!
             </span>
           </div>
         </div>

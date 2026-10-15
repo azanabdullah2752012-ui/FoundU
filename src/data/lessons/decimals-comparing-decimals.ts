@@ -64,7 +64,7 @@ export const decimalsComparingDecimalsLesson: LessonData = {
     instructions: 'Tap columns and squares on the grid to change the shaded value. Notice how the visual comparison against 0.35 (35 squares) behaves.',
     keyInsights: [
       'The tenths digit is 10 times larger than the hundredths digit',
-      '0.4 is identical to 0.40 — appending zeros to the right does not change the amount',
+      '0.4 is identical to 0.40: appending zeros to the right does not change the amount',
       'Always compare the largest place value (tenths) first',
     ],
   },
@@ -93,7 +93,7 @@ export const decimalsComparingDecimalsLesson: LessonData = {
         { id: 'qdc-2-c', text: 'It becomes 10 times smaller' },
       ],
       correctChoiceId: 'qdc-2-b',
-      explanation: 'Adding a trailing zero at the very end of a decimal (0.5 to 0.50) changes nothing about the shaded area — it just says 50 hundredths instead of 5 tenths.',
+      explanation: 'Adding a trailing zero at the very end of a decimal (0.5 to 0.50) changes nothing about the shaded area: it just says 50 hundredths instead of 5 tenths.',
       hint: 'Think about money: 5 dimes ($0.5) is the exact same amount as 50 pennies ($0.50).',
     },
   ],

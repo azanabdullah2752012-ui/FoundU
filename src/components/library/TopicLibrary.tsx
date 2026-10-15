@@ -96,7 +96,7 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
             placeholder="Search concepts, e.g. fractions, decimals, place value..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E5DD] rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-[#D45B34] text-[#1C1917] placeholder:text-[#9E9B93] shadow-2xs"
+            className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E5DD] rounded-xl text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D45B34] text-[#1C1917] placeholder:text-[#9E9B93] shadow-2xs"
           />
         </div>
 
@@ -131,7 +131,7 @@ export const TopicLibrary: React.FC<TopicLibraryProps> = ({
         {filteredTopics.map((topic) => (
           <section
             key={topic.id}
-            className="card-atelier p-6 sm:p-7 shadow-xs"
+            className="card-workshop p-6 sm:p-7 shadow-xs"
           >
             <div className="flex items-start justify-between gap-4 mb-4 pb-4 border-b border-[#E8E5DD]/70">
               <div className="flex items-center gap-3">

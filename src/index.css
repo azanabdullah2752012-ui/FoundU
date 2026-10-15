@@ -67,8 +67,8 @@
   box-shadow: none;
 }
 
-/* Atelier card elevation: directional shadow with warm tint, soft inner highlight */
-.card-atelier {
+/* Workshop card elevation: directional shadow with warm tint, soft inner highlight */
+.card-workshop {
   background-color: #FFFFFF;
   border: 1px solid #E8E5DD;
   box-shadow: 
@@ -79,7 +79,7 @@
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-atelier:hover {
+.card-workshop:hover {
   border-color: #D5D1C7;
   box-shadow: 
     0 2px 6px rgba(28, 25, 23, 0.04),

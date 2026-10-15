@@ -11,7 +11,7 @@ export const decimalsFractionToDecimalLesson: LessonData = {
     heading: 'Two ways of writing the exact same amount',
     coreDefinition: 'A decimal is simply a fraction whose denominator is 10, 100, or 1000.',
     whyItMatters:
-      'Fractions and decimals are not two different languages—they are two writing styles for the same value. 1/2 is literally 5/10, written as 0.5.',
+      'Fractions and decimals are not two different languages: they are two writing styles for the same value. 1/2 is literally 5/10, written as 0.5.',
     keyTakeaway: 'Scale the fraction denominator to 10 or 100 to read the decimal directly.',
     visualHookType: 'decimal-grid',
   },

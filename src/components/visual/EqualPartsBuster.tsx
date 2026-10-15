@@ -52,20 +52,20 @@ export const EqualPartsBuster: React.FC = () => {
       {/* Visual demonstration */}
       {selectedExample === 'unequal' ? (
         <div className="bg-[#FFFBEB]/60 border border-[#FDE68A] rounded-xl p-4 sm:p-5 animate-in fade-in duration-200">
-          <div className="text-xs font-mono font-bold text-[#92400E] mb-2 uppercase">
-            3 Pieces — But completely unequal:
+          <div className="text-xs font-sans font-bold text-[#92400E] mb-2 uppercase">
+            3 Pieces (unequal sizes):
           </div>
 
           {/* Unequal 3-piece bar */}
           <div className="h-12 w-full flex rounded-lg border border-[#D5D1C7] bg-[#F4F2EB] p-1 gap-1 mb-3">
-            <div className="w-[15%] h-full bg-[#D45B34] text-white rounded flex items-center justify-center font-mono text-[10px] font-semibold">
+            <div className="w-[15%] h-full bg-[#D45B34] text-white rounded flex items-center justify-center font-sans text-[10px] font-semibold">
               Tiny
             </div>
-            <div className="w-[25%] h-full bg-white text-[#9E9B93] rounded flex items-center justify-center font-mono text-[10px]">
+            <div className="w-[25%] h-full bg-white text-[#9E9B93] rounded flex items-center justify-center font-sans text-[10px]">
               Medium
             </div>
-            <div className="w-[60%] h-full bg-white text-[#9E9B93] rounded flex items-center justify-center font-mono text-xs">
-              Huge piece (60%)
+            <div className="w-[60%] h-full bg-white text-[#9E9B93] rounded flex items-center justify-center font-sans text-xs">
+              Huge piece (<span className="font-mono">60%</span>)
             </div>
           </div>
 
@@ -81,8 +81,8 @@ export const EqualPartsBuster: React.FC = () => {
         </div>
       ) : (
         <div className="bg-[#F0F9F5]/70 border border-[#B7E4D3] rounded-xl p-4 sm:p-5 animate-in fade-in duration-200">
-          <div className="text-xs font-mono font-bold text-[#1E6B4F] mb-2 uppercase">
-            3 Pieces — Exactly equal in size:
+          <div className="text-xs font-sans font-bold text-[#1E6B4F] mb-2 uppercase">
+            3 Pieces (equal sizes):
           </div>
 
           {/* Equal 3-piece bar */}

@@ -127,7 +127,7 @@ export const FractionAddition: React.FC<FractionAdditionProps> = ({
       <div className="mt-3 pt-3 border-t border-[#E8E5DD] flex items-center gap-2 text-xs text-[#6B6861]">
         <Sparkles className="w-4 h-4 text-[#D45B34] shrink-0" />
         <span>
-          <strong>Why you never add the bottom numbers:</strong> The denominator only tells you the cut size (e.g. quarters). When you combine 1 quarter and 2 quarters, the pieces don't turn into eighths—you simply have 3 quarters!
+          <strong>Why you never add the bottom numbers:</strong> The denominator only tells you the cut size (e.g. quarters). When you combine 1 quarter and 2 quarters, the pieces don't turn into eighths; you simply have 3 quarters!
         </span>
       </div>
     </div>

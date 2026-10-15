@@ -76,15 +76,15 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
   return (
     <article className="max-w-5xl mx-auto py-4 sm:py-6 animate-in fade-in duration-200">
-      {/* 2-Column Responsive Atelier Workspace */}
+      {/* 2-Column Responsive Workshop Workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Visual Intuition & Editorial Text */}
         <div className="lg:col-span-5 space-y-4">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
+            <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
               STEP 01
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
+            <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
               The Visual Idea
             </span>
           </div>
@@ -95,7 +95,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
           {/* Core Visual Metaphor Story */}
           <div className="bg-white border border-[#E8E5DD] rounded-2xl p-5 shadow-xs space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#D45B34] font-bold">
+            <div className="flex items-center gap-2 text-xs font-sans uppercase tracking-wider text-[#D45B34] font-bold">
               <span>{pedagogy.metaphor.emoji}</span>
               <span>{pedagogy.metaphor.title}</span>
             </div>
@@ -118,7 +118,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
           {/* Brain Trap Card: Always visible by default (no hidden accordion) */}
           <div className="bg-white border border-[#E8E5DD] rounded-2xl p-4 shadow-xs space-y-2">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#D45B34] uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs font-sans font-bold text-[#D45B34] uppercase tracking-wider">
               <span>⚠️ Intuition Trap</span>
             </div>
             <p className="text-xs font-semibold text-[#1C1917] italic">
@@ -136,7 +136,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
             <div className="bg-white border border-[#E8E5DD] rounded-2xl p-5 sm:p-6 shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
-                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#D45B34]">
+                  <div className="flex items-center gap-1.5 text-xs font-sans font-bold uppercase tracking-wider text-[#D45B34]">
                     <Scissors className="w-3.5 h-3.5" />
                     <span>Touch & Cut Manipulative</span>
                   </div>
@@ -147,7 +147,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
                 {/* Slicing Quick Buttons */}
                 <div className="flex items-center gap-1 bg-[#FAF9F5] p-1 rounded-xl border border-[#E8E5DD] self-start sm:self-auto">
-                  <span className="text-[11px] font-mono text-[#9E9B93] px-1">Cuts:</span>
+                  <span className="text-[11px] font-sans font-medium text-[#9E9B93] px-1">Cuts:</span>
                   {[2, 3, 4, 6, 8].map((count) => (
                     <button
                       key={count}
@@ -167,11 +167,11 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
 
               {/* Sliced Bar Container */}
               <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-4 shadow-inner">
-                <div className="flex items-center justify-between text-xs font-mono text-[#6B6861] mb-2">
+                <div className="flex items-center justify-between text-xs font-sans text-[#6B6861] mb-2">
                   <span>
                     Bar cut into {sliceCount} equal pieces
                   </span>
-                  <span className="font-bold text-base text-[#D45B34]">
+                  <span className="font-mono font-bold text-base text-[#D45B34]">
                     {selectedSlices}/{sliceCount}
                   </span>
                 </div>
@@ -202,7 +202,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
               {/* Fraction Meaning Anatomy */}
               <div className="grid grid-cols-2 gap-3 pt-1">
                 <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-3 text-center">
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-[#D45B34] font-bold">
+                  <div className="text-[10px] font-sans uppercase tracking-wider text-[#D45B34] font-bold">
                     Top Number (Numerator)
                   </div>
                   <div className="text-2xl font-black font-mono text-[#D45B34] my-0.5">
@@ -214,7 +214,7 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson }) => {
                 </div>
 
                 <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-xl p-3 text-center">
-                  <div className="text-[10px] font-mono uppercase tracking-wider text-[#1C1917] font-bold">
+                  <div className="text-[10px] font-sans uppercase tracking-wider text-[#1C1917] font-bold">
                     Bottom Number (Denominator)
                   </div>
                   <div className="text-2xl font-black font-mono text-[#1C1917] my-0.5">

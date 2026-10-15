@@ -84,10 +84,10 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
+            <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
               STEP 03
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
+            <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
               Interactive Lab
             </span>
           </div>
@@ -125,7 +125,7 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
                 )}
               </div>
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider font-bold block">
+                <span className="text-[10px] font-sans uppercase tracking-wider font-bold block">
                   {isChallengeSolved ? '✨ Goal Achieved!' : 'Your Goal:'}
                 </span>
                 <p className="text-xs sm:text-sm font-semibold">

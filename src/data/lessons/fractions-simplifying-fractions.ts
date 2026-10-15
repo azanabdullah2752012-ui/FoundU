@@ -11,7 +11,7 @@ export const fractionsSimplifyingFractionsLesson: LessonData = {
     heading: 'Why write 4/8 when you can write 1/2?',
     coreDefinition: 'Simplifying a fraction means grouping smaller equal pieces together into the fewest possible slices.',
     whyItMatters:
-      '4/8 of a pizza and 1/2 of a pizza feed the exact same hunger. Simplifying doesn’t shrink the meal—it just reduces mental clutter.',
+      '4/8 of a pizza and 1/2 of a pizza feed the exact same hunger. Simplifying does not shrink the meal; it just reduces mental clutter.',
     keyTakeaway: 'Divide top and bottom by the same common number until no common factors remain.',
     visualHookType: 'fraction-slice',
   },
@@ -100,7 +100,7 @@ export const fractionsSimplifyingFractionsLesson: LessonData = {
         { id: 'q-simp-2-c', text: 'Yes, you get more pizza' },
       ],
       correctChoiceId: 'q-simp-2-a',
-      explanation: 'Simplifying only groups cuts together—it never changes the total physical amount.',
+      explanation: 'Simplifying only groups cuts together; it never changes the total physical amount.',
       hint: 'Think about eating 2 quarters vs 1 half. Is it the same amount of food?',
     },
   ],

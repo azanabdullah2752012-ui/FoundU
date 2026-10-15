@@ -46,7 +46,7 @@ export const algebraTheBalanceScaleLesson: LessonData = {
       {
         id: 'bal-ex-3',
         title: 'The Golden Rule of Algebra',
-        description: 'You can add, subtract, multiply, or divide anything you want — as long as you do it equally to both sides.',
+        description: 'You can add, subtract, multiply, or divide anything you want, as long as you do it equally to both sides.',
         fractionText: 'Left = Right',
         visual: {
           type: 'balance-scale',

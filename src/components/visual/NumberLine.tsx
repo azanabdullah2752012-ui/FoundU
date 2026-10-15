@@ -95,7 +95,7 @@ export const NumberLine: React.FC<NumberLineProps> = ({
 
       <div className="mt-4 pt-3 border-t border-[#E8E5DD] flex items-center justify-between text-xs text-[#6B6861]">
         <span>
-          <strong>Intuition:</strong> A fraction is not just a slice of food—it has an exact coordinate between whole numbers.
+          <strong>Intuition:</strong> A fraction is not just a slice of food; it has an exact coordinate between whole numbers.
         </span>
       </div>
     </div>

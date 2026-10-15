@@ -58,10 +58,10 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
+            <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
               STEP 02
             </span>
-            <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
+            <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
               Real Examples
             </span>
           </div>
@@ -82,14 +82,14 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
                   sound.playTap();
                   setActiveIdx(idx);
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                   isActive
                     ? 'bg-[#1C1917] text-white shadow-xs'
                     : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-white'
                 }`}
               >
-                <span>0{idx + 1}</span>
-                <span className="font-semibold">{item.fractionText}</span>
+                <span className="font-mono">0{idx + 1}</span>
+                <span className="font-mono font-semibold">{item.fractionText}</span>
               </button>
             );
           })}
@@ -102,7 +102,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
           {/* Left Column: Notation & Intuition */}
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#9E9B93]">
+              <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#9E9B93]">
                 Example {activeIdx + 1} of {items.length}
               </span>
               <div className="flex items-center gap-2">
@@ -142,7 +142,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
                   sound.playTap();
                   setActiveIdx((prev) => prev - 1);
                 }}
-                className="inline-flex items-center gap-1 text-xs font-bold font-mono text-[#6B6861] hover:text-[#1C1917] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1 text-xs font-bold font-sans text-[#6B6861] hover:text-[#1C1917] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Prev example</span>
@@ -172,7 +172,7 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
                   sound.playTap();
                   setActiveIdx((prev) => prev + 1);
                 }}
-                className="inline-flex items-center gap-1 text-xs font-bold font-mono text-[#D45B34] hover:text-[#BC4B26] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
+                className="inline-flex items-center gap-1 text-xs font-bold font-sans text-[#D45B34] hover:text-[#BC4B26] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-colors"
               >
                 <span>Next example</span>
                 <ChevronRight className="w-4 h-4" />

@@ -11,7 +11,7 @@ export const percentagesIntroLesson: LessonData = {
     heading: 'What is a percentage?',
     coreDefinition: 'Percent literally means “per hundred” (from Latin per centum). A percentage is a fraction out of 100.',
     whyItMatters:
-      'Comparing 17 out of 25 with 33 out of 50 is tricky in your head. Converting both into “out of 100” gives them the exact same common ground. 50% simply means 50 out of 100 — exactly one half.',
+      'Comparing 17 out of 25 with 33 out of 50 is tricky in your head. Converting both into “out of 100” gives them the exact same common ground. 50% simply means 50 out of 100: exactly one half.',
     keyTakeaway: 'The percent symbol (%) is just a shorthand label for a denominator of 100.',
   },
   examples: {

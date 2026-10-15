@@ -203,13 +203,13 @@ export const Gummy: React.FC<GummyProps> = ({
         width: dimensions.width,
         height: dimensions.height,
       }}
-      title="Gummy — The Pickle Corp Mascot (Click to poke, double click to backflip!)"
+      title="Gummy, The Pickle Corp Mascot (Click to poke, double click to backflip!)"
       role="img"
       aria-label="Gummy Mascot"
     >
       {/* Optional Speech Bubble */}
       {speechText && (
-        <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#1C1917] border border-[#E8E5DD] px-2 py-0.5 rounded-full text-[10px] font-mono whitespace-nowrap shadow-xs pointer-events-none z-20 animate-in fade-in duration-150">
+        <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#1C1917] border border-[#E8E5DD] px-2 py-0.5 rounded-full text-[10px] font-sans font-medium whitespace-nowrap shadow-xs pointer-events-none z-20 animate-in fade-in duration-150">
           {speechText}
           <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white border-r border-b border-[#E8E5DD] rotate-45" />
         </div>

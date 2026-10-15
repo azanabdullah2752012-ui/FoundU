@@ -28,15 +28,15 @@ export const ContinueLearning: React.FC<ContinueLearningProps> = ({
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 mb-12">
-      <div className="card-atelier p-5 sm:p-6 bg-gradient-to-r from-white via-[#FAF9F5] to-white border border-[#E4E0D5] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="card-workshop p-5 sm:p-6 bg-gradient-to-r from-white via-[#FAF9F5] to-white border border-[#E4E0D5] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="space-y-1.5">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#D45B34]" />
-            <span className="text-xs font-mono font-bold text-[#D45B34] uppercase tracking-wider">
+            <span className="text-xs font-sans font-bold text-[#D45B34] uppercase tracking-wider">
               {inProgressLesson.topicTitle}
             </span>
             <span className="text-[#9E9B93] text-xs">•</span>
-            <span className="text-xs font-mono text-[#6B6861] bg-[#F4F2EB] px-2.5 py-0.5 rounded-full border border-[#E8E5DD]">
+            <span className="text-xs font-sans text-[#6B6861] bg-[#F4F2EB] px-2.5 py-0.5 rounded-full border border-[#E8E5DD]">
               {stageLabels[currentStage] || 'In progress'}
             </span>
             {isCompleted && (

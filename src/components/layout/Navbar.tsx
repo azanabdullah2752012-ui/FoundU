@@ -56,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           type="button"
           onClick={onNavigateHome}
-          className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
+          className="flex items-center gap-3 text-left group focus-visible:ring-2 focus-visible:ring-[#D45B34] focus-visible:ring-offset-2 rounded-xl cursor-pointer"
           aria-label="Foundu home"
         >
           {/* Blue Flame Torch Icon */}
@@ -69,11 +69,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="font-extrabold text-lg tracking-tight text-[#1C1917] group-hover:text-[#D45B34] transition-colors leading-none">
                 FOUNDU
               </span>
-              <span className="text-[10px] font-mono font-bold text-[#D45B34] bg-[#FDF4F0] px-1.5 py-0.2 rounded border border-[#F3C3B2]/50">
-                ATELIER
+              <span className="text-[10px] font-sans font-bold text-[#D45B34] bg-[#FDF4F0] px-1.5 py-0.2 rounded border border-[#F3C3B2]/50 tracking-wider">
+                LAB
               </span>
             </div>
-            <span className="text-[10px] font-mono tracking-wider text-[#9E9B93] mt-0.5">
+            <span className="text-[10px] font-sans font-medium tracking-wider text-[#9E9B93] mt-0.5">
               Pickle Corp™
             </span>
           </div>

@@ -41,7 +41,7 @@ export const arithmeticMultiplicationAsArraysLesson: LessonData = {
           arrayGrid: { rows: 4, cols: 3 },
           label: '4 rows of 3 = 12',
         },
-        insight: 'The total number of tiles didn’t change at all — only your perspective rotated.',
+        insight: 'The total number of tiles did not change at all: only your perspective rotated.',
       },
       {
         id: 'arr-ex-3',

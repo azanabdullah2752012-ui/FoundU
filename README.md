@@ -40,7 +40,7 @@ Foundu is a calm, modern web learning platform designed to help students and sel
   - ⚖️ **Early Algebra**: Equations as balance scales, What is a variable?
   - 📊 **Ratios**: What ratios represent, Equivalent ratios & scaling, Solving proportions.
   - 🔄 **Conversions**: The metric ladder, Time & rates.
-- **Seamless Local Persistence**: Progress, active lesson stages, and submitted answers are saved locally via `localStorage`—no login required.
+- **Seamless Local Persistence**: Progress, active lesson stages, and submitted answers are saved locally via `localStorage`: no login required.
 - **⚡ Keyboard Shortcuts for Speed**:
   - **Visual Lab & Manipulatives**: `1`-`8` (Select cuts/slices), `Enter ↵` / `N` (Advance Stage), `P` (Previous Stage), `R` (Reset tool).
   - **Speed Practice**: `1`-`4` (Select answer choice), `Enter ↵` (Submit / Next Question), `R` (Retry), `P` (Previous Question).

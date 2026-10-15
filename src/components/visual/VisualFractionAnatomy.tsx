@@ -8,14 +8,14 @@ export const VisualFractionAnatomy: React.FC = () => {
   return (
     <div className="w-full bg-white border border-[#E8E5DD] rounded-2xl p-5 sm:p-7 shadow-xs select-none">
       <div className="text-center mb-6">
-        <span className="text-xs font-mono font-bold text-[#D45B34] uppercase tracking-wider bg-[#FDF4F0] border border-[#F3C3B2] px-2.5 py-1 rounded-full">
+        <span className="text-xs font-sans font-bold text-[#D45B34] uppercase tracking-wider bg-[#FDF4F0] border border-[#F3C3B2] px-2.5 py-1 rounded-full">
           Universal Visual Guide
         </span>
         <h3 className="text-xl sm:text-2xl font-bold text-[#1C1917] mt-2">
           What the Two Numbers Mean
         </h3>
         <p className="text-xs sm:text-sm text-[#6B6861] mt-1">
-          No English required—look at the colors and symbols.
+          No English required: look at the colors and symbols.
         </p>
       </div>
 
@@ -26,7 +26,7 @@ export const VisualFractionAnatomy: React.FC = () => {
           {/* Top: Numerator Callout */}
           <div className="flex items-center gap-2 text-[#D45B34] animate-bounce">
             <Hand className="w-4 h-4" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider">
+            <span className="text-xs font-sans font-bold uppercase tracking-wider">
               Parts you have
             </span>
           </div>
@@ -45,7 +45,7 @@ export const VisualFractionAnatomy: React.FC = () => {
           {/* Bottom: Denominator Callout */}
           <div className="flex items-center gap-2 text-[#6B6861]">
             <Grid className="w-4 h-4" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider">
+            <span className="text-xs font-sans font-bold uppercase tracking-wider">
               Total equal cuts
             </span>
           </div>
@@ -54,7 +54,7 @@ export const VisualFractionAnatomy: React.FC = () => {
         {/* Right: Direct Physical Representation */}
         <div className="md:col-span-7 flex flex-col justify-center space-y-4">
           <div>
-            <div className="flex items-center justify-between text-xs font-mono text-[#6B6861] mb-1.5">
+            <div className="flex items-center justify-between text-xs font-sans text-[#6B6861] mb-1.5">
               <span>Physical Bar:</span>
               <span className="font-bold text-[#D45B34]">
                 {numerator} of {denominator} pieces colored
@@ -92,7 +92,7 @@ export const VisualFractionAnatomy: React.FC = () => {
 
           {/* Quick Denominator Buttons */}
           <div className="flex items-center gap-1.5 overflow-x-auto pt-1">
-            <span className="text-xs font-medium text-[#1C1917] shrink-0 font-mono">
+            <span className="text-xs font-medium text-[#1C1917] shrink-0 font-sans">
               Cut into:
             </span>
             {[2, 3, 4, 5, 6].map((d) => (
@@ -103,7 +103,7 @@ export const VisualFractionAnatomy: React.FC = () => {
                   setDenominator(d);
                   if (numerator > d) setNumerator(d);
                 }}
-                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition-all ${
+                className={`px-2.5 py-1 rounded-lg text-xs font-sans font-bold transition-all ${
                   denominator === d
                     ? 'bg-[#1C1917] text-white shadow-xs'
                     : 'bg-white border border-[#E8E5DD] text-[#6B6861] hover:text-[#1C1917]'
@@ -123,7 +123,7 @@ export const VisualFractionAnatomy: React.FC = () => {
             ▲
           </div>
           <div>
-            <div className="font-bold uppercase font-mono">Top Number (Numerator)</div>
+            <div className="font-bold uppercase font-sans">Top Number (Numerator)</div>
             <div className="text-[#1C1917] text-xs">
               Counts how many colored pieces you are holding.
             </div>
@@ -135,7 +135,7 @@ export const VisualFractionAnatomy: React.FC = () => {
             ▼
           </div>
           <div>
-            <div className="font-bold uppercase font-mono text-[#6B6861]">Bottom Number (Denominator)</div>
+            <div className="font-bold uppercase font-sans text-[#6B6861]">Bottom Number (Denominator)</div>
             <div className="text-[#1C1917] text-xs">
               Counts how many total equal cuts divide the whole.
             </div>

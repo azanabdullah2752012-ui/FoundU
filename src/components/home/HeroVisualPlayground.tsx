@@ -70,7 +70,7 @@ export const HeroVisualPlayground: React.FC = () => {
           key={i}
           d={pathData}
           onClick={() => handleSliceClick(i)}
-          className="cursor-pointer transition-colors duration-150 outline-none"
+          className="cursor-pointer transition-colors duration-150 focus:outline-none focus-visible:stroke-[#D45B34] focus-visible:stroke-[4]"
           fill={isSelected ? '#D45B34' : '#F7F4EE'}
           stroke="#FAF9F5"
           strokeWidth="3"
@@ -100,11 +100,11 @@ export const HeroVisualPlayground: React.FC = () => {
       <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#E8E5DD]/80">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-[#1E6B4F] animate-pulse" />
-          <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1C1917]">
+          <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#1C1917]">
             Tactile Fraction Disc
           </span>
           <span className="text-[#9E9B93] text-xs">•</span>
-          <span className="text-[11px] font-mono text-[#6B6861] hidden sm:inline">
+          <span className="text-[11px] font-sans text-[#6B6861] hidden sm:inline">
             Interactive Manipulative
           </span>
         </div>
@@ -112,7 +112,7 @@ export const HeroVisualPlayground: React.FC = () => {
         <button
           type="button"
           onClick={handleReset}
-          className="text-[11px] font-mono text-[#6B6861] hover:text-[#1C1917] flex items-center gap-1 transition-colors px-2 py-0.5 rounded hover:bg-[#F4F2EB] cursor-pointer"
+          className="text-[11px] font-sans font-medium text-[#6B6861] hover:text-[#1C1917] flex items-center gap-1 transition-colors px-2 py-0.5 rounded hover:bg-[#F4F2EB] cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
           title="Reset to 1 slice"
         >
           <RotateCcw className="w-3 h-3 text-[#D45B34]" />
@@ -146,10 +146,10 @@ export const HeroVisualPlayground: React.FC = () => {
           {/* Slices Presets: Physical Tactile Buttons */}
           <div className="mt-4 w-full">
             <div className="flex items-center justify-between mb-1.5 px-1">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[#9E9B93] font-bold">
+              <span className="text-[10px] font-sans uppercase tracking-wider text-[#9E9B93] font-bold">
                 Cut Equal Pieces:
               </span>
-              <span className="text-[10px] font-mono text-[#D45B34] font-semibold">
+              <span className="text-[10px] font-sans text-[#D45B34] font-semibold">
                 {totalSlices} equal wedges
               </span>
             </div>
@@ -159,7 +159,7 @@ export const HeroVisualPlayground: React.FC = () => {
                   key={num}
                   type="button"
                   onClick={() => handleTotalChange(num)}
-                  className={`py-1.5 text-center rounded-lg font-mono text-xs font-bold transition-all cursor-pointer ${
+                  className={`py-1.5 text-center rounded-lg font-mono text-xs font-bold transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34] ${
                     totalSlices === num
                       ? 'bg-[#1C1917] text-white shadow-xs'
                       : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-white/60'
@@ -176,10 +176,10 @@ export const HeroVisualPlayground: React.FC = () => {
         <div className="md:col-span-6 flex flex-col justify-between space-y-4">
           <div className="bg-[#FAF9F5] border border-[#E8E5DD] rounded-2xl p-4 space-y-3">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[#9E9B93] font-bold">
+              <span className="font-sans text-[10px] uppercase tracking-wider text-[#9E9B93] font-bold">
                 Triple Equivalence
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#D45B34]">
+              <span className="inline-flex items-center gap-1 text-[11px] font-sans text-[#D45B34] font-semibold">
                 <Sparkles className="w-3 h-3" />
                 Same Concept
               </span>
@@ -189,7 +189,7 @@ export const HeroVisualPlayground: React.FC = () => {
             <div className="grid grid-cols-3 gap-2 pt-1">
               {/* Fraction */}
               <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
-                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
+                <span className="text-[10px] font-sans text-[#9E9B93] uppercase font-bold block mb-1">
                   Fraction
                 </span>
                 <div className="flex flex-col items-center justify-center my-auto">
@@ -201,14 +201,14 @@ export const HeroVisualPlayground: React.FC = () => {
                     {totalSlices}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                <span className="text-[10px] font-sans text-[#6B6861] mt-1 block">
                   pieces
                 </span>
               </div>
 
               {/* Decimal */}
               <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
-                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
+                <span className="text-[10px] font-sans text-[#9E9B93] uppercase font-bold block mb-1">
                   Decimal
                 </span>
                 <div className="my-auto">
@@ -216,14 +216,14 @@ export const HeroVisualPlayground: React.FC = () => {
                     {decimalValue}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                <span className="text-[10px] font-sans text-[#6B6861] mt-1 block">
                   base 1.0
                 </span>
               </div>
 
               {/* Percentage */}
               <div className="p-2.5 rounded-xl bg-white border border-[#E8E5DD] text-center flex flex-col justify-between">
-                <span className="text-[10px] font-mono text-[#9E9B93] uppercase font-bold block mb-1">
+                <span className="text-[10px] font-sans text-[#9E9B93] uppercase font-bold block mb-1">
                   Percent
                 </span>
                 <div className="my-auto">
@@ -231,7 +231,7 @@ export const HeroVisualPlayground: React.FC = () => {
                     {fractionPercent}%
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#6B6861] mt-1 block">
+                <span className="text-[10px] font-sans text-[#6B6861] mt-1 block">
                   per 100
                 </span>
               </div>

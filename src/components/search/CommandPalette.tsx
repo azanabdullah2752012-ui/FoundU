@@ -84,7 +84,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               id: `trap-${lesson.id}`,
               lessonId: lesson.id,
               title: pedagogy.brainTrap.title,
-              subtitle: `Trap: "${pedagogy.brainTrap.trapStatement}" — ${pedagogy.brainTrap.whyItTricksUs}`,
+              subtitle: `Trap: "${pedagogy.brainTrap.trapStatement}". ${pedagogy.brainTrap.whyItTricksUs}`,
               category: 'trap',
               categoryLabel: 'Brain Trap',
               topicTitle: topic.title,

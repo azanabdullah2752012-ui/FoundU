@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
                 onClick={() => {
                   if (typeof navigator !== 'undefined' && navigator.share) {
                     navigator.share({
-                      title: 'FoundU — Understand the basics',
+                      title: 'FoundU: Understand the basics',
                       text: 'Visual, tactile math & science foundations with zero jargon by Pickle Corp.',
                       url: window.location.href,
                     }).catch(() => {});

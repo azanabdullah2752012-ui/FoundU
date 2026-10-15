@@ -157,10 +157,10 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
       {/* Stage Badge & Step Indicator */}
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
+          <span className="font-sans text-xs font-bold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
             STEP 04
           </span>
-          <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
+          <span className="text-xs font-sans uppercase tracking-wider text-[#9E9B93] font-semibold">
             Intuition Check
           </span>
         </div>
@@ -346,7 +346,7 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
                   <div className="space-y-2">
                     <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#92400E]">
                       <HelpCircle className="w-4 h-4" />
-                      <span>Almost — take another look:</span>
+                      <span>Almost! Take another look:</span>
                     </div>
 
                     <p className="text-xs text-[#1C1917] leading-relaxed">

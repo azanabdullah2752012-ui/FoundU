@@ -7,7 +7,7 @@ export const PhilosophySection: React.FC = () => {
     <section className="max-w-5xl mx-auto px-4 sm:px-6 py-14 sm:py-20 border-t border-[#E8E5DD]">
       {/* Section Header */}
       <div className="text-center max-w-2xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D45B34] font-bold mb-2">
+        <div className="inline-flex items-center gap-1.5 text-xs font-sans uppercase tracking-wider text-[#D45B34] font-bold mb-2">
           <Sparkles className="w-3.5 h-3.5" />
           <span>The FoundU Philosophy</span>
         </div>
@@ -25,10 +25,10 @@ export const PhilosophySection: React.FC = () => {
         <div className="rounded-3xl bg-[#1C1917] text-white p-7 sm:p-8 flex flex-col justify-between shadow-md">
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-              <span className="font-mono text-xs uppercase tracking-wider text-[#F3C3B2] font-bold">
+              <span className="font-sans text-xs uppercase tracking-wider text-[#F3C3B2] font-bold">
                 The School Method
               </span>
-              <span className="text-xs font-mono text-white/50">Abstract Rules</span>
+              <span className="text-xs font-sans text-white/60 font-medium">Abstract Rules</span>
             </div>
 
             <h3 className="text-xl font-bold mb-3 text-white">
@@ -60,7 +60,7 @@ export const PhilosophySection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="pt-6 mt-6 border-t border-white/10 text-[11px] font-mono text-white/50">
+          <div className="pt-6 mt-6 border-t border-white/10 text-xs font-sans text-white/60">
             Outcome: Forgotten within days of the exam.
           </div>
         </div>
@@ -69,10 +69,10 @@ export const PhilosophySection: React.FC = () => {
         <div className="rounded-3xl bg-white border-2 border-[#D45B34]/30 p-7 sm:p-8 flex flex-col justify-between shadow-sm">
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-[#E8E5DD] mb-5">
-              <span className="font-mono text-xs uppercase tracking-wider text-[#D45B34] font-bold">
+              <span className="font-sans text-xs uppercase tracking-wider text-[#D45B34] font-bold">
                 The FoundU Way
               </span>
-              <span className="text-xs font-mono text-[#1E6B4F] font-bold">Physical Intuition</span>
+              <span className="text-xs font-sans text-[#1E6B4F] font-bold">Physical Intuition</span>
             </div>
 
             <h3 className="text-xl font-bold mb-3 text-[#1C1917]">
@@ -104,7 +104,7 @@ export const PhilosophySection: React.FC = () => {
             </ul>
           </div>
 
-          <div className="pt-6 mt-6 border-t border-[#E8E5DD] text-[11px] font-mono text-[#D45B34] font-bold">
+          <div className="pt-6 mt-6 border-t border-[#E8E5DD] text-xs font-sans text-[#D45B34] font-bold">
             Outcome: Permanent intuition that never leaves you.
           </div>
         </div>
@@ -119,7 +119,7 @@ export const PhilosophySection: React.FC = () => {
             <span className="text-[11px] text-[#6B6861]">Dedicated to dignity, craftsmanship, and human clarity.</span>
           </div>
         </div>
-        <span className="text-xs font-mono text-[#9E9B93]">Always Free &bull; Open Web</span>
+        <span className="text-xs font-sans text-[#9E9B93] font-medium">Always Free &bull; Open Web</span>
       </div>
     </section>
   );

@@ -63,7 +63,7 @@ export const numbersNegativeNumbersLesson: LessonData = {
     interactiveType: 'thermometer',
     instructions: 'Click the step buttons or click any tick on the continuum to move the marker above and below zero.',
     keyInsights: [
-      'Zero is the origin line — not nothingness, but the benchmark anchor',
+      'Zero is the origin line: not nothingness, but the benchmark anchor',
       'Negative numbers live to the left of zero (or below zero vertically)',
       'Further right on the line always means larger value: -1 is larger than -10',
     ],

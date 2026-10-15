@@ -11,7 +11,7 @@ export const fractionsAddingFractionsLesson: LessonData = {
     heading: 'Why is 1/4 + 2/4 = 3/4 (and NOT 3/8)?',
     coreDefinition: 'When adding fractions with the same denominator, add the shaded pieces (numerators) and keep the cut size (denominator).',
     whyItMatters:
-      'The denominator tells you the type of coin or slice (e.g. quarters). If you have 1 quarter and add 2 quarters, you have 3 quarters—the quarters didn’t suddenly split into eighths!',
+      'The denominator tells you the type of coin or slice (e.g. quarters). If you have 1 quarter and add 2 quarters, you have 3 quarters. The quarters did not suddenly split into eighths!',
     keyTakeaway: 'Add the tops, keep the bottom: a/c + b/c = (a+b)/c.',
     visualHookType: 'fraction-slice',
   },
@@ -98,7 +98,7 @@ export const fractionsAddingFractionsLesson: LessonData = {
       ],
       correctChoiceId: 'q-add-2-a',
       explanation: 'Exactly! 2/8 would mean eighths (smaller pieces). But 1 quarter + 1 quarter is 2 quarters (half of the whole)!',
-      hint: 'Think about eating two quarter slices of a pizza—did the pizza become cut into 8 slices?',
+      hint: 'Think about eating two quarter slices of a pizza: did the pizza become cut into 8 slices?',
     },
   ],
   completion: {

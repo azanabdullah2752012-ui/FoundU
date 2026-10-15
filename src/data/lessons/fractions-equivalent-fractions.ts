@@ -11,7 +11,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
     heading: 'Why do different fractions measure the exact same amount?',
     coreDefinition: 'Equivalent fractions are different ways of naming the exact same physical quantity.',
     whyItMatters:
-      'If you slice a chocolate bar in half and eat 1 piece, you eat half the bar. If you instead slice it into 4 pieces and eat 2, you still eat the exact same amount of chocolate. The total amount is unchanged—only the number of cuts changed.',
+      'If you slice a chocolate bar in half and eat 1 piece, you eat half the bar. If you instead slice it into 4 pieces and eat 2, you still eat the exact same amount of chocolate. The total amount is unchanged: only the number of cuts changed.',
     keyTakeaway:
       'Multiplying or dividing both the top and bottom by the same number cuts each piece into smaller pieces, but keeps the total covered space exactly identical.',
   },
@@ -35,7 +35,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       },
       {
         id: 'eq-2',
-        title: 'Two fourths (2/4) — Cut in 2',
+        title: 'Two fourths (2/4): Cut in 2',
         description: 'We cut each of the 2 halves in half. Now we have 4 parts, and 2 are shaded.',
         fractionText: '2/4 = 1/2',
         equivalentText: 'Exact same amount as 1/2',
@@ -49,7 +49,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       },
       {
         id: 'eq-3',
-        title: 'Four eighths (4/8) — Cut in 4',
+        title: 'Four eighths (4/8): Cut in 4',
         description: 'We cut each original half into 4 smaller slices.',
         fractionText: '4/8 = 1/2',
         equivalentText: 'Exact same amount as 1/2',
@@ -63,7 +63,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       },
       {
         id: 'eq-4',
-        title: 'Three sixths (3/6) — Cut in 3',
+        title: 'Three sixths (3/6): Cut in 3',
         description: 'Cutting each original half into 3 slices produces 6 total slices.',
         fractionText: '3/6 = 1/2',
         equivalentText: 'Exact same amount as 1/2',
@@ -193,7 +193,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       choices: [
         {
           id: 'eq-q4-a',
-          text: 'Because adding numbers changes the ratio. 1/2 is 50%, but 2/3 is 66.7%—a significantly larger amount.',
+          text: 'Because adding numbers changes the ratio. 1/2 is 50%, but 2/3 is 66.7%, which is a significantly larger amount.',
         },
         {
           id: 'eq-q4-b',
@@ -206,7 +206,7 @@ export const fractionsEquivalentFractionsLesson: LessonData = {
       ],
       correctChoiceId: 'eq-q4-a',
       explanation:
-        'That’s right. Slicing pieces multiplies them—it never adds. Adding 1 to top and bottom fundamentally changes the proportion: 2/3 is noticeably bigger than 1/2.',
+        'That’s right. Slicing pieces multiplies them, it never adds. Adding 1 to top and bottom fundamentally changes the proportion: 2/3 is noticeably bigger than 1/2.',
       hint: 'Not quite. Think visually: 1 out of 2 is half of a pizza. 2 out of 3 is more than half of a pizza. They are not equal amounts!',
     },
     {

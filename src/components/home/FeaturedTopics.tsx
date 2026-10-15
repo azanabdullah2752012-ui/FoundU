@@ -32,7 +32,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
       {/* Section Header with Clear Baselines */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-[#E8E5DD]">
         <div>
-          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#D45B34] font-bold mb-1.5">
+          <div className="inline-flex items-center gap-1.5 text-xs font-sans uppercase tracking-wider text-[#D45B34] font-bold mb-1.5">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Bedrock Curriculum</span>
           </div>
@@ -47,7 +47,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
         <button
           type="button"
           onClick={onExploreAll}
-          className="btn-tactile self-start sm:self-auto text-xs sm:text-sm font-bold text-[#1C1917] hover:text-[#D45B34] transition-colors flex items-center gap-2 cursor-pointer bg-white px-4 py-2 rounded-xl border border-[#E8E5DD] shadow-2xs shrink-0"
+          className="btn-tactile self-start sm:self-auto text-xs sm:text-sm font-bold text-[#1C1917] hover:text-[#D45B34] transition-colors flex items-center gap-2 cursor-pointer bg-white px-4 py-2 rounded-xl border border-[#E8E5DD] shadow-2xs shrink-0 focus-visible:ring-2 focus-visible:ring-[#D45B34]"
         >
           <span>Curriculum View</span>
           <ArrowRight className="w-3.5 h-3.5 text-[#D45B34]" />
@@ -71,7 +71,7 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                   onExploreAll();
                 }
               }}
-              className="card-atelier p-5 flex flex-col justify-between group cursor-pointer select-none"
+              className="card-workshop p-5 flex flex-col justify-between group cursor-pointer select-none focus-visible:ring-2 focus-visible:ring-[#D45B34]"
             >
               {/* Card Header: Module Number & State */}
               <div>
@@ -81,16 +81,16 @@ export const FeaturedTopics: React.FC<FeaturedTopicsProps> = ({
                   </span>
 
                   {isDone ? (
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-[#1E6B4F] bg-[#F0F9F5] border border-[#B7E4D3] px-2 py-0.5 rounded-full">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-sans font-bold text-[#1E6B4F] bg-[#F0F9F5] border border-[#B7E4D3] px-2 py-0.5 rounded-full uppercase tracking-wider">
                       <CheckCircle2 className="w-3 h-3" />
                       MASTERED
                     </span>
                   ) : availableLesson?.isAvailable ? (
-                    <span className="text-[10px] font-mono font-bold text-[#1E6B4F] bg-[#F0F9F5] px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-sans font-bold text-[#1E6B4F] bg-[#F0F9F5] px-2 py-0.5 rounded-full uppercase tracking-wider">
                       LAB READY
                     </span>
                   ) : (
-                    <span className="text-[10px] font-mono text-[#9E9B93] bg-[#F4F2EB] px-2 py-0.5 rounded-full">
+                    <span className="text-[10px] font-sans font-bold text-[#9E9B93] bg-[#F4F2EB] px-2 py-0.5 rounded-full uppercase tracking-wider">
                       IN STUDIO
                     </span>
                   )}

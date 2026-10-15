@@ -23,8 +23,8 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E8E5DD] shadow-2xs">
               <PickleCorpLogo variant="compact" showMascot={false} />
               <span className="w-1 h-1 rounded-full bg-[#D45B34]" />
-              <span className="font-mono text-[11px] font-bold tracking-wider text-[#6B6861] uppercase">
-                Foundations Atelier
+              <span className="font-sans text-[11px] font-bold tracking-wider text-[#6B6861] uppercase">
+                Visual Math Workshop
               </span>
             </div>
 
@@ -48,7 +48,7 @@ export const Hero: React.FC<HeroProps> = ({
               <button
                 type="button"
                 onClick={onStartLearning}
-                className="btn-tactile inline-flex items-center justify-center gap-2.5 bg-[#1C1917] hover:bg-[#D45B34] text-white px-7 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-sm group cursor-pointer"
+                className="btn-tactile inline-flex items-center justify-center gap-2.5 bg-[#1C1917] hover:bg-[#D45B34] text-white px-7 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-sm group cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34] focus-visible:ring-offset-2"
               >
                 <span>Start with Fractions</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#F3C3B2]" />
@@ -57,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({
               <button
                 type="button"
                 onClick={onExploreTopics}
-                className="btn-tactile inline-flex items-center justify-center gap-2 bg-white border border-[#E8E5DD] hover:bg-[#FAF9F5] hover:border-[#D5D1C7] text-[#1C1917] px-6 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-2xs cursor-pointer"
+                className="btn-tactile inline-flex items-center justify-center gap-2 bg-white border border-[#E8E5DD] hover:bg-[#FAF9F5] hover:border-[#D5D1C7] text-[#1C1917] px-6 py-4 rounded-2xl font-bold text-sm sm:text-base shadow-2xs cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34] focus-visible:ring-offset-2"
               >
                 <BookOpen className="w-4 h-4 text-[#D45B34]" />
                 <span>All 8 Topics</span>
@@ -66,11 +66,11 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Reassurance quote */}
             <p className="text-xs text-[#9E9B93] italic pt-1">
-              “I never really got this in school.” &nbsp;—&nbsp; That’s completely okay. We start from real objects.
+              “I never really got this in school.” That’s completely okay. We start from real objects.
             </p>
 
             {/* Quiet craft signals */}
-            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-3 border-t border-[#E8E5DD]/70 text-xs text-[#6B6861] font-mono">
+            <div className="flex flex-wrap items-center gap-y-2 gap-x-4 pt-3 border-t border-[#E8E5DD]/70 text-xs text-[#6B6861] font-sans font-medium">
               <span className="flex items-center gap-1.5">
                 <Check className="w-3.5 h-3.5 text-[#1E6B4F]" />
                 100% Visual Manipulatives

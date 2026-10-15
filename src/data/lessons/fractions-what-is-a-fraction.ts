@@ -60,7 +60,7 @@ export const fractionsWhatIsAFractionLesson: LessonData = {
       },
       {
         id: 'ex-4',
-        title: 'Four out of four parts — The Whole',
+        title: 'Four out of four parts: The Whole',
         description: 'When all 4 slices are highlighted, you have the entire thing.',
         fractionText: '4/4 = 1',
         equivalentText: '1 whole',

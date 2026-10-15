@@ -129,7 +129,7 @@ export const RatioVisualizer: React.FC<RatioVisualizerProps> = ({
           <div className="flex items-center gap-2 text-xs text-[#6B6861] pt-1">
             <Sparkles className="w-4 h-4 text-[#D45B34] shrink-0" />
             <span>
-              A ratio is a relationship. Scaling {baseA}:{baseB} by ×{scale} produces {countA}:{countB}—the flavor or mixture remains completely identical!
+              A ratio is a relationship. Scaling {baseA}:{baseB} by ×{scale} produces {countA}:{countB}: the flavor or mixture remains completely identical!
             </span>
           </div>
         </div>
