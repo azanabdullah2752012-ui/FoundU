@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Home, HelpCircle, CheckCircle2, Volume2, VolumeX, Search } from 'lucide-react';
+import { BookOpen, CheckCircle2, Volume2, VolumeX, Search } from 'lucide-react';
 import type { UserProgress } from '../../types';
 import { sound } from '../../utils/sound';
 import { Gummy } from '../brand/Gummy';
-import { PickleCorpLogo } from '../brand/PickleCorpLogo';
+import { PickleCorpTorchIcon } from '../brand/PickleCorpLogo';
 import type { PickleCorpUser } from '../brand/PickleCorpLoginModal';
 
 interface NavbarProps {
@@ -24,16 +24,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigateHome,
   onNavigateLibrary,
-  onContinueLesson,
-  onOpenShortcuts: _onOpenShortcuts,
   onOpenSearch,
   onOpenMastery,
   onOpenLogin,
   currentUser,
   progress,
-  activeLessonTitle,
 }) => {
-  const [showBrandMeaning, setShowBrandMeaning] = useState(false);
   const [isMuted, setIsMuted] = useState(sound.getMuted());
 
   useEffect(() => {
@@ -56,120 +52,89 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-[#FAF9F5]/90 backdrop-blur-md border-b border-[#E8E5DD] transition-all">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Brand / Logo */}
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            className="flex items-center gap-2.5 text-left group focus:outline-none cursor-pointer"
-            aria-label="Foundu home"
-          >
-            {/* Geometric Foundation Stamp */}
-            <div className="w-8 h-8 rounded-xl bg-[#1C1917] text-white flex items-center justify-center font-mono font-bold text-sm tracking-wider group-hover:bg-[#D45B34] transition-colors shadow-xs">
-              F
-            </div>
-            <div className="flex flex-col">
+        {/* Unified Single Brand Identity Lockup */}
+        <button
+          type="button"
+          onClick={onNavigateHome}
+          className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer"
+          aria-label="Foundu home"
+        >
+          {/* Blue Flame Torch Icon */}
+          <div className="w-8 h-8 rounded-xl bg-white border border-[#E8E5DD] flex items-center justify-center p-1 group-hover:border-[#D45B34] transition-colors shadow-2xs">
+            <PickleCorpTorchIcon size={20} />
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-lg tracking-tight text-[#1C1917] group-hover:text-[#D45B34] transition-colors leading-none">
                 FOUNDU
               </span>
-              <span className="text-[9px] uppercase font-mono tracking-widest text-[#9E9B93] mt-0.5">
-                Atelier
+              <span className="text-[10px] font-mono font-bold text-[#D45B34] bg-[#FDF4F0] px-1.5 py-0.2 rounded border border-[#F3C3B2]/50">
+                ATELIER
               </span>
             </div>
-          </button>
-
-          {/* Pickle Corp Official Brand Logo & Gummy Mascot */}
-          <div className="hidden sm:flex items-center pl-3 border-l border-[#E8E5DD]">
-            <PickleCorpLogo
-              variant="compact"
-              showMascot={true}
-              gummyColor={currentUser?.gummyColor || 'terracotta'}
-            />
+            <span className="text-[10px] font-mono tracking-wider text-[#9E9B93] mt-0.5">
+              Pickle Corp™
+            </span>
           </div>
+        </button>
 
-          {/* Meaning hint popover trigger */}
-          <div className="relative hidden md:block">
-            <button
-              type="button"
-              onClick={() => setShowBrandMeaning(!showBrandMeaning)}
-              onMouseEnter={() => setShowBrandMeaning(true)}
-              onMouseLeave={() => setShowBrandMeaning(false)}
-              className="p-1 text-[#9E9B93] hover:text-[#6B6861] transition-colors rounded-full focus:outline-none cursor-pointer"
-              aria-label="About the Foundu name"
-            >
-              <HelpCircle className="w-3.5 h-3.5" />
-            </button>
-
-            {showBrandMeaning && (
-              <div className="absolute left-0 mt-2 w-72 p-3 bg-white border border-[#E8E5DD] rounded-xl shadow-lg text-xs z-50 animate-in fade-in duration-150">
-                <div className="font-semibold text-[#1C1917] mb-1">
-                  The meaning behind FOUNDU:
-                </div>
-                <p className="text-[#6B6861] mb-1.5 leading-relaxed">
-                  <strong className="text-[#1C1917]">Foundation + U:</strong>{' '}
-                  Building the foundational concepts everything else rests on.
-                </p>
-                <p className="text-[#6B6861] leading-relaxed">
-                  <strong className="text-[#1C1917]">Found + U:</strong> Finding
-                  the missing understanding and regaining your footing.
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Navigation Actions */}
+        {/* Clean, Spacious Navigation & Utility Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Home Button */}
-          <button
-            type="button"
-            onClick={onNavigateHome}
-            className={`btn-tactile px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
-              currentView === 'home'
-                ? 'bg-[#1C1917] text-white shadow-xs'
-                : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB]'
-            }`}
-          >
-            <Home className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Home</span>
-          </button>
-
-          {/* Topics Button */}
+          {/* Topics / Curriculum Link */}
           <button
             type="button"
             onClick={onNavigateLibrary}
-            className={`btn-tactile px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5 cursor-pointer ${
+            className={`btn-tactile px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
               currentView === 'library'
                 ? 'bg-[#1C1917] text-white shadow-xs'
-                : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB]'
+                : 'text-[#6B6861] hover:text-[#1C1917] hover:bg-white border border-transparent hover:border-[#E8E5DD]'
             }`}
           >
-            <BookOpen className="w-3.5 h-3.5 text-[#D45B34]" />
+            <BookOpen className="w-4 h-4 text-[#D45B34]" />
             <span>Topics</span>
           </button>
+
+          {/* Mastery Drawer Pill (Clean & subtle) */}
+          {onOpenMastery && (
+            <button
+              type="button"
+              onClick={onOpenMastery}
+              className={`btn-tactile hidden sm:flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-2 rounded-xl transition-all cursor-pointer border shadow-2xs ${
+                completedCount > 0
+                  ? 'text-[#1E6B4F] bg-[#F0F9F5] border-[#B7E4D3] hover:bg-[#E4F5ED]'
+                  : 'text-[#6B6861] bg-white border-[#E8E5DD] hover:bg-[#FAF9F5]'
+              }`}
+              title="View Foundational Mastery"
+              aria-label="View mastery progress"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-[#1E6B4F]" />
+              <span>{completedCount} Mastered</span>
+            </button>
+          )}
 
           {/* Concept Search Trigger */}
           {onOpenSearch && (
             <button
               type="button"
               onClick={onOpenSearch}
-              className="btn-tactile p-2 sm:px-2.5 sm:py-1.5 rounded-xl text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-[#F4F2EB] transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white cursor-pointer shadow-2xs"
-              title="Search concepts"
+              className="btn-tactile p-2 sm:px-3 sm:py-2 rounded-xl text-xs font-medium text-[#6B6861] hover:text-[#1C1917] hover:bg-white transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-[#FAF9F5] cursor-pointer shadow-2xs"
+              title="Search concepts (Cmd+K)"
               aria-label="Search concepts"
             >
               <Search className="w-3.5 h-3.5 text-[#1C1917]" />
-              <span className="hidden md:inline">Search</span>
+              <span className="hidden md:inline font-mono text-[11px] text-[#9E9B93]">⌘K</span>
             </button>
           )}
 
-          {/* Sound Toggle Button */}
+          {/* Sound Toggle */}
           <button
             type="button"
             onClick={handleToggleSound}
-            className={`btn-tactile p-2 rounded-xl text-xs font-medium transition-colors flex items-center gap-1 border border-transparent hover:border-[#E8E5DD] cursor-pointer ${
-              isMuted ? 'text-[#9E9B93] hover:text-[#1C1917] hover:bg-[#F4F2EB]' : 'text-[#1E6B4F] hover:bg-[#F4F2EB]'
+            className={`btn-tactile p-2 rounded-xl text-xs transition-colors flex items-center justify-center border border-transparent hover:border-[#E8E5DD] hover:bg-white cursor-pointer ${
+              isMuted ? 'text-[#9E9B93]' : 'text-[#1E6B4F]'
             }`}
-            title={isMuted ? 'Unmute audio' : 'Mute audio'}
+            title={isMuted ? 'Unmute audio (M)' : 'Mute audio (M)'}
             aria-label={isMuted ? 'Unmute audio' : 'Mute audio'}
           >
             {isMuted ? (
@@ -179,56 +144,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Pickle Corp Studio ID / Log In Button */}
+          {/* Single Gummy User Avatar Pill */}
           {onOpenLogin && (
             <button
               type="button"
               onClick={onOpenLogin}
-              className="p-1 sm:px-2.5 sm:py-1 rounded-xl text-xs font-mono font-medium transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white hover:bg-[#FAF9F5] cursor-pointer shadow-2xs group"
-              title="Pickle Corp Studio ID / Learner Sign In"
-              aria-label="Pickle Corp Studio ID"
+              className="btn-tactile py-1.5 px-3 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 border border-[#E8E5DD] bg-white hover:bg-[#FAF9F5] cursor-pointer shadow-2xs ml-1"
+              title="Learner Profile & Studio ID"
+              aria-label="Learner Profile"
             >
               <Gummy
                 size="xs"
                 color={currentUser?.gummyColor || 'terracotta'}
-                className="shrink-0 -my-0.5 group-hover:scale-110 transition-transform"
+                className="shrink-0 -my-0.5"
               />
-              <span className="font-bold text-[#1C1917] hidden sm:inline">
-                {currentUser?.isLoggedIn && currentUser.name ? currentUser.name : 'Log In'}
-              </span>
-            </button>
-          )}
-
-          {/* Mastery Drawer Trigger */}
-          {onOpenMastery && (
-            <button
-              type="button"
-              onClick={onOpenMastery}
-              className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium ml-1 transition-colors cursor-pointer border shadow-2xs ${
-                completedCount > 0
-                  ? 'text-[#1E6B4F] bg-[#F0F9F5] border-[#B7E4D3] hover:bg-[#E4F5ED]'
-                  : 'text-[#6B6861] bg-white border-[#E8E5DD] hover:bg-[#FAF9F5]'
-              }`}
-              title="View Foundational Mastery Ledger"
-              aria-label="View mastery progress"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#1E6B4F]" />
-              <span>
-                {completedCount > 0 ? `${completedCount} Mastered` : 'Mastery'}
-              </span>
-            </button>
-          )}
-
-          {/* Resume In-Progress Lesson */}
-          {progress.inProgressLessonId && onContinueLesson && currentView !== 'lesson' && (
-            <button
-              type="button"
-              onClick={onContinueLesson}
-              className="text-xs text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] hover:bg-[#F9ECE7] px-2.5 py-1 rounded-full font-medium ml-1 transition-colors flex items-center gap-1 cursor-pointer"
-            >
-              <span>Resume</span>
-              <span className="max-w-[120px] truncate hidden md:inline font-mono">
-                {activeLessonTitle || 'Lesson'}
+              <span className="text-[#1C1917]">
+                {currentUser?.isLoggedIn && currentUser.name ? currentUser.name : 'Sign In'}
               </span>
             </button>
           )}
