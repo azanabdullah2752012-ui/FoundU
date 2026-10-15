@@ -28,9 +28,28 @@ export const Footer: React.FC = () => {
             <blockquote className="text-sm font-medium text-[#1C1917] italic">
               “That’s okay. Let’s start from the beginning.”
             </blockquote>
+            <div className="flex items-center md:justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof navigator !== 'undefined' && navigator.share) {
+                    navigator.share({
+                      title: 'FoundU — Understand the basics',
+                      text: 'Visual, tactile math & science foundations with zero jargon by Pickle Corp.',
+                      url: window.location.href,
+                    }).catch(() => {});
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('FoundU link copied to clipboard!');
+                  }
+                }}
+                className="btn-tactile text-xs font-mono font-bold text-[#D45B34] hover:text-[#BC4B26] bg-[#FDF4F0] border border-[#F3C3B2] px-3 py-1 rounded-xl transition-colors cursor-pointer"
+              >
+                Share FoundU ↗
+              </button>
+            </div>
             <p className="text-xs text-[#9E9B93]">
-              Foundation + U &nbsp;•&nbsp; Found + U &nbsp;•&nbsp; Client-side local
-              storage progress
+              Foundation + U &nbsp;•&nbsp; Found + U &nbsp;•&nbsp; 100% Offline PWA Ready
             </p>
           </div>
         </div>

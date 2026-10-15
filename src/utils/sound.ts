@@ -1,5 +1,5 @@
 // Gentle, calm synthesized acoustic feedback using native Web Audio API
-// No external assets or dependencies needed. Calming, warm, and unobtrusive.
+// with micro-haptic vibration for tactile physical feeling on mobile devices.
 
 class SoundManager {
   private ctx: AudioContext | null = null;
@@ -25,6 +25,17 @@ class SoundManager {
     }
   }
 
+  // Micro-haptic vibration trigger for supported mobile devices
+  private triggerHaptic(durationMs = 12) {
+    if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+      try {
+        navigator.vibrate(durationMs);
+      } catch {
+        // Ignored if user blocked vibration
+      }
+    }
+  }
+
   public toggleMute(): boolean {
     this.isMuted = !this.isMuted;
     localStorage.setItem('foundu_sound_muted', String(this.isMuted));
@@ -40,6 +51,7 @@ class SoundManager {
 
   // Soft tactile click for toggles, steppers, and interactive dials
   public playTap() {
+    this.triggerHaptic(10);
     if (this.isMuted) return;
     this.initCtx();
     if (!this.ctx) return;
@@ -61,8 +73,58 @@ class SoundManager {
     osc.stop(this.ctx.currentTime + 0.04);
   }
 
+  // Mechanical rotary tick for dials, wheel scrubbing, and slider steps
+  public playTick() {
+    this.triggerHaptic(8);
+    if (this.isMuted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(240, this.ctx.currentTime + 0.02);
+
+    gain.gain.setValueAtTime(0.035, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.02);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.02);
+  }
+
+  // Magnetic snap click when locking into a target or fraction wedge
+  public playSnap() {
+    this.triggerHaptic(15);
+    if (this.isMuted) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const now = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(320, now);
+    osc.frequency.exponentialRampToValueAtTime(580, now + 0.035);
+
+    gain.gain.setValueAtTime(0.05, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.04);
+  }
+
   // Soft organic woodblock / token drop sound for manipulatives (weights, tokens, slices)
   public playDrop() {
+    this.triggerHaptic(12);
     if (this.isMuted) return;
     this.initCtx();
     if (!this.ctx) return;
@@ -86,6 +148,7 @@ class SoundManager {
 
   // Warm, uplifting harmonic chime for answering correctly or completing a stage
   public playSuccess() {
+    this.triggerHaptic(20);
     if (this.isMuted) return;
     this.initCtx();
     if (!this.ctx) return;
@@ -114,6 +177,7 @@ class SoundManager {
 
   // Reassuring, soft low tone when an answer needs review (calm, non-punitive)
   public playRetry() {
+    this.triggerHaptic(18);
     if (this.isMuted) return;
     this.initCtx();
     if (!this.ctx) return;
@@ -138,6 +202,7 @@ class SoundManager {
 
   // Soft shimmer for completing a full lesson
   public playCelebration() {
+    this.triggerHaptic(30);
     if (this.isMuted) return;
     this.initCtx();
     if (!this.ctx) return;

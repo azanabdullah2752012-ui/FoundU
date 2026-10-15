@@ -6,6 +6,8 @@ import { PercentageGrid } from '../visual/PercentageGrid';
 import { BalanceScale } from '../visual/BalanceScale';
 import { ArrayMultiplier } from '../visual/ArrayMultiplier';
 import { NegativeLine } from '../visual/NegativeLine';
+import { RatioVisualizer } from '../visual/RatioVisualizer';
+import { MetricLadder } from '../visual/MetricLadder';
 import { VisualFractionAnatomy } from '../visual/VisualFractionAnatomy';
 import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
 
@@ -65,6 +67,10 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson, onNext }) => {
       ? 'array-grid'
       : lesson.topicId === 'numbers'
       ? 'thermometer'
+      : lesson.topicId === 'ratios'
+      ? 'ratio-scaler'
+      : lesson.topicId === 'conversions'
+      ? 'metric-ladder'
       : 'fraction-slice');
 
   return (
@@ -346,6 +352,14 @@ export const LessonIntro: React.FC<LessonIntroProps> = ({ lesson, onNext }) => {
 
           {hookType === 'thermometer' && (
             <NegativeLine initialValue={-3} interactive={true} label="Visual Hook: Above & Below Zero" />
+          )}
+
+          {hookType === 'ratio-scaler' && (
+            <RatioVisualizer baseA={2} baseB={3} interactive={true} label="Visual Hook: Mixing Proportions" />
+          )}
+
+          {hookType === 'metric-ladder' && (
+            <MetricLadder initialValue={2.5} interactive={true} label="Visual Hook: Shifting Units by 10" />
           )}
         </div>
       </div>

@@ -8,7 +8,7 @@ export const HeroVisualPlayground: React.FC = () => {
   const [selectedCount, setSelectedCount] = useState<number>(3);
 
   const handleSliceClick = (index: number) => {
-    sound.playTap();
+    sound.playTick();
     if (index + 1 === selectedCount) {
       setSelectedCount(Math.max(0, index));
     } else {
@@ -17,7 +17,7 @@ export const HeroVisualPlayground: React.FC = () => {
   };
 
   const handleTotalChange = (newTotal: number) => {
-    sound.playSuccess();
+    sound.playSnap();
     setTotalSlices(newTotal);
     if (selectedCount > newTotal) {
       setSelectedCount(Math.min(selectedCount, newTotal));
