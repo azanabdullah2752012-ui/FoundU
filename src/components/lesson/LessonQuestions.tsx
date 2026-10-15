@@ -8,6 +8,7 @@ import {
   RotateCcw,
 } from 'lucide-react';
 import { VisualRenderer } from '../visual/VisualRenderer';
+import { VoiceListenButton } from '../common/VoiceListenButton';
 import { sound } from '../../utils/sound';
 
 interface LessonQuestionsProps {
@@ -194,9 +195,17 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
         <div className={currentQuestion.visual ? 'grid grid-cols-1 md:grid-cols-12 gap-6 items-start' : 'space-y-4'}>
           {/* Question Text & Prompt Visual */}
           <div className={currentQuestion.visual ? 'md:col-span-5 space-y-3' : 'space-y-2'}>
-            <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#1C1917] leading-snug">
-              {currentQuestion.questionText}
-            </h2>
+            <div className="flex items-start justify-between gap-3">
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-[#1C1917] leading-snug">
+                {currentQuestion.questionText}
+              </h2>
+              <VoiceListenButton
+                text={`${currentQuestion.questionText}. ${currentQuestion.promptNote || ''}`}
+                label="Hear Question"
+                size="sm"
+                className="shrink-0"
+              />
+            </div>
 
             {currentQuestion.promptNote && (
               <p className="text-xs sm:text-sm text-[#6B6861]">

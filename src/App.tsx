@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
+import { MobileBottomBar } from './components/layout/MobileBottomBar';
 import { Hero } from './components/home/Hero';
 import { ContinueLearning } from './components/home/ContinueLearning';
 import { FeaturedTopics } from './components/home/FeaturedTopics';
@@ -210,7 +211,7 @@ export function App() {
       />
 
       {/* Main Content Views */}
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         {currentView === 'home' && (
           <div className="animate-in fade-in duration-150">
             <Hero
@@ -298,6 +299,24 @@ export function App() {
 
       {/* Global Footer (shown on home & library) */}
       {currentView !== 'lesson' && <Footer />}
+
+      {/* Tactile Mobile Bottom Bar Dock */}
+      <MobileBottomBar
+        currentView={currentView}
+        onNavigateHome={() => {
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onNavigateLibrary={() => {
+          setCurrentView('library');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onContinueLesson={handleStartLearning}
+        onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenMastery={() => setIsMasteryOpen(true)}
+        progress={progress}
+        activeLessonTitle={activeLesson?.title}
+      />
     </div>
   );
 }

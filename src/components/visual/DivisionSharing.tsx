@@ -26,7 +26,7 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
           {label && (
-            <div className="text-xs font-mono font-semibold text-[#6B6861] uppercase tracking-wider mb-1">
+            <div className="text-xs font-sans font-semibold text-[#6B6861] uppercase tracking-wider mb-1">
               {label}
             </div>
           )}
@@ -35,14 +35,14 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
               {total} ÷ {groups} = {quotient}
             </span>
             {remainder > 0 && (
-              <span className="text-xs font-bold font-mono text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded-full">
-                Remainder: {remainder}
+              <span className="text-xs font-bold font-sans text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded-full">
+                Remainder: <span className="font-mono">{remainder}</span>
               </span>
             )}
           </div>
         </div>
 
-        <div className="text-xs text-[#6B6861] bg-[#FAF9F5] p-2 rounded-xl border border-[#E8E5DD]">
+        <div className="text-xs font-sans text-[#6B6861] bg-[#FAF9F5] p-2 rounded-xl border border-[#E8E5DD]">
           <strong>{total} items</strong> shared into <strong>{groups} equal groups</strong>
         </div>
       </div>
@@ -55,7 +55,7 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
               key={gIdx}
               className="bg-white rounded-xl border border-[#E8E5DD] p-3 flex flex-col items-center shadow-2xs"
             >
-              <div className="text-[11px] font-mono text-[#9E9B93] mb-2 font-bold">
+              <div className="text-[11px] font-sans text-[#9E9B93] mb-2 font-bold uppercase">
                 Group {gIdx + 1}
               </div>
               <div className="flex flex-wrap gap-1 justify-center min-h-[40px] items-center">
@@ -68,8 +68,8 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
                   </div>
                 ))}
               </div>
-              <div className="text-xs font-mono font-bold text-[#1C1917] mt-2">
-                {quotient} item{quotient === 1 ? '' : 's'}
+              <div className="text-xs font-sans font-bold text-[#1C1917] mt-2">
+                <span className="font-mono">{quotient}</span> item{quotient === 1 ? '' : 's'}
               </div>
             </div>
           ))}
@@ -78,20 +78,20 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
         {/* Remainder Tray */}
         {remainder > 0 && (
           <div className="mt-3 p-3 bg-white rounded-xl border border-[#D45B34]/30 flex items-center justify-between">
-            <div className="text-xs font-mono font-bold text-[#D45B34]">
+            <div className="text-xs font-sans font-bold text-[#D45B34]">
               Remainder Tray (Cannot be shared equally):
             </div>
             <div className="flex items-center gap-1.5">
               {Array.from({ length: remainder }).map((_, rIdx) => (
                 <div
                   key={rIdx}
-                  className="w-5 h-5 rounded-full bg-[#D45B34] text-white text-[10px] font-mono font-bold flex items-center justify-center shadow-2xs"
+                  className="w-5 h-5 rounded-full bg-[#D45B34] text-white text-[10px] font-sans font-bold flex items-center justify-center shadow-2xs"
                 >
                   R
                 </div>
               ))}
-              <span className="text-xs font-mono font-bold text-[#D45B34] ml-1">
-                {remainder} leftover
+              <span className="text-xs font-sans font-bold text-[#D45B34] ml-1">
+                <span className="font-mono">{remainder}</span> leftover
               </span>
             </div>
           </div>
@@ -103,8 +103,8 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
         <div className="mt-4 pt-3 border-t border-[#E8E5DD] space-y-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <div className="flex justify-between text-xs font-mono font-semibold text-[#6B6861] mb-1">
-                <span>Total Items: {total}</span>
+              <div className="flex justify-between text-xs font-sans font-semibold text-[#6B6861] mb-1">
+                <span>Total Items: <span className="font-mono text-[#1C1917]">{total}</span></span>
               </div>
               <input
                 type="range"
@@ -118,8 +118,8 @@ export const DivisionSharing: React.FC<DivisionSharingProps> = ({
             </div>
 
             <div>
-              <div className="flex justify-between text-xs font-mono font-semibold text-[#6B6861] mb-1">
-                <span>Groups to Share With: {groups}</span>
+              <div className="flex justify-between text-xs font-sans font-semibold text-[#6B6861] mb-1">
+                <span>Groups to Share With: <span className="font-mono text-[#1C1917]">{groups}</span></span>
               </div>
               <input
                 type="range"

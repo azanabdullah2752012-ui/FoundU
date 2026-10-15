@@ -99,7 +99,7 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
             <div className="w-0.5 h-12 bg-[#9E9B93]" />
             <div className="w-32 sm:w-36 min-h-16 bg-[#F4F2EB] border-2 border-[#3F3C35] rounded-b-2xl p-2 flex flex-wrap items-center justify-center gap-1.5 shadow-sm">
               {hasBox && (
-                <div className="w-9 h-9 bg-[#D45B34] text-white font-mono font-black rounded-lg flex items-center justify-center text-sm shadow-xs border border-[#BC4B26]">
+                <div className="w-9 h-9 bg-[#D45B34] text-white font-sans font-black rounded-lg flex items-center justify-center text-sm shadow-xs border border-[#BC4B26]">
                   x
                 </div>
               )}
@@ -112,8 +112,8 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
                 </div>
               ))}
             </div>
-            <div className="text-[11px] font-mono font-bold text-[#6B6861] mt-1">
-              Left: {hasBox ? 'x' : '0'}{leftWeights > 0 ? ` + ${leftWeights}` : ''}
+            <div className="text-[11px] font-sans font-bold text-[#6B6861] mt-1">
+              Left: <span className="font-mono">{hasBox ? 'x' : '0'}{leftWeights > 0 ? ` + ${leftWeights}` : ''}</span>
             </div>
           </div>
 
@@ -133,8 +133,8 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
                 </div>
               ))}
             </div>
-            <div className="text-[11px] font-mono font-bold text-[#6B6861] mt-1">
-              Right: {rightWeights}
+            <div className="text-[11px] font-sans font-bold text-[#6B6861] mt-1">
+              Right: <span className="font-mono">{rightWeights}</span>
             </div>
           </div>
         </div>
@@ -149,12 +149,12 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
         <div className="mt-8 pt-4 border-t border-[#E8E5DD] space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <span className="text-xs font-semibold text-[#1C1917]">
-              The Golden Rule of Equations: Keep It Balanced
+              The Golden Rule: Whatever you do to one side, do to the other
             </span>
             <button
               type="button"
               onClick={handleReset}
-              className="text-xs text-[#6B6861] hover:text-[#1C1917] flex items-center gap-1 font-medium transition-colors"
+              className="text-xs text-[#6B6861] hover:text-[#1C1917] flex items-center gap-1 font-medium transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3 h-3" />
               <span>Reset Scale</span>
@@ -166,7 +166,7 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
               type="button"
               disabled={leftWeights < 1 || rightWeights < 1}
               onClick={() => handleRemoveFromBoth(1)}
-              className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD] text-xs font-mono font-semibold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD] text-xs font-sans font-semibold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
             >
               <Minus className="w-3.5 h-3.5 text-[#D45B34]" />
               <span>Remove 1 marble from BOTH sides</span>
@@ -176,15 +176,60 @@ export const BalanceScale: React.FC<BalanceScaleProps> = ({
               type="button"
               disabled={leftWeights < 3 || rightWeights < 3}
               onClick={() => handleRemoveFromBoth(3)}
-              className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD] text-xs font-mono font-semibold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-[#FAF9F5] border border-[#E8E5DD] text-xs font-sans font-semibold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
             >
               <Minus className="w-3.5 h-3.5 text-[#D45B34]" />
               <span>Remove 3 marbles from BOTH sides</span>
             </button>
           </div>
 
+          {/* Quick single-pan balance experiment buttons */}
+          <div className="flex items-center justify-between gap-2 bg-[#FAF9F5] p-2.5 rounded-xl border border-[#E8E5DD] text-xs">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[#6B6861] font-medium font-sans">Left Pan:</span>
+              <button
+                type="button"
+                onClick={() => setLeftWeights((prev) => prev + 1)}
+                className="px-2 py-0.5 bg-white border border-[#E8E5DD] rounded-md font-mono font-bold text-[#1C1917] hover:bg-[#F4F2EB] cursor-pointer"
+                title="Add 1 marble to left"
+              >
+                +1
+              </button>
+              <button
+                type="button"
+                disabled={leftWeights === 0}
+                onClick={() => setLeftWeights((prev) => Math.max(0, prev - 1))}
+                className="px-2 py-0.5 bg-white border border-[#E8E5DD] rounded-md font-mono font-bold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-30 cursor-pointer"
+                title="Remove 1 marble from left"
+              >
+                -1
+              </button>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <span className="text-[#6B6861] font-medium font-sans">Right Pan:</span>
+              <button
+                type="button"
+                onClick={() => setRightWeights((prev) => prev + 1)}
+                className="px-2 py-0.5 bg-white border border-[#E8E5DD] rounded-md font-mono font-bold text-[#1C1917] hover:bg-[#F4F2EB] cursor-pointer"
+                title="Add 1 marble to right"
+              >
+                +1
+              </button>
+              <button
+                type="button"
+                disabled={rightWeights === 0}
+                onClick={() => setRightWeights((prev) => Math.max(0, prev - 1))}
+                className="px-2 py-0.5 bg-white border border-[#E8E5DD] rounded-md font-mono font-bold text-[#1C1917] hover:bg-[#F4F2EB] disabled:opacity-30 cursor-pointer"
+                title="Remove 1 marble from right"
+              >
+                -1
+              </button>
+            </div>
+          </div>
+
           <p className="text-xs text-[#6B6861] pt-1">
-            💡 Whatever you remove or add to the <strong>left</strong>, you must do to the <strong>right</strong>. Once the unknown box <span className="font-mono font-bold text-[#D45B34]">x</span> sits alone, whatever remains on the other side is its exact weight!
+            Whatever you remove or add to the <strong>left</strong>, you must do to the <strong>right</strong>. Once the unknown box <span className="font-sans font-bold text-[#D45B34]">x</span> sits alone, whatever remains on the other side is its exact weight!
           </p>
         </div>
       )}

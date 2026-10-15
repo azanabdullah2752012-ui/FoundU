@@ -12,6 +12,7 @@ import { NegativeLine } from './NegativeLine';
 import { RatioVisualizer } from './RatioVisualizer';
 import { MetricLadder } from './MetricLadder';
 import { AngleExplorer } from './AngleExplorer';
+import { DivisionSharing } from './DivisionSharing';
 
 interface VisualRendererProps {
   visual?: VisualData;
@@ -146,6 +147,15 @@ export const VisualRenderer: React.FC<VisualRendererProps> = ({
           initialAngle={visual.angleData?.angle ?? 45}
           targetMin={visual.angleData?.targetMin}
           targetMax={visual.angleData?.targetMax}
+          interactive={interactive}
+          label={visual.label}
+        />
+      )}
+
+      {visual.type === 'division-sharing' && (
+        <DivisionSharing
+          initialTotal={visual.divisionSharing?.total ?? 12}
+          initialGroups={visual.divisionSharing?.groups ?? 3}
           interactive={interactive}
           label={visual.label}
         />

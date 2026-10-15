@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenMastery}
-              className={`btn-tactile hidden sm:flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-2 rounded-xl transition-all cursor-pointer border shadow-2xs ${
+              className={`btn-tactile hidden sm:flex items-center gap-1.5 text-xs font-sans font-bold px-3 py-2 rounded-xl transition-all cursor-pointer border shadow-2xs ${
                 completedCount > 0
                   ? 'text-[#1E6B4F] bg-[#F0F9F5] border-[#B7E4D3] hover:bg-[#E4F5ED]'
                   : 'text-[#6B6861] bg-white border-[#E8E5DD] hover:bg-[#FAF9F5]'
@@ -109,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-label="View mastery progress"
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-[#1E6B4F]" />
-              <span>{completedCount} Mastered</span>
+              <span><span className="font-mono">{completedCount}</span> Mastered</span>
             </button>
           )}
 
@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={onOpenLogin}
-              className="btn-tactile py-1.5 px-3 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 border border-[#E8E5DD] bg-white hover:bg-[#FAF9F5] cursor-pointer shadow-2xs ml-1"
+              className="btn-tactile py-1.5 px-3 rounded-xl text-xs font-sans font-bold transition-all flex items-center gap-2 border border-[#E8E5DD] bg-white hover:bg-[#FAF9F5] cursor-pointer shadow-2xs ml-1"
               title="Learner Profile & Studio ID"
               aria-label="Learner Profile"
             >

@@ -28,7 +28,7 @@ export const NegativeLine: React.FC<NegativeLineProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
         <div>
           {label && (
-            <div className="text-xs font-mono font-semibold text-[#6B6861] uppercase tracking-wider mb-1">
+            <div className="text-xs font-sans font-semibold text-[#6B6861] uppercase tracking-wider mb-1">
               {label}
             </div>
           )}
@@ -51,7 +51,7 @@ export const NegativeLine: React.FC<NegativeLineProps> = ({
         </div>
 
         {/* Metaphor pill */}
-        <div className="flex items-center gap-2 bg-[#FAF9F5] px-3 py-1.5 rounded-xl border border-[#E8E5DD] text-xs font-mono font-semibold self-start sm:self-auto">
+        <div className="flex items-center gap-2 bg-[#FAF9F5] px-3 py-1.5 rounded-xl border border-[#E8E5DD] text-xs font-sans font-semibold self-start sm:self-auto">
           {isNegative ? (
             <>
               <Waves className="w-4 h-4 text-[#0284C7]" />
@@ -141,24 +141,24 @@ export const NegativeLine: React.FC<NegativeLineProps> = ({
                 type="button"
                 disabled={val <= min}
                 onClick={() => setVal((v) => v - 1)}
-                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-mono font-bold rounded-lg transition-colors disabled:opacity-40"
+                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-sans font-bold rounded-lg transition-colors disabled:opacity-40 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
               >
-                ← Step Left (-1)
+                ← Step Left (<span className="font-mono">-1</span>)
               </button>
               <button
                 type="button"
                 onClick={() => setVal(0)}
-                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-mono font-bold rounded-lg transition-colors"
+                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-sans font-bold rounded-lg transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
               >
-                Reset to 0
+                Reset to <span className="font-mono">0</span>
               </button>
               <button
                 type="button"
                 disabled={val >= max}
                 onClick={() => setVal((v) => v + 1)}
-                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-mono font-bold rounded-lg transition-colors disabled:opacity-40"
+                className="px-2.5 py-1 bg-[#FAF9F5] border border-[#E8E5DD] hover:bg-[#F4F2EB] text-xs font-sans font-bold rounded-lg transition-colors disabled:opacity-40 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#D45B34]"
               >
-                Step Right (+1) →
+                Step Right (<span className="font-mono">+1</span>) →
               </button>
             </div>
           </div>

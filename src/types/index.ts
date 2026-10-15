@@ -14,7 +14,8 @@ export interface VisualData {
     | 'ratio-model'
     | 'metric-ladder'
     | 'place-value-blocks'
-    | 'angle-explorer';
+    | 'angle-explorer'
+    | 'division-sharing';
   totalParts?: number;
   shadedParts?: number;
   highlightIndexes?: number[];
@@ -70,6 +71,10 @@ export interface VisualData {
     hundreds?: number;
     tens?: number;
     ones?: number;
+  };
+  divisionSharing?: {
+    total: number;
+    groups: number;
   };
 }
 
@@ -138,7 +143,16 @@ export interface LessonData {
     coreDefinition: string;
     whyItMatters: string;
     keyTakeaway: string;
-    visualHookType?: 'fraction-slice' | 'decimal-grid' | 'percentage-grid' | 'balance-scale' | 'array-grid' | 'thermometer';
+    visualHookType?:
+      | 'fraction-slice'
+      | 'decimal-grid'
+      | 'percentage-grid'
+      | 'balance-scale'
+      | 'array-grid'
+      | 'thermometer'
+      | 'division-sharing'
+      | 'metric-ladder'
+      | 'ratio-scaler';
   };
   examples: {
     heading: string;

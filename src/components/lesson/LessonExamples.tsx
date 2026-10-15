@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { LessonData } from '../../types';
 import { ChevronLeft, ChevronRight, Eye, Layers } from 'lucide-react';
 import { VisualRenderer } from '../visual/VisualRenderer';
+import { VoiceListenButton } from '../common/VoiceListenButton';
 import { sound } from '../../utils/sound';
 
 interface LessonExamplesProps {
@@ -106,11 +107,16 @@ export const LessonExamples: React.FC<LessonExamplesProps> = ({
                 Example {activeIdx + 1} of {items.length}
               </span>
               <div className="flex items-center gap-2">
+                <VoiceListenButton
+                  text={`${currentItem.title}. ${currentItem.description}. Key visual takeaway: ${currentItem.insight}`}
+                  label="Listen"
+                  size="sm"
+                />
                 <span className="font-mono text-3xl font-black text-[#D45B34]">
                   {currentItem.fractionText}
                 </span>
                 {currentItem.equivalentText && (
-                  <span className="text-xs bg-[#FAF9F5] border border-[#E8E5DD] text-[#6B6861] px-2 py-0.5 rounded-full font-mono font-medium">
+                  <span className="text-xs bg-[#FAF9F5] border border-[#E8E5DD] text-[#6B6861] px-2 py-0.5 rounded-full font-sans font-medium">
                     {currentItem.equivalentText}
                   </span>
                 )}

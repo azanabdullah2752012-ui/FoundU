@@ -13,7 +13,7 @@ export const arithmeticDivisionAsSharingLesson: LessonData = {
     whyItMatters:
       'Division is not a scary long calculation with guesswork. It is physically dealing out cards or candies so everyone receives the exact same amount.',
     keyTakeaway: 'Total ÷ Groups = Amount in each group. Whatever is left over is the remainder.',
-    visualHookType: 'array-grid',
+    visualHookType: 'division-sharing',
   },
   examples: {
     heading: 'The mechanics of equal sharing',
@@ -25,8 +25,8 @@ export const arithmeticDivisionAsSharingLesson: LessonData = {
         description: '12 cookies shared among 3 friends gives exactly 4 cookies each, with 0 leftover.',
         fractionText: '12 ÷ 3 = 4',
         visual: {
-          type: 'array-grid',
-          arrayGrid: { rows: 3, cols: 4 },
+          type: 'division-sharing',
+          divisionSharing: { total: 12, groups: 3 },
           label: '3 groups of 4 = 12',
         },
         insight: 'Notice division is the exact inverse of multiplication: 3 × 4 = 12, so 12 ÷ 3 = 4.',
@@ -37,8 +37,8 @@ export const arithmeticDivisionAsSharingLesson: LessonData = {
         description: '13 shared among 4 people gives 3 each, and 1 extra cookie that cannot be split whole.',
         fractionText: '13 ÷ 4 = 3 R 1',
         visual: {
-          type: 'array-grid',
-          arrayGrid: { rows: 4, cols: 3 },
+          type: 'division-sharing',
+          divisionSharing: { total: 13, groups: 4 },
           label: '4 groups of 3 (12) + 1 remainder = 13',
         },
         insight: 'The remainder must always be strictly smaller than the number of groups (1 < 4).',

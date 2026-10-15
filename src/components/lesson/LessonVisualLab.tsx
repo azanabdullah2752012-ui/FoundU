@@ -15,6 +15,7 @@ import { MetricLadder } from '../visual/MetricLadder';
 import { DivisionSharing } from '../visual/DivisionSharing';
 import { FractionAddition } from '../visual/FractionAddition';
 import { AngleExplorer } from '../visual/AngleExplorer';
+import { VoiceListenButton } from '../common/VoiceListenButton';
 import { PEDAGOGY_REGISTRY } from '../../data/pedagogyData';
 import { sound } from '../../utils/sound';
 
@@ -98,6 +99,11 @@ export const LessonVisualLab: React.FC<LessonVisualLabProps> = ({
             {visualLab.instructions}
           </p>
         </div>
+        <VoiceListenButton
+          text={`${visualLab.title}. Instructions: ${visualLab.instructions}. ${challenge ? `Your goal: ${challenge.prompt}` : ''}`}
+          label="Listen"
+          size="sm"
+        />
       </div>
 
       {/* Goal Banner */}
