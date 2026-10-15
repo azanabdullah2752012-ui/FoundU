@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <PickleCorpLogo
               variant="compact"
               showMascot={true}
-              gummyColor={currentUser?.gummyColor || 'green'}
+              gummyColor={currentUser?.gummyColor || 'terracotta'}
             />
           </div>
 
@@ -212,7 +212,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Gummy
                 size="xs"
-                color={currentUser?.gummyColor || 'green'}
+                color={currentUser?.gummyColor || 'terracotta'}
                 className="shrink-0 -my-0.5 group-hover:scale-110 transition-transform"
               />
               <span className="font-bold text-[#1C1917] hidden sm:inline">

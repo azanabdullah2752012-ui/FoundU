@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useId } from 'react';
 import { sound } from '../../utils/sound';
 
-export type GummyColor = 'taupe' | 'green' | 'caramel' | 'blue' | 'rose' | 'amber';
+export type GummyColor = 'terracotta' | 'taupe' | 'green' | 'caramel' | 'blue' | 'rose' | 'amber';
 
 export interface GummyProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'hero';
@@ -14,19 +14,26 @@ export interface GummyProps {
 }
 
 const GUMMY_THEMES: Record<GummyColor, { fill: string; fillLight: string; stroke: string; blush: string; eye: string }> = {
+  terracotta: {
+    fill: '#d45b34',
+    fillLight: '#e4714d',
+    stroke: '#2e140d',
+    blush: '#f5a792',
+    eye: '#2e140d',
+  },
   taupe: {
     fill: '#ab947e',
     fillLight: '#b8a18c',
-    stroke: '#593d3b',
+    stroke: '#3d3129',
     blush: '#c0a692',
-    eye: '#593d3b',
+    eye: '#3d3129',
   },
   green: {
-    fill: '#84ab8c',
-    fillLight: '#97bda0',
-    stroke: '#3b5942',
-    blush: '#a2c7a9',
-    eye: '#3b5942',
+    fill: '#2e7356',
+    fillLight: '#438f70',
+    stroke: '#143b2b',
+    blush: '#89c7ad',
+    eye: '#143b2b',
   },
   caramel: {
     fill: '#c2976b',
@@ -36,11 +43,11 @@ const GUMMY_THEMES: Record<GummyColor, { fill: string; fillLight: string; stroke
     eye: '#5c4128',
   },
   blue: {
-    fill: '#7ea4ab',
-    fillLight: '#94b6bd',
-    stroke: '#3b4e59',
-    blush: '#a6c2c7',
-    eye: '#3b4e59',
+    fill: '#1d7af2',
+    fillLight: '#4392f7',
+    stroke: '#0e2d5c',
+    blush: '#95c3fc',
+    eye: '#0e2d5c',
   },
   rose: {
     fill: '#ab7e8a',
@@ -68,7 +75,7 @@ const SIZE_MAP = {
 
 export const Gummy: React.FC<GummyProps> = ({
   size = 'md',
-  color = 'taupe',
+  color = 'terracotta',
   interactive = true,
   celebrate = false,
   speechText,
@@ -86,7 +93,7 @@ export const Gummy: React.FC<GummyProps> = ({
   const rawId = useId();
   const gradientId = `gummy-${rawId.replace(/:/g, '-')}`;
 
-  const theme = GUMMY_THEMES[color] || GUMMY_THEMES.taupe;
+  const theme = GUMMY_THEMES[color] || GUMMY_THEMES.terracotta;
   const dimensions = SIZE_MAP[size] || SIZE_MAP.md;
 
   const triggerHop = useCallback(() => {
@@ -202,9 +209,9 @@ export const Gummy: React.FC<GummyProps> = ({
     >
       {/* Optional Speech Bubble */}
       {speechText && (
-        <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#1C1917] border border-[#593d3b]/20 px-2 py-0.5 rounded-full text-[10px] font-mono whitespace-nowrap shadow-xs pointer-events-none z-20 animate-in fade-in duration-150">
+        <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-[#1C1917] border border-[#E8E5DD] px-2 py-0.5 rounded-full text-[10px] font-mono whitespace-nowrap shadow-xs pointer-events-none z-20 animate-in fade-in duration-150">
           {speechText}
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white border-r border-b border-[#593d3b]/20 rotate-45" />
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white border-r border-b border-[#E8E5DD] rotate-45" />
         </div>
       )}
 
@@ -220,9 +227,9 @@ export const Gummy: React.FC<GummyProps> = ({
       >
         <defs>
           <radialGradient id={`${gradientId}-sh`} cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#593d3b" stopOpacity="0.32" />
-            <stop offset="65%" stopColor="#593d3b" stopOpacity="0.09" />
-            <stop offset="100%" stopColor="#593d3b" stopOpacity="0" />
+            <stop offset="0%" stopColor={theme.stroke} stopOpacity="0.32" />
+            <stop offset="65%" stopColor={theme.stroke} stopOpacity="0.09" />
+            <stop offset="100%" stopColor={theme.stroke} stopOpacity="0" />
           </radialGradient>
           <linearGradient id={`${gradientId}-body`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor={theme.fillLight} />

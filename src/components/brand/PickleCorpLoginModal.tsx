@@ -19,11 +19,12 @@ interface PickleCorpLoginModalProps {
 }
 
 const COLOR_OPTIONS: { id: GummyColor; label: string; swatch: string }[] = [
-  { id: 'taupe', label: 'Oatmeal Taupe', swatch: '#ab947e' },
-  { id: 'green', label: 'Mint Pickle', swatch: '#84ab8c' },
-  { id: 'caramel', label: 'Caramel Biscuit', swatch: '#c2976b' },
-  { id: 'blue', label: 'Sky Lavender', swatch: '#7ea4ab' },
-  { id: 'rose', label: 'Berry Plum', swatch: '#ab7e8a' },
+  { id: 'terracotta', label: 'Foundu Terracotta', swatch: '#d45b34' },
+  { id: 'blue', label: 'Torch Blue', swatch: '#1d7af2' },
+  { id: 'green', label: 'Forest Sage', swatch: '#2e7356' },
+  { id: 'caramel', label: 'Honey Biscuit', swatch: '#c2976b' },
+  { id: 'taupe', label: 'Oatmeal Paper', swatch: '#ab947e' },
+  { id: 'rose', label: 'Mulberry Plum', swatch: '#ab7e8a' },
   { id: 'amber', label: 'Amber Gold', swatch: '#c9a35d' },
 ];
 
@@ -34,7 +35,7 @@ export const PickleCorpLoginModal: React.FC<PickleCorpLoginModalProps> = ({
   onSaveUser,
 }) => {
   const [name, setName] = useState(currentUser.name || 'Azan');
-  const [selectedColor, setSelectedColor] = useState<GummyColor>(currentUser.gummyColor || 'taupe');
+  const [selectedColor, setSelectedColor] = useState<GummyColor>(currentUser.gummyColor || 'terracotta');
   const [speechText, setSpeechText] = useState('Hi! I’m Gummy!');
 
   if (!isOpen) return null;

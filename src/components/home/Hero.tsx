@@ -16,7 +16,7 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="max-w-3xl mx-auto">
         {/* Pickle Corp Official Logo & Gummy Mascot Pill */}
         <div className="flex flex-col items-center justify-center mb-6">
-          <PickleCorpLogo variant="badge" showMascot={true} gummyColor="green" />
+          <PickleCorpLogo variant="badge" showMascot={true} gummyColor="terracotta" />
         </div>
 
         {/* Primary Headline */}

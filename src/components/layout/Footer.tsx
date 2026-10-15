@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-2.5">
             <div className="flex items-center gap-1.5 px-2 py-1 bg-[#F2EFE9] border border-[#E8E5DD] rounded-md">
               <PickleCorpTorchIcon size={18} />
-              <Gummy size="sm" color="green" />
+              <Gummy size="sm" color="terracotta" />
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
               <span className="font-mono font-bold text-[#1C1917]">

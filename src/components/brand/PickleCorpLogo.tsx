@@ -88,7 +88,7 @@ export const PickleCorpTorchIcon: React.FC<{ size?: number; className?: string }
 
 export const PickleCorpLogo: React.FC<PickleCorpLogoProps> = ({
   showMascot = false,
-  gummyColor = 'green',
+  gummyColor = 'terracotta',
   className = '',
   variant = 'compact',
   size = 'sm',

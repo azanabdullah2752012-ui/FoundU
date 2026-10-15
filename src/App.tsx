@@ -26,13 +26,20 @@ export function App() {
   const [pickleUser, setPickleUser] = useState<PickleCorpUser>(() => {
     try {
       const saved = localStorage.getItem('pickle_corp_user_v1');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.gummyColor === 'green') {
+          parsed.gummyColor = 'terracotta';
+          localStorage.setItem('pickle_corp_user_v1', JSON.stringify(parsed));
+        }
+        return parsed;
+      }
     } catch (e) {
       console.error('Failed to load Pickle Corp user', e);
     }
     return {
       name: 'Azan',
-      gummyColor: 'green',
+      gummyColor: 'terracotta',
       isLoggedIn: true,
       favorCount: 1,
       joinedAt: new Date().toISOString(),
