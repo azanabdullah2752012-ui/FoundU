@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { BookOpen, Home, HelpCircle, CheckCircle2, Keyboard, Volume2, VolumeX, Search } from 'lucide-react';
 import type { UserProgress } from '../../types';
 import { sound } from '../../utils/sound';
+import { Gummy } from '../brand/Gummy';
+import type { PickleCorpUser } from '../brand/PickleCorpLoginModal';
 
 interface NavbarProps {
   currentView: 'home' | 'library' | 'lesson';
@@ -11,6 +13,8 @@ interface NavbarProps {
   onOpenShortcuts: () => void;
   onOpenSearch?: () => void;
   onOpenMastery?: () => void;
+  onOpenLogin?: () => void;
+  currentUser?: PickleCorpUser;
   progress: UserProgress;
   activeLessonTitle?: string;
 }
@@ -23,6 +27,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenShortcuts,
   onOpenSearch,
   onOpenMastery,
+  onOpenLogin,
+  currentUser,
   progress,
   activeLessonTitle,
 }) => {
@@ -70,6 +76,28 @@ export const Navbar: React.FC<NavbarProps> = ({
               </span>
             </div>
           </button>
+
+          {/* Pickle Corp Brand & Gummy Mascot */}
+          <div className="hidden sm:flex items-center gap-2 pl-2.5 border-l border-[#E8E5DD]">
+            <Gummy
+              size="sm"
+              color={currentUser?.gummyColor || 'green'}
+              className="hover:scale-105 transition-transform"
+            />
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1">
+                <span className="text-[11px] font-mono font-extrabold text-[#1C1917] tracking-tight">
+                  Pickle Corp™
+                </span>
+                <span className="text-[8px] font-mono font-bold bg-[#FDF4F0] border border-[#F3C3B2] text-[#D45B34] px-1 rounded uppercase">
+                  Studio
+                </span>
+              </div>
+              <span className="text-[9px] font-mono text-[#9E9B93] -mt-0.5">
+                Favors over fiat
+              </span>
+            </div>
+          </div>
 
           {/* Meaning hint popover trigger */}
           <div className="relative">
@@ -184,6 +212,26 @@ export const Navbar: React.FC<NavbarProps> = ({
               ?
             </kbd>
           </button>
+
+          {/* Pickle Corp Studio ID / Log In Button */}
+          {onOpenLogin && (
+            <button
+              type="button"
+              onClick={onOpenLogin}
+              className="p-1 sm:px-2.5 sm:py-1 rounded-xl text-xs font-mono font-medium transition-colors flex items-center gap-1.5 border border-[#E8E5DD] bg-white hover:bg-[#FAF9F5] cursor-pointer shadow-2xs group"
+              title="Pickle Corp Studio ID / Learner Sign In"
+              aria-label="Pickle Corp Studio ID"
+            >
+              <Gummy
+                size="xs"
+                color={currentUser?.gummyColor || 'green'}
+                className="shrink-0 -my-0.5 group-hover:scale-110 transition-transform"
+              />
+              <span className="font-bold text-[#1C1917] hidden sm:inline">
+                {currentUser?.isLoggedIn && currentUser.name ? currentUser.name : 'Log In'}
+              </span>
+            </button>
+          )}
 
           {/* Mastery Drawer Trigger */}
           {onOpenMastery && (

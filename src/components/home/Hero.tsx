@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, BookOpen } from 'lucide-react';
+import { Gummy } from '../brand/Gummy';
 
 interface HeroProps {
   onStartLearning: () => void;
@@ -11,17 +12,18 @@ export const Hero: React.FC<HeroProps> = ({
   onExploreTopics,
 }) => {
   return (
-    <section className="py-16 sm:py-24 text-center px-4 sm:px-6 relative overflow-hidden">
+    <section className="py-12 sm:py-20 text-center px-4 sm:px-6 relative overflow-hidden">
       <div className="max-w-3xl mx-auto">
-        {/* Subtle pill tag */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#E8E5DD] shadow-xs text-xs font-mono text-[#6B6861] mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#D45B34]" />
-          <span>Foundation + U &nbsp;•&nbsp; Found + U</span>
-        </div>
-
-        {/* Brand name */}
-        <div className="text-xs sm:text-sm font-mono tracking-widest uppercase text-[#9E9B93] mb-3">
-          FOUNDU
+        {/* Pickle Corp & Gummy Mascot Pill */}
+        <div className="flex flex-col items-center justify-center mb-5">
+          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-[#E8E5DD] shadow-2xs text-xs font-mono text-[#6B6861] hover:border-[#D45B34]/30 transition-all">
+            <Gummy size="sm" color="green" speechText="Poke me!" />
+            <span className="font-bold text-[#1C1917]">A Pickle Corp™ Project</span>
+            <span className="text-[#9E9B93]">•</span>
+            <span className="text-[#6B6861] hidden sm:inline">Azan &amp; Thanvi</span>
+            <span className="text-[#9E9B93] hidden sm:inline">•</span>
+            <span className="text-[#D45B34] font-semibold">Foundu</span>
+          </div>
         </div>
 
         {/* Primary Headline */}

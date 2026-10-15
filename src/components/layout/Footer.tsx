@@ -1,4 +1,5 @@
 import React from 'react';
+import { Gummy } from '../brand/Gummy';
 
 export const Footer: React.FC = () => {
   return (
@@ -33,11 +34,20 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-[#E8E5DD]/60 flex flex-col sm:flex-row items-center justify-between text-xs text-[#9E9B93] gap-2">
-          <span>
-            © {new Date().getFullYear()} Foundu. Build everything else from there.
-          </span>
-          <span>Designed with restraint & clarity.</span>
+        <div className="mt-8 pt-6 border-t border-[#E8E5DD]/60 flex flex-col sm:flex-row items-center justify-between text-xs text-[#9E9B93] gap-3">
+          <div className="flex items-center gap-2">
+            <Gummy size="sm" color="green" />
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-mono font-bold text-[#1C1917]">
+                A Pickle Corp™ Production
+              </span>
+              <span className="hidden sm:inline text-[#E8E5DD]">•</span>
+              <span className="font-mono text-[#6B6861]">
+                Azan &amp; Thanvi • Favors over fiat
+              </span>
+            </div>
+          </div>
+          <span>© {new Date().getFullYear()} Foundu &amp; Pickle Corp.</span>
         </div>
       </div>
     </footer>

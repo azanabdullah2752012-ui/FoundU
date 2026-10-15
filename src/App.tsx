@@ -10,6 +10,7 @@ import { LessonContainer } from './components/lesson/LessonContainer';
 import { ShortcutsModal } from './components/common/ShortcutsModal';
 import { CommandPalette } from './components/search/CommandPalette';
 import { MasteryDrawer } from './components/mastery/MasteryDrawer';
+import { PickleCorpLoginModal, type PickleCorpUser } from './components/brand/PickleCorpLoginModal';
 import { FOUNDATION_TOPICS, getLessonById } from './data/topics';
 import { useProgress } from './hooks/useProgress';
 import type { Stage } from './types';
@@ -20,6 +21,32 @@ export function App() {
   const [isShortcutsOpen, setIsShortcutsOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMasteryOpen, setIsMasteryOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const [pickleUser, setPickleUser] = useState<PickleCorpUser>(() => {
+    try {
+      const saved = localStorage.getItem('pickle_corp_user_v1');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load Pickle Corp user', e);
+    }
+    return {
+      name: 'Azan',
+      gummyColor: 'green',
+      isLoggedIn: true,
+      favorCount: 1,
+      joinedAt: new Date().toISOString(),
+    };
+  });
+
+  const handleSaveUser = (updatedUser: PickleCorpUser) => {
+    setPickleUser(updatedUser);
+    try {
+      localStorage.setItem('pickle_corp_user_v1', JSON.stringify(updatedUser));
+    } catch (e) {
+      console.error('Failed to save Pickle Corp user', e);
+    }
+  };
 
   const {
     progress,
@@ -67,17 +94,18 @@ export function App() {
 
       // Escape closes open modals / drawers
       if (e.key === 'Escape') {
-        if (isSearchOpen || isMasteryOpen || isShortcutsOpen) {
+        if (isSearchOpen || isMasteryOpen || isShortcutsOpen || isLoginOpen) {
           e.preventDefault();
           setIsSearchOpen(false);
           setIsMasteryOpen(false);
           setIsShortcutsOpen(false);
+          setIsLoginOpen(false);
           return;
         }
       }
 
       // If any modal/drawer is open, don't trigger background navigation
-      if (isShortcutsOpen || isSearchOpen || isMasteryOpen) return;
+      if (isShortcutsOpen || isSearchOpen || isMasteryOpen || isLoginOpen) return;
 
       // Global fast navigation: 'h' for Home, 't' for Topics
       if (e.key.toLowerCase() === 'h' && !e.metaKey && !e.ctrlKey && !e.altKey) {
@@ -93,7 +121,7 @@ export function App() {
 
     window.addEventListener('keydown', handleGlobalShortcuts);
     return () => window.removeEventListener('keydown', handleGlobalShortcuts);
-  }, [isShortcutsOpen, isSearchOpen, isMasteryOpen]);
+  }, [isShortcutsOpen, isSearchOpen, isMasteryOpen, isLoginOpen]);
 
   const handleStartLearning = () => {
     // Navigate straight to the flagship Fractions lesson or last active
@@ -139,8 +167,18 @@ export function App() {
         onOpenShortcuts={() => setIsShortcutsOpen(true)}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenMastery={() => setIsMasteryOpen(true)}
+        onOpenLogin={() => setIsLoginOpen(true)}
+        currentUser={pickleUser}
         progress={progress}
         activeLessonTitle={activeLesson?.title}
+      />
+
+      {/* Pickle Corp Studio ID / Learner Sign In Modal */}
+      <PickleCorpLoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        currentUser={pickleUser}
+        onSaveUser={handleSaveUser}
       />
 
       {/* Global Concept Command Palette */}
