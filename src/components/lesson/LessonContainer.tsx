@@ -184,8 +184,8 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
 
       {/* Persistent Simple Bottom Navigation Bar */}
       {currentStage !== 'complete' && (
-        <div className="sticky bottom-0 z-30 border-t border-[#E8E5DD] bg-white/95 backdrop-blur-md py-3 px-4 sm:px-6 shadow-md">
-          <div className="max-w-3xl mx-auto flex items-center justify-between gap-3">
+        <footer className="sticky bottom-0 z-30 border-t border-[#E8E5DD] bg-[#FAF9F5]/95 backdrop-blur-md py-3 px-4 sm:px-6 shadow-md">
+          <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
             {currentStage !== 'intro' ? (
               <button
                 type="button"
@@ -195,25 +195,28 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
                   else if (currentStage === 'visuals') onStageChange('examples');
                   else if (currentStage === 'questions') onStageChange('visuals');
                 }}
-                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#1C1917] font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
+                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-white hover:bg-[#F4F2EB] text-[#1C1917] font-bold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs flex items-center gap-1.5"
               >
-                ◀ Previous
+                <span>◀ Previous</span>
               </button>
             ) : (
               <button
                 type="button"
-                onClick={onExit}
-                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-[#FAF9F5] hover:bg-[#F4F2EB] text-[#6B6861] font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs"
+                onClick={() => {
+                  sound.playTap();
+                  onExit();
+                }}
+                className="px-4 py-2.5 rounded-xl border border-[#E8E5DD] bg-white hover:bg-[#F4F2EB] text-[#6B6861] hover:text-[#1C1917] font-semibold text-xs sm:text-sm transition-colors cursor-pointer shadow-2xs flex items-center gap-1.5"
               >
-                Topics
+                <span>← Topics</span>
               </button>
             )}
 
             <div className="text-xs font-mono font-bold text-[#6B6861] hidden sm:block">
-              {currentStage === 'intro' && 'Step 1: Look at the visual metaphor 👁️'}
-              {currentStage === 'examples' && 'Step 2: Understand real examples 📖'}
-              {currentStage === 'visuals' && 'Step 3: Play & manipulate the lab 🖐️'}
-              {currentStage === 'questions' && 'Step 4: Check your intuition 🎯'}
+              {currentStage === 'intro' && 'Step 1 of 4 · Visual Metaphor 👁️'}
+              {currentStage === 'examples' && 'Step 2 of 4 · Real Examples 📖'}
+              {currentStage === 'visuals' && 'Step 3 of 4 · Interactive Lab 🖐️'}
+              {currentStage === 'questions' && 'Step 4 of 4 · Intuition Check 🎯'}
             </div>
 
             {currentStage !== 'questions' ? (
@@ -225,17 +228,21 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
                   else if (currentStage === 'examples') onStageChange('visuals');
                   else if (currentStage === 'visuals') onStageChange('questions');
                 }}
-                className="px-6 py-2.5 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-1.5 active:scale-98"
+                className="px-6 py-2.5 rounded-xl bg-[#D45B34] hover:bg-[#BC4B26] text-white font-bold text-xs sm:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-2 active:scale-98"
               >
-                <span>Next Step ▶</span>
+                <span>
+                  {currentStage === 'intro' && 'Next: Examples ▶'}
+                  {currentStage === 'examples' && 'Next: Visual Lab ▶'}
+                  {currentStage === 'visuals' && 'Next: Quiz ▶'}
+                </span>
               </button>
             ) : (
-              <div className="text-xs text-[#9E9B93] italic font-medium">
-                Choose answer above
+              <div className="text-xs text-[#9E9B93] italic font-medium font-mono">
+                Answer on screen above ↑
               </div>
             )}
           </div>
-        </div>
+        </footer>
       )}
     </div>
   );

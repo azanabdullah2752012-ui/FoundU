@@ -158,19 +158,14 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="font-mono text-xs font-semibold text-[#D45B34] bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
-            STAGE 04
+            STEP 04
           </span>
           <span className="text-xs font-mono uppercase tracking-wider text-[#9E9B93]">
-            Practice Questions
+            Intuition Check
           </span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono text-[#D45B34] hidden sm:inline bg-[#FDF4F0] border border-[#F3C3B2] px-2 py-0.5 rounded">
-            Press [1-4] to answer
-          </span>
-          <div className="font-mono text-xs text-[#6B6861] bg-white border border-[#E8E5DD] px-2.5 py-0.5 rounded-full">
-            Question {currentQuestionIndex + 1} of {questions.length}
-          </div>
+        <div className="font-mono text-xs text-[#6B6861] bg-white border border-[#E8E5DD] px-2.5 py-1 rounded-full font-bold shadow-2xs">
+          Question {currentQuestionIndex + 1} of {questions.length}
         </div>
       </div>
 
@@ -382,31 +377,19 @@ export const LessonQuestions: React.FC<LessonQuestionsProps> = ({
         </div>
       </div>
 
-      {/* Navigation footer between questions */}
-      <div className="flex items-center justify-between text-xs text-[#6B6861] pt-1">
-        <button
-          type="button"
-          onClick={handlePrevQuestion}
-          className="inline-flex items-center gap-1.5 text-[#6B6861] hover:text-[#1C1917] transition-colors cursor-pointer"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          <span>
-            {currentQuestionIndex === 0
-              ? 'Back to Visual Lab'
-              : `Question ${currentQuestionIndex}`}
-          </span>
-          <kbd className="text-[10px] font-mono px-1 py-0.2 bg-white border border-[#E8E5DD] rounded text-[#9E9B93]">
-            P
-          </kbd>
-        </button>
-
-        <div className="flex items-center gap-1.5 text-[11px] text-[#9E9B93] bg-[#FAF9F5] px-2 py-0.5 rounded-lg border border-[#E8E5DD]">
-          <span className="font-mono text-[#D45B34] font-medium">Shortcuts:</span>
-          <span><kbd className="px-1 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917]">1-4</kbd> Pick</span>
-          <span>•</span>
-          <span><kbd className="px-1 bg-white border border-[#D5D1C7] rounded font-mono text-[10px] text-[#1C1917]">Enter ↵</kbd> Next</span>
+      {/* Navigation link between questions if past question 1 */}
+      {currentQuestionIndex > 0 && (
+        <div className="pt-2 flex justify-start">
+          <button
+            type="button"
+            onClick={handlePrevQuestion}
+            className="inline-flex items-center gap-1.5 text-xs text-[#6B6861] hover:text-[#1C1917] transition-colors cursor-pointer font-medium"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Previous Question ({currentQuestionIndex} of {questions.length})</span>
+          </button>
         </div>
-      </div>
+      )}
     </article>
   );
 };
